@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receitas Profissionais — Massa Prima | Ideias para padarias e pastelarias</title>
+<meta name="description" content="Receitas profissionais com as matérias-primas Massa Prima e a gama complementar: dosagens oficiais, método passo-a-passo e dicas para vender mais na sua loja.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --laranja:#EC6607; --laranja-d:#c9550a; --castanho:#77310A; --bege:#FEEAD3; --bege-claro:#FFF7EC;
+  --ink:#3D1A05; --sand:#efe0cd; --sand-line:#e6d3b8; --muted:#8a6a4a; --past:#a8451a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--ink);background:var(--bege-claro);line-height:1.55}
+h1,h2,h3,h4,h5{font-family:'Zilla Slab',serif;color:var(--castanho);line-height:1.15}
+a{color:var(--laranja-d)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:40;background:var(--bege-claro);border-bottom:1px solid var(--sand-line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 22px;max-width:1180px;margin:0 auto}
+.nav a.logo img{height:52px;display:block}
+.nav .links{display:flex;gap:20px;align-items:center}
+.nav .links a{font-weight:700;text-decoration:none;color:var(--castanho);font-size:.92rem}
+.nav .links a:hover{color:var(--laranja)}
+.top{background:var(--bege);padding:40px 0 34px;border-bottom:1px solid var(--sand-line)}
+.top h1{font-size:clamp(1.8rem,4vw,2.6rem)}
+.top p{color:var(--muted);max-width:660px;margin-top:8px;font-size:1.05rem}
+.controls{position:sticky;top:73px;z-index:30;background:var(--bege-claro);padding:16px 0;border-bottom:1px solid var(--sand-line)}
+.controls .wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chip{border:2px solid var(--sand-line);background:#fff;color:var(--castanho);padding:9px 18px;border-radius:30px;font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--castanho);color:#fff;border-color:var(--castanho)}
+.chip:hover:not(.on){border-color:var(--castanho)}
+main{padding:34px 0 70px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.rcard{background:#fff;border:1px solid var(--sand-line);border-radius:16px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s;text-align:left;padding:0}
+.rcard:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(119,49,10,.16);border-color:var(--laranja)}
+.rcard .thumb{aspect-ratio:4/3;overflow:hidden}
+.rcard .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.rcard:hover .thumb img{transform:scale(1.05)}
+.rcard .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.rcard .tag{align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--laranja-d);background:var(--bege);padding:4px 11px;border-radius:20px}
+.rcard h3{font-size:1.2rem}
+.rcard .meta{color:var(--muted);font-size:.85rem;font-weight:700}
+.rcard .ver{font-weight:800;color:var(--laranja-d);font-size:.9rem;margin-top:auto}
+/* sheet */
+.overlay{position:fixed;inset:0;background:rgba(61,26,5,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:60}
+.overlay.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;top:0;right:0;height:100%;width:min(680px,100vw);background:var(--bege-claro);z-index:70;transform:translateX(100%);transition:transform .26s ease;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,.2)}
+.sheet.on{transform:translateX(0)}
+.sh-top{position:sticky;top:0;z-index:2;color:#fff;padding:24px 26px 20px;overflow:hidden}
+.sh-top::before{content:'';position:absolute;inset:0;opacity:.13;pointer-events:none;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="216" height="180"><g fill="%23FFFFFF"><ellipse cx="36" cy="34" rx="11" ry="22" transform="rotate(-24 36 34)"/><ellipse cx="112" cy="22" rx="11" ry="22" transform="rotate(-24 112 22)"/><ellipse cx="178" cy="52" rx="11" ry="22" transform="rotate(20 178 52)"/><ellipse cx="64" cy="86" rx="11" ry="22" transform="rotate(30 64 86)"/><ellipse cx="146" cy="108" rx="11" ry="22" transform="rotate(-40 146 108)"/><ellipse cx="22" cy="128" rx="11" ry="22" transform="rotate(-38 22 128)"/><ellipse cx="92" cy="152" rx="11" ry="22" transform="rotate(18 92 152)"/><ellipse cx="196" cy="158" rx="11" ry="22" transform="rotate(26 196 158)"/></g></svg>') repeat}
+.sh-top>*{position:relative;z-index:1}
+.sh-top .tag{display:inline-block;background:rgba(0,0,0,.18);padding:4px 12px;border-radius:20px;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;color:#fff}
+.sh-top h2{color:#fff;font-size:1.7rem;max-width:88%;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+.sh-top .close{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.2);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:1.1rem;cursor:pointer;z-index:2}
+.sh-top .close:hover{background:rgba(255,255,255,.35)}
+.sh-hero{aspect-ratio:16/9;overflow:hidden;background:var(--sand)}
+.sh-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.sh-body{padding:24px 26px 40px}
+.metarow{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.metarow span{background:#fff;border:1px solid var(--sand-line);border-radius:30px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--castanho)}
+.block{background:#fff;border:1px solid var(--sand-line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.block h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.6px;color:var(--laranja-d);margin-bottom:10px}
+.block p{font-size:.95rem}
+.prods{display:flex;gap:8px;flex-wrap:wrap}
+.prods a{display:inline-block;background:var(--bege);color:var(--castanho);text-decoration:none;font-weight:800;font-size:.85rem;padding:8px 16px;border-radius:30px;border:1px solid var(--sand-line)}
+.prods a:hover{background:var(--laranja);color:#fff;border-color:var(--laranja)}
+table.tec{width:100%;border-collapse:collapse;font-size:.93rem}
+table.tec td{padding:7px 8px;border-bottom:1px solid var(--sand);vertical-align:top}
+table.tec td:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+table.tec tr:last-child td{border-bottom:none}
+table.tec tr.grp td{background:var(--bege);font-family:'Zilla Slab',serif;font-weight:700;color:var(--castanho);font-size:.86rem;text-align:left}
+.metodo ol{margin:0 0 0 20px}
+.metodo li{font-size:.94rem;margin-bottom:8px}
+.block.dica{background:#fff6ee;border-color:#f3c99b}
+.block.venda{background:var(--castanho);border-color:var(--castanho);color:var(--bege)}
+.block.venda h4{color:#f6c9a0}
+.sh-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.btn{border:none;border-radius:30px;padding:13px 24px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;font-size:.95rem}
+.btn.pri{background:var(--laranja);color:#fff}
+.btn.pri:hover{background:var(--laranja-d)}
+.btn.gho{background:transparent;border:2px solid var(--castanho);color:var(--castanho)}
+.btn.gho:hover{background:var(--castanho);color:#fff}
+.disc{color:var(--muted);font-size:.8rem;margin-top:14px}
+footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 0}
+footer img{height:56px;margin-bottom:8px}
+footer p{font-size:.85rem;opacity:.85}
+@media print{
+  body *{visibility:hidden}
+  .sheet,.sheet *{visibility:visible}
+  .sheet{position:absolute;transform:none;box-shadow:none;width:100%;height:auto;overflow:visible;background:#fff}
+  .sh-top{color:#000 !important;background:#fff !important;border-bottom:2px solid #000}
+  .sh-top h2,.sh-top .tag{color:#000;text-shadow:none}
+  .close,.sh-cta{display:none}
+  .block{break-inside:avoid;border:1px solid #ccc}
+  .block.venda{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html"><img src="assets/logo_principal.png" alt="Massa Prima"></a>
+    <div class="links"><a href="catalogo.html">Catálogo</a><a href="index.html">← Voltar ao site</a></div>
+  </div>
+</header>
+
+<section class="top">
+  <div class="wrap">
+    <h1>Receitas Profissionais</h1>
+    <p>Ideias prontas a aplicar na sua loja, com dosagens das fichas técnicas oficiais, método passo-a-passo e dicas para vender mais. Cada receita indica os produtos usados — clique para ver a ficha técnica no catálogo.</p>
+  </div>
+</section>
+
+<div class="controls"><div class="wrap" id="chips"></div></div>
+
+<main class="wrap"><div class="grid" id="grid"></div></main>
+
+<div class="overlay" id="ov"></div>
+<aside class="sheet" id="sheet" aria-hidden="true"></aside>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/logo_bege.png" alt="Massa Prima">
+    <p><em>qualidade que inspira resultados perfeitos</em></p>
+    <p>© 2026 Massa Prima · Quente e Bom, Angola</p>
+  </div>
+</footer>
+
+<script id="dados" type="application/json">[{"id":"pao-rustico","cat":"Pão","titulo":"Pão rústico de todos os dias","foto":"assets/receitas/pao-rustico.jpg","tempo":"±2h30 (com fermentação)","rend":"±30 pães de 500 g (em massa)","usados":[{"n":"Massa Prima Pão Rústico 100%","id":"pao-rustico"},{"n":"Levedura Seca","id":"pz-levedura-seca"}],"tabela":[["MP Pão Rústico 100%","10.000 g"],["Levedura Fresca","300 g"],["ou Levedura Seca","100 g"],["Água","± 7.000 g"]],"metodo":["Amassar os ingredientes inicialmente com 60% da água e ir adicionando a restante ao longo da amassadura.","Temperatura da massa: 24-26º C","Dar estanca de cerca de 30 minutos (para as massas mais hidratadas aumentar para cerca de 45 minutos).","Dividir e tender nos formatos desejados.","Levedar em estufa, com pouca humidade, cerca de 45 minutos (para as massas mais hidratadas diminuir para cerca de 30 minutos).","Cozer a vapor, a uma temperatura de 230-240ºC.","Adequar o tempo de cozimentoao tamanho das peças."],"dica":"Para crosta mais rústica, aumente a hidratação e prolongue a estanca para 45 minutos.","venda":"O pão especial que diferencia a padaria — venda ao peso e posicione como \"pão de fim-de-semana, todos os dias\"."},{"id":"broa-milho","cat":"Pão","titulo":"Broa de milho amarela","foto":"assets/receitas/broa-milho.jpg","tempo":"±1h30","rend":"±32 broas de 500 g (em massa)","usados":[{"n":"Broa de Milho Amarelo (Prodite Zeelandia)","id":"pz-broa-de-milho-amarelo"},{"n":"Levedura Seca","id":"pz-levedura-seca"}],"tabela":[["Broa de Milho Amarelo","10.000 g"],["Água (30 ºC - 40 ºC)","± 6.000 g"],["Levedura Fresca","150 g"],["ou Levedura Seca","50 g"],["Não juntar sal",""]],"metodo":["Amassar bem os ingredientes até obter uma massa homogénea.","Temperatura da massa: 28 ºC - 30 ºC.","Deixar repousar cerca de 30 minutos.","Dividir a massa em empêlos com o tamanho desejado,","moldar e levedar durante cerca de 20 minutos.","Cozer com vapor, a uma temperatura de cerca de 240 ºC.","Adequar o tempo de cozimento ao tamanho das peças."],"dica":"Use água morna (30–40 °C) — é o segredo da broa bem levedada.","venda":"A tradição que traz clientes fiéis: broa ao fim de semana esgota. Produto clean label — comunique-o."},{"id":"multicereais","cat":"Pão","titulo":"Pão multicereais decorado","foto":"assets/receitas/multicereais.jpg","tempo":"±2h","rend":"±32 pães de 500 g (em massa)","usados":[{"n":"Massa Prima Pão Multicereais 100%","id":"pao-multicereais"},{"n":"Mistura 4 Sementes","id":"mistura-4-sementes"},{"n":"Sementes de Sésamo","id":"sementes-de-sesamo-sem-pele"}],"tabela":[["MP Pão Multicereais 100% LD","10.000 g"],["Levedura Fresca","300 g"],["ou Levedura Seca","100 g"],["Água","± 5.900 g"]],"metodo":["Misturar todos os ingredientes e amassar cerca de 12 minutos.","Deixar repousar 15 minutos, enrolar e descansar mais 10 minutos.","Formar e decorar com as sementes que desejar (sésamo, flocos de aveia, 4 sementes) e deixar levedar 45 minutos.","Cozer a uma temperatura de 210-220ºC com vapor.","Adequar o tempo de cozimento ao tamanho das peças."],"dica":"Humedeça a superfície antes de passar pelas sementes — ficam presas sem cair na cozedura.","venda":"A prateleira \"saudável\" vende a preço premium. Exponha cortado ao meio para mostrar o miolo."},{"id":"pao-hamburguer","cat":"Pão","titulo":"Pão de hambúrguer profissional","foto":"assets/receitas/pao-hamburguer.jpg","tempo":"±2h","rend":"±180 pães de 90 g (em massa)","usados":[{"n":"Massa Prima Pão de Forma e Hamburguer 100%","id":"pao-de-forma-e-hamburguer"},{"n":"Gorpan (Prodite Zeelandia)","id":"pz-gorpan"},{"n":"Sementes de Sésamo","id":"sementes-de-sesamo-sem-pele"},{"n":"Carlex (desmoldante)","id":"pz-carlex-1000"}],"tabela":[["MP Pão de Forma e Hamburguer 100% LD","10.000 g"],["Levedura Fresca","500 g"],["ou Levedura Seca","170 g"],["Água","5.200 g"],["Gorpan ou Margarina Perla Massas","500 g"],["ou Fresh Plus","200 g"]],"metodo":["Juntar todos os ingredientes e amassar durante 15 minutos.","Deixar repousar 20 minutos.","Dividir a massa em empelos com o tamanho desejado e deixar levedar 15 minutos.","Colocar nas formas previamente untadas com desmoldante CARLO e deixar levedar de 45 a 60 minutos, conforme o tamanho desejado.","Temperatura do forno: 220º C - 230º C","Tempo de Cozedura: cerca de 20 minutos"],"dica":"Pincele com ovo e polvilhe sésamo antes de levedar — brilho e cobertura uniformes.","venda":"Forneça hamburguerias e cafés da zona: encomendas B2B recorrentes com produção planeada."},{"id":"torta-chocolate-framboesa","cat":"Bolos & Tortas","titulo":"Torta de chocolate com framboesa","foto":"assets/receitas/torta-chocolate-framboesa.jpg","tempo":"45 min + arrefecimento","rend":"2 tortas (±20 fatias)","usados":[{"n":"Massa Prima Cake Chocolate","id":"cake-chocolate"},{"n":"Fruitful Filling Framboesa (PZ)","id":"pz-fruitfull-filling-framboesa"},{"n":"Scaldis Dark (PZ)","id":"pz-scaldis-dark"}],"tabela":[["MP Cake Chocolate","1000 g"],["Óleo vegetal","300 g"],["Ovos","(±9) 450 g"],["Água","250 g"],["Açúcar","150 g"]],"metodo":["Misturar todos os ingredientes e bater com raquete durante aproximadamente 4 minutos, velocidade lenta.","Colocar o batido num tabuleiro previamente forrado com papel vegetal siliconizado, e deixar repousar durante 10 minutos.","Cozer a cerca de 210 ºC, durante aproximadamente 8-10 minutos.","Desenformar, barrar com Fruitful Filling Framboesa e enrolar.","Cobrir com Scaldis Dark derretido e decorar."],"dica":"Enrole a torta ainda morna com o papel — não parte.","venda":"Venda à fatia com a espiral à vista: a framboesa vermelha \"vende sozinha\" na vitrine. 1 kg de mix rende 2 tortas."},{"id":"cenoura-noz","cat":"Bolos & Tortas","titulo":"Cake de cenoura com noz e caramelo","foto":"assets/receitas/cenoura-noz.jpg","tempo":"±1h","rend":"2 bolos médios (±20 fatias)","usados":[{"n":"Massa Prima Cake Cenoura","id":"cake-cenoura"},{"n":"Miolo de Noz (PZ)","id":"pz-miolo-de-noz-metades"},{"n":"Decorgel Caramelo (PZ)","id":"pz-decorgel-caramelo"}],"tabela":[["MP Cake Cenoura","1.000 g"],["Óleo vegetal","300 g"],["Ovos","(±6) 300 g"],["Água","250 g"],["Açúcar","---"],["Miolo de Noz (no batido)","150 g"]],"metodo":["Receita Base:","Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo.","- Para a maioria das aplicações, untar previamente as formas com Carlex 1000 ou Carlex Spray. Cozer a uma temperatura entre 170 e 180ºC, adequando o tempo de cozimento ao tipo de aplicação.","- Para queques, cozer a cerca de 220 ºC, durante 20-30 minutos.","Receita para Torta:","Misturar todos os ingredientes e bater com raquete durante aproximadamente 4 minutos, velocidade lenta.","Colocar o batido num tabuleiro previamente forrado com papel vegetal siliconizado, e deixar repousar durante 10 minutos.","Cozer a cerca de 210 ºC, durante aproximadamente 8-10 minutos.","No final, decorar com metades de noz e cobrir com Decorgel Caramelo para brilho e cobertura."],"dica":"Envolva as nozes no batido já batido, à mão — não as triture.","venda":"O bolo do lanche: venda inteiro e à fatia. O brilho do Decorgel faz o bolo \"novo\" o dia todo na vitrine."},{"id":"torta-laranja","cat":"Bolos & Tortas","titulo":"Torta de laranja","foto":"assets/receitas/torta-laranja.jpg","tempo":"45 min + arrefecimento","rend":"2 tortas (±20 fatias)","usados":[{"n":"Massa Prima Cake Laranja","id":"cake-laranja"},{"n":"Creme de Ovo (PZ)","id":"pz-creme-de-ovo"},{"n":"Brigel Neutro (PZ)","id":"pz-brigel-neutro"}],"tabela":[["MP Cake Laranja","1000 g"],["Óleo vegetal","300 g"],["Ovos","(±9) 450 g"],["Água","250 g"],["Açúcar","150 g"]],"metodo":["Misturar todos os ingredientes e bater com raquete durante aproximadamente 4 minutos, velocidade lenta.","Colocar o batido num tabuleiro forrado com papel vegetal siliconizado e deixar repousar 10 minutos.","Cozer a cerca de 210 ºC, durante aproximadamente 8-10 minutos.","Desenformar, barrar com Creme de Ovo e enrolar.","Pincelar com Brigel Neutro para brilho e polvilhar com açúcar em pó."],"dica":"Sirva com gomos de laranja fresca por cima — frescura visível.","venda":"Clássico rentável de vitrine: fatia generosa, margem excelente."},{"id":"red-velvet","cat":"Bolos & Tortas","titulo":"Red velvet com chantilly","foto":"assets/receitas/red-velvet.jpg","tempo":"±1h15","rend":"1 bolo de 2 andares (±14 fatias)","usados":[{"n":"Soft Cake Red Velvet (PZ)","id":""},{"n":"Massa Prima Chantilly Pó","id":"chantilly-po"}],"tabela":[["Soft Cake Red Velvet","segundo a ficha do produto"],["— Chantilly —",""],["MP Chantilly Pó","600 g"],["Água ou leite frio","1.000 g"]],"metodo":["Preparar o batido Soft Cake Red Velvet segundo a ficha técnica do produto.","Cozer em duas formas iguais e deixar arrefecer completamente.","Chantilly: adicionar o MP Chantilly Pó à água ou leite frio e bater com varas na velocidade máxima 4-5 minutos.","Montar em camadas: bolo, chantilly, bolo, chantilly. Alisar e decorar."],"dica":"Bolo e chantilly bem frios na montagem — camadas direitas e corte limpo.","venda":"A fatia mais fotografada da vitrine. Preço premium e presença nas redes sociais garantida."},{"id":"muffins-duplo-choc","cat":"Vitrine & Café","titulo":"Muffins duplo chocolate","foto":"assets/receitas/muffins-duplo-choc.jpg","tempo":"±40 min","rend":"±180 muffins de 100 g","usados":[{"n":"Massa Prima Muffin Chocolate","id":"muffin-chocolate"},{"n":"Arabesque Dark 70% (PZ)","id":"pz-arabesq-dark-70"}],"tabela":[["MP Muffin Chocolate","10.000 g"],["Água","4000 g"],["Óleo","4000 g"],["Arabesque Dark picado","1.000 g"]],"metodo":["Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.","Envolver o Arabesque Dark picado no batido.","Distribuir o batido pelas formas de muffins.","Cozer a cerca de 200 ºC (lar) e 180 ºC (teto), durante aproximadamente 25 minutos.","Abrir o ar quando os bolos começarem a formar cabeça."],"dica":"Pedaços grandes de chocolate (não pepitas finas) — centros derretidos visíveis.","venda":"Take-away e lanche escolar: embale individualmente e venda também em caixa de 4."},{"id":"brioche-creme","cat":"Vitrine & Café","titulo":"Brioche recheado com creme","foto":"assets/receitas/brioche-creme.jpg","tempo":"±2h30","rend":"±28 brioches de 60 g","usados":[{"n":"Massa Prima Brioche","id":"brioche"},{"n":"Massa Prima Creme Pasteleiro Sublime","id":"creme-pasteleiro-sublime"}],"tabela":[["Massa Prima Brioche","1.000 g"],["Água","400 g"],["Levedura","60 g"],["ou Levedura Seca","20 g"],["— Creme (a frio) —",""],["MP Creme Pasteleiro Sublime","1.000 g"],["Açúcar","1.000 g"],["Água fria","3.000 g"]],"metodo":["Amassar todos os ingredientes da massa 3 minutos em 1.ª velocidade e 8 minutos em 2.ª, até obter uma massa bem desenvolvida (26-28 °C).","Deixar descansar 10 minutos; dividir, enrolar e descansar mais 10 minutos.","Formar bolas e levedar ±60 minutos. Pintar com ovo.","Cozer adequando temperatura e tempo ao tamanho das peças. Arrefecer.","Creme: misturar o açúcar com o Creme Pasteleiro Sublime, adicionar à água fria e bater 3-5 minutos com varas.","Rechear os brioches com saco de pasteleiro e polvilhar com açúcar em pó."],"dica":"O creme prepara-se a frio em 5 minutos — sem fogão, sem risco.","venda":"O pequeno-almoço que cria hábito: café + brioche recheado como menu fixo da manhã."},{"id":"bolo-arroz","cat":"Vitrine & Café","titulo":"Bolo de arroz tradicional","foto":"assets/receitas/bolo-arroz.jpg","tempo":"±40 min","rend":"±150 bolos de 110 g","usados":[{"n":"Massa Prima Queque e Bolo de Arroz","id":"queque-e-bolo-de-arroz"}],"tabela":[["MP Queque e Bolo de Arroz","10.000 g"],["Água","4000 g"],["Óleo","2500 g"]],"metodo":["Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.","Distribuir o batido pelas formas.","Cozer a 180-200º C durante 20-25 minutos.","Polvilhar com açúcar antes de cozer para a crosta característica."],"dica":"Encha as cintas a 3/4 — a \"cabeça\" do bolo de arroz é a assinatura.","venda":"O clássico do café ao lado da máquina: rotação diária garantida."},{"id":"bolo-festivo","cat":"Vitrine & Café","titulo":"Bolo festivo por encomenda","foto":"assets/receitas/bolo-festivo.jpg","tempo":"2h + decoração","rend":"1 bolo de festa (±20 fatias)","usados":[{"n":"Massa Prima Cake Neutro","id":"cake-neutro"},{"n":"Fondant (PZ)","id":"pz-fondant"},{"n":"Massa Prima Decor Icing","id":"decor-icing"},{"n":"Massa Prima Icing Sugar","id":"icing-sugar"}],"tabela":[["MP Cake Neutro","1.000 g"],["Óleo vegetal","300 g"],["Ovos","(±6) 300 g"],["Água","225 g"],["Açúcar","---"]],"metodo":["Receita Base:","Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo.","- Para a maioria das aplicações, untar previamente as formas com Carlex 1000 ou Carlex Spray. Cozer a uma temperatura entre 170 e 180ºC, adequando o tempo de cozimento ao tipo de aplicação.","Arrefecer completamente, nivelar e cobrir com Fondant.","Modelar decorações com Decor Icing (amassar até ganhar plasticidade; usar amido se necessário).","Finalizar com detalhes em Icing Sugar."],"dica":"Trabalhe o Decor Icing com um pouco de amido de milho para não colar às mãos.","venda":"Encomendas de aniversário e eventos: preço por encomenda, sinal de 50%, fotos no Instagram da loja."}]</script>
+<script>
+const R=JSON.parse(document.getElementById('dados').textContent);
+const CORES={'Pão':'var(--laranja)','Bolos & Tortas':'var(--past)','Vitrine & Café':'#8a5a12'};
+let cat='Todas';
+const cats=['Todas',...new Set(R.map(r=>r.cat))];
+const chipsEl=document.getElementById('chips');
+cats.forEach(c=>{
+  const b=document.createElement('button'); b.className='chip'+(c==='Todas'?' on':''); b.textContent=c; b.dataset.f=c;
+  b.onclick=()=>{cat=c;[...chipsEl.children].forEach(x=>x.classList.toggle('on',x.dataset.f===c));render();};
+  chipsEl.appendChild(b);
+});
+function render(){
+  const g=document.getElementById('grid'); g.innerHTML='';
+  R.filter(r=>cat==='Todas'||r.cat===cat).forEach(r=>{
+    const c=document.createElement('button'); c.className='rcard'; c.onclick=()=>abrir(r.id);
+    c.innerHTML=`<div class="thumb"><img loading="lazy" src="${r.foto}" alt="${r.titulo}"></div>
+      <div class="body"><span class="tag" style="color:${CORES[r.cat]||'var(--laranja-d)'}">${r.cat}</span>
+      <h3>${r.titulo}</h3><p class="meta">⏱ ${r.tempo} · 🥖 ${r.rend}</p>
+      <span class="ver">Ver receita →</span></div>`;
+    g.appendChild(c);
+  });
+}
+function abrir(id){
+  const r=R.find(x=>x.id===id); if(!r)return;
+  const s=document.getElementById('sheet');
+  const tabela=r.tabela.map(([k,v])=> v===''&&/^—/.test(k) ? `<tr class="grp"><td colspan="2">${k.replace(/—/g,'').trim()}</td></tr>` : `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+  s.innerHTML=`
+    <div class="sh-top" style="background-color:${CORES[r.cat]||'var(--laranja)'}">
+      <button class="close" onclick="fechar()" aria-label="Fechar">✕</button>
+      <span class="tag">${r.cat}</span><h2>${r.titulo}</h2>
+    </div>
+    <div class="sh-hero"><img src="${r.foto}" alt="${r.titulo}"></div>
+    <div class="sh-body">
+      <div class="metarow"><span>⏱ ${r.tempo}</span><span>🥖 Rendimento: ${r.rend}</span></div>
+      <div class="block"><h4>Produtos usados</h4><div class="prods">${r.usados.map(u=>u.id?`<a href="catalogo.html#${u.id}">${u.n}</a>`:`<span>${u.n}</span>`).join('')}</div></div>
+      <div class="block"><h4>Ingredientes</h4><table class="tec"><tbody>${tabela}</tbody></table></div>
+      <div class="block metodo"><h4>Método</h4><ol>${r.metodo.map(m=>`<li>${m}</li>`).join('')}</ol></div>
+      <div class="block dica"><h4>💡 Dica de mestre</h4><p>${r.dica}</p></div>
+      <div class="block venda"><h4>Para vender mais</h4><p>${r.venda}</p></div>
+      <div class="sh-cta">
+        <button class="btn gho" onclick="window.print()">Imprimir / PDF</button>
+        <a class="btn pri" href="index.html#contactos">Falar com a equipa</a>
+      </div>
+      <p class="disc">Dosagens conforme as fichas técnicas oficiais dos produtos. Ajuste tempos e temperaturas ao seu equipamento.</p>
+    </div>`;
+  s.classList.add('on'); s.setAttribute('aria-hidden','false');
+  document.getElementById('ov').classList.add('on');
+  document.body.style.overflow='hidden';
+  history.replaceState(null,'','#'+id);
+}
+function fechar(){
+  document.getElementById('sheet').classList.remove('on');
+  document.getElementById('sheet').setAttribute('aria-hidden','true');
+  document.getElementById('ov').classList.remove('on');
+  document.body.style.overflow='';
+  history.replaceState(null,'',location.pathname);
+}
+document.getElementById('ov').onclick=fechar;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fechar();});
+render();
+if(location.hash){const id=location.hash.slice(1);if(R.some(r=>r.id===id))abrir(id);}
+</script>
+</body>
+</html>
