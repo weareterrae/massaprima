@@ -85,6 +85,12 @@ section{padding:70px 0}
 .galeria figure:hover img{transform:scale(1.06)}
 .galeria figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 12px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-family:'Zilla Slab',serif;font-weight:700;font-size:1rem}
 @media(max-width:760px){.angola .ang-top{grid-template-columns:1fr}.galeria{grid-template-columns:repeat(2,1fr)}}
+/* escola */
+.escola{background:var(--bege)}
+.cp-card{outline:3px solid var(--laranja);outline-offset:-3px}
+.cp-qs{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.cp-qs button{background:var(--bege);border:1.5px solid #e6d3b8;color:var(--castanho);border-radius:20px;padding:9px 14px;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer;text-align:left}
+.cp-qs button:hover{border-color:var(--laranja);color:var(--laranja)}
 /* apoio banner */
 .apoio-banner{position:relative;border-radius:18px;overflow:hidden;margin-bottom:34px;max-height:300px}
 .apoio-banner img{width:100%;height:100%;object-fit:cover;display:block;max-height:300px}
@@ -107,20 +113,6 @@ footer .soc{margin:10px 0 26px;font-weight:700}
 footer .soc a{color:var(--bege);text-decoration:none;margin:0 12px}
 footer .soc a:hover{color:#fff}
 /* chef prima */
-#cp-btn{position:fixed;bottom:24px;right:24px;width:64px;height:64px;border-radius:50%;background:var(--laranja);color:#fff;font-size:1.7rem;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);z-index:100}
-#cp-btn:hover{transform:scale(1.06)}
-#cp-panel{position:fixed;bottom:100px;right:24px;width:min(360px,calc(100vw - 40px));height:480px;background:#fff;border-radius:18px;box-shadow:0 12px 44px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden;z-index:100}
-#cp-panel.open{display:flex}
-#cp-head{background:var(--laranja);color:#fff;padding:14px 18px;font-weight:800;display:flex;justify-content:space-between;align-items:center}
-#cp-head button{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer}
-#cp-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--bege-claro)}
-.msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:.92rem}
-.msg.bot{background:var(--bege);border-bottom-left-radius:4px;align-self:flex-start}
-.msg.user{background:var(--laranja);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
-#cp-form{display:flex;border-top:1px solid #eee}
-#cp-form input{flex:1;border:none;padding:14px;font-size:.95rem;font-family:inherit}
-#cp-form input:focus{outline:none}
-#cp-form button{background:var(--laranja);color:#fff;border:none;padding:0 20px;font-weight:800;cursor:pointer}
 </style>
 </head>
 <body>
@@ -254,6 +246,26 @@ footer .soc a:hover{color:#fff}
   </div>
 </section>
 
+
+<section class="escola" id="escola">
+  <div class="wrap">
+    <h2 class="sec-title">🎓 A Escola Massa Prima</h2>
+    <p class="sec-sub">Mais do que matéria-prima: conhecimento para o seu negócio crescer. Aprenda, calcule e pergunte — tudo gratuito.</p>
+    <div class="cards">
+      <div class="card"><div class="body"><h3>👩‍🍳 Receitas profissionais</h3><p>12 receitas com dosagens oficiais, método passo-a-passo e dicas para vender mais — e vamos juntar novas todos os meses.</p><a class="btn" href="receitas.html">Ver receitas</a></div></div>
+      <div class="card"><div class="body"><h3>🧮 Calculadora de Food Cost</h3><p>Descubra quanto custa cada pão ou fatia e qual o preço de venda certo para ganhar bem.</p><a class="btn" href="foodcost.html">Calcular agora</a></div></div>
+      <div class="card cp-card"><div class="body"><h3>🌾 Chef Prima — o seu mestre 24/7</h3><p>O nosso assistente com inteligência artificial conhece os 88 produtos, as receitas e as técnicas. Pergunte-lhe o que quiser, a qualquer hora.</p>
+        <div class="cp-qs">
+          <button onclick="ChefPrima.ask('Quero abrir uma padaria, por onde começo?')">«Quero abrir uma padaria, por onde começo?»</button>
+          <button onclick="ChefPrima.ask('Como uso o mix Cake Chocolate?')">«Como uso o Cake Chocolate?»</button>
+          <button onclick="ChefPrima.ask('Ensina-me a pôr preço numa fatia de bolo')">«Como ponho preço numa fatia?»</button>
+        </div>
+        <button class="btn" onclick="ChefPrima.open()">Falar com o Chef Prima</button>
+      </div></div>
+    </div>
+  </div>
+</section>
+
 <section class="apoio" id="apoio">
   <div class="wrap">
     <h2 class="sec-title">Apoio ao Profissional</h2>
@@ -322,101 +334,8 @@ footer .soc a:hover{color:#fff}
   </div>
 </footer>
 
-<button id="cp-btn" title="Falar com o Chef Prima">🌾</button>
-<div id="cp-panel">
-  <div id="cp-head"><span>Chef Prima 🌾</span><button id="cp-close">✕</button></div>
-  <div id="cp-msgs"></div>
-  <form id="cp-form"><input id="cp-in" placeholder="Escreva a sua pergunta…" autocomplete="off"><button type="submit">➤</button></form>
-</div>
 
-<script>
-// ===== Chef Prima — assistente com base de conhecimento real (34 produtos das fichas técnicas) =====
-// v1 rule-based + KB local; na fase de produção liga-se a IA (como Terrae/Água Minda), mantendo esta KB.
-const KB = JSON.parse('[{"n":"Amido de Milho","d":"","fo":["5"],"m":""},{"n":"Biscuit","d":"Produto para o fabrico de entremeios, pão-de-ló, tortas, bolos de gema e similares.","fo":["5","15","25"],"m":"Bater os ingredientes com varas durante 7 - 10 minutos na velocidade máxima. Entremeios e Pão-de-Ló:"},{"n":"Biscuit Chocolate","d":"Produto para o fabrico de entremeios, pão-de-ló, tortas e similares de chocolate.","fo":["5","15","25"],"m":"Bater os ingredientes com varas durante 7 - 10 minutos na velocidade máxima. Entremeios e Pão-de-Ló:"},{"n":"Bolo Rei","d":"Produto completo para o fabrico de Bolo Rei.","fo":["15","25"],"m":"Amassar os ingredientes do Aparelho 1 durante ± 15 minutos. Temperatura da massa: 28° C"},{"n":"Brioche","d":"Produto completo para o fabrico de massas lêvedas, tais como croissant, brioche, bolas de berlim, pão de leite tipo brioche e similares","fo":["15","25"],"m":"Amassar todos os ingredientes do Aparelho 1 durante 3 minutos em 1ª velocidade e 8 minutos em 2ª velocidade até obter uma massa bem desenvolvida. Temperatura da massa: 26°C-28°C"},{"n":"Cake Ananás","d":"Produto completo para o fabrico de pastas, bolos diversos e queques com pedaços de ananás.","fo":["15"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Caramelo","d":"Produto completo para o fabrico de pastas, bolos diversos e queques com pedaços de caramelo.","fo":["15"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Cenoura","d":"Produto completo para o fabrico de pastas, queques, tortas e bolos diversos de cenoura.","fo":["5","15","25"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Chocolate","d":"Produto completo para o fabrico de pastas, queques, tortas e bolos diversos de chocolate.","fo":["5","15","25"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Laranja","d":"Produto completo para o fabrico de pastas, queques, tortas e bolos diversos de laranja.","fo":["5","15","25"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Neutro","d":"Produto completo para o fabrico de pastas, bolo mármore, fatias fantasia e queques.","fo":["5","15"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Noz","d":"Produto completo para o fabrico de pastas, bolos diversos e queques com noz.","fo":["15"],"m":""},{"n":"Chantilly Pó","d":"Produto completo para a elaboração de creme tipo chantilly com boa estrutura e fácil preparação.","fo":["5"],"m":"Adicionar MP Chantilly Pó à água ou leite frio e bater com varas na velocidade máxima durante 4 - 5 minutos, até obter a consistência desejada."},{"n":"Creme Pasteleiro Sublime","d":"Produto para a elaboração de creme pasteleiro a frio, com excelente textura e sabor.","fo":["5"],"m":"A frio: Misturar previamente o açúcar com o RAP. Adicionar à água e bater 3 a 5 minutos com varas até obter um preparado homogéneo."},{"n":"Decor Icing","d":"Pasta de açúcar colorida para cobertura, decoração e modelagem em cake design.","fo":["2.5"],"m":"Retirar a quantidade desejada da embalagem e amassar com as maos até obter a plasticidade pretendida. Em caso de necessidade aconselha-se a trabalhar o Decor Icing com amido."},{"n":"Fermento Pastelaria","d":"Fermento em pó para pastelaria.","fo":["5","15"],"m":"Pronto a utilizar."},{"n":"Icing Sugar","d":"Açúcar em pó para decoração e cobertura de bolos.","fo":["5","15"],"m":"Aplicação directa."},{"n":"Melhorante Gold","d":"Melhorante para o fabrico de todos os tipos de pão.","fo":["5","15"],"m":""},{"n":"Melhorante Natura","d":"Melhorante clean label para todos os tipos de pão.","fo":["5","15"],"m":""},{"n":"Pão Centeio da Baviera 100%","d":"Produto completo para o fabrico de pão com centeio.","fo":["15"],"m":"Amassar os ingredientes cerca de 10 minutos. Deixar descansar 20 minutos e pesar no tamanho desejado."},{"n":"Pão Integral 100%","d":"Produto completo para o fabrico de pão integral e fibras pré-embalado.","fo":["15"],"m":"Juntar todos os ingredientes e amassar cerca de 10 minutos. Temperatura da massa: 26º C"},{"n":"Pão Multicereais 100%","d":"Produto completo para o fabrico de pão especial com cereais.","fo":["15","25"],"m":"Misturar todos os ingredientes e amassar cerca de 12 minutos. Deixar repousar 15 minutos, enrolar e descansar mais 10 minutos."},{"n":"Pão Prokorn 100%","d":"Produto completo para o fabrico de pão especial de trigo com cereais. Fonte de cálcio e de magnésio.","fo":["15","25"],"m":"Misturar os ingredientes durante 4 minutos em 1ª velocidade e 12 minutos em 2ª velocidade (6 minutos se usar espiral). Temperatura da massa: 26º C"},{"n":"Pão de Forma e Hamburguer 100%","d":"Produto completo para o fabrico de pão especial e hambúrguer pré-embalados.","fo":["15","25"],"m":"Juntar todos os ingredientes e amassar durante 15 minutos. Deixar repousar 20 minutos."},{"n":"Pão Rústico 100%","d":"Produto completo p/ fabrico de pão especial rústico.","fo":["15","25"],"m":"Amassar os ingredientes inicialmente com 60% da água e ir adicionando a restante ao longo da amassadura. Temperatura da massa: 24-26º C"},{"n":"Pão Shape 100%","d":"Produto completo para o fabrico de pão de trigo integral pré-embalado fatiado.","fo":["15","25"],"m":"Amassar todos os ingredientes* (adicionar apenas 60% da água no início da amassadura e restante adição de forma progressiva) e amassar 4 a 5 min. em 1ª velocidade e 10 min. em 2ª velocidade, até obter uma massa bem desenvolvida. Temperatura da massa: 25ºC - 27ºC."},{"n":"Propionato de Cálcio","d":"Produto utilizado como aditivo alimentar que cumpre os critérios de pureza estabelecidos no Regulamento (UE) n.º 231/2012.","fo":["5"],"m":"A utilização desta matéria-prima em produtos de Padaria e Pastelaria deverá cumprir os limites estabelecidos no Regulamento (CE) n.° 1333/2008."},{"n":"Mistura 4 Sementes","d":"Sementes selecionadas para decoração de pão.","fo":["5"],"m":""},{"n":"Sementes de Sésamo sem Pele","d":"Sementes selecionadas para decoração de pão.","fo":["5"],"m":""},{"n":"Queque e Bolo de Arroz","d":"Produto para o fabrico de queque e bolo de arroz tradicional, contendo farinha de arroz.","fo":["15","25"],"m":"Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo. Distribuir o batido pelas formas."},{"n":"Muffin","d":"Produto para o fabrico de muffins, queques e similares.","fo":["15"],"m":"Muffins:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Muffins.Cozer os Muffins a uma temperatura de cerca de 200ºC (lar) e 180ºC (tecto), durante aproximadamente 25 minutos.Abrir o ar, quando os bolos começarem a formar cabeça. 2332Queques:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Queques.Para Queques, cozer a cerca de 220ºC (lar) e 210ºC (tecto).Abrir o ar, quando os bolos começarem a formar cabeça."},{"n":"Muffin Chocolate","d":"Produto para o fabrico de muffins, queques e similares com sabor a chocolate.","fo":["15"],"m":"Muffins:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Muffins.Cozer os Muffins a uma temperatura de cerca de 200ºC (lar) e 180ºC (tecto), durante aproximadamente 25 minutos.Abrir o ar, quando os bolos começarem a formar cabeça. 2332Queques:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Queques.Para Queques, cozer a cerca de 220ºC (lar) e 210ºC (tecto).Abrir o ar, quando os bolos começarem a formar cabeça."},{"n":"Cacau em Pó","d":"Cacau em pó","fo":["5"],"m":"Pronto a aplicar"},{"n":"Coco Ralado Ceilão","d":"Coco ralado","fo":["5"],"m":""}]');
-const painel=document.getElementById('cp-panel'),msgs=document.getElementById('cp-msgs');
-document.getElementById('cp-btn').onclick=()=>{painel.classList.toggle('open');if(!msgs.children.length)bot("Olá! Sou o Chef Prima 🌾 Conheço toda a gama Massa Prima — posso dizer-lhe que mix usar, como se prepara e em que formatos, ou pôr a nossa equipa em contacto consigo. Experimente perguntar-me sobre um produto (ex.: como uso o Cake Chocolate?).");};
-document.getElementById('cp-close').onclick=()=>painel.classList.remove('open');
-function add(t,c){const d=document.createElement('div');d.className='msg '+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
-function bot(t){setTimeout(()=>add(t,'bot'),350);}
-function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
-function frase1(m){ // primeira(s) instrução(ões), limpa
-  if(!m) return '';
-  let x=m.replace(/([a-zç])\.([A-ZÀ-Ú])/g,'$1. $2').replace(/\b\d{4,}\b/g,' ').replace(/\s+/g,' ').trim();
-  const p=x.split(/(?<=\.)\s/); return (p[0]+(p[1]&&p[0].length<70?' '+p[1]:'')).trim();
-}
-const STOP=new Set(['massa','prima','de','da','do','e','o','a','com','para','sem','em','100%','pao','pão']);
-function tokens(s){return norm(s).replace(/[^a-z0-9% ]/g,' ').split(/\s+/).filter(w=>w&&!STOP.has(w)&&w.length>2);}
-function procurar(q){
-  const qt=tokens(q); if(!qt.length) return [];
-  return KB.map(p=>{const nt=tokens(p.n);let sc=0;for(const w of qt){if(nt.some(n=>n===w||n.startsWith(w)||w.startsWith(n)))sc++;}return{p,sc};})
-    .filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc);
-}
-function fmtProduto(p){
-  let t="🌾 Massa Prima "+p.n+". ";
-  if(p.d) t+=p.d+" ";
-  if(p.m) t+="Como usar: "+frase1(p.m)+" ";
-  if(p.fo&&p.fo.length) t+="Disponível em sacos de "+p.fo.join(', ').replace('2.5','2,5')+" kg. ";
-  t+="Quer receber a ficha técnica completa ou falar com a nossa equipa? É só deixar-me o seu contacto.";
-  return t;
-}
-// ===== Chef Prima v2: IA (Supabase Edge Function) com fallback rule-based =====
-const PRIMA_ENDPOINT='https://qciagsktkqljvknmahfu.supabase.co/functions/v1/CHEFPRIMAIA';
-let hist=[]; // histórico para a IA
-let leadMode=false;
-function ruleReply(q){
-  let _out=null; const bot=t=>{_out=t;};
-  (function(){
-  if(leadMode){leadMode=false;bot("Anotado! ✅ A nossa equipa vai entrar em contacto consigo o mais depressa possível. Precisa de mais alguma coisa?");return;}
-  const s=norm(q);
-  // 1) intenções comerciais primeiro
-  if(/(amostra|testar|experimentar|comprar|encomend|cat[áa]logo|pre[çc]o)/.test(s)){leadMode=true;bot("Com todo o gosto! Deixe-me numa mensagem o seu nome, localidade e contacto (telefone ou e-mail) e a nossa equipa comercial fala consigo. 🌾");return;}
-  if(/(preco|custa|quanto|tabela)/.test(s)){leadMode=true;bot("Os preços dependem do produto e da quantidade. Deixe-me o seu contacto e a nossa equipa comercial responde-lhe com a tabela certa para o seu caso.");return;}
-  if(/(onde|comprar|loja|distribuidor|revenda|ponto de venda)/.test(s)){leadMode=true;bot("Diga-me a sua localidade e o seu contacto, e indicamos-lhe o ponto de venda mais próximo — ou entregamos diretamente, se for cliente profissional.");return;}
-  if(/(contacto|falar|equipa|whatsapp|telefone|liga|email|e-mail)/.test(s)){leadMode=true;bot("Com certeza! Pode escrever-nos para geral@quenteebom.co.ao, ou deixe-me aqui o seu nome e contacto que a nossa equipa fala consigo em horário de expediente.");return;}
-  if(/(ola|bom dia|boa tarde|boa noite|^oi\b)/.test(s)){bot("Olá! 👋 Em que posso ajudar? Posso falar-lhe de qualquer produto Massa Prima, dizer-lhe como se usa, ou pedir à equipa que entre em contacto.");return;}
-  if(/(obrigad|fixe|top|excelente)/.test(s)){bot("Sempre às ordens! 🌾 Quando quiser levar a Massa Prima para a sua produção, é só falar connosco.");return;}
-  if(/(feito em angola|produzi|fabrica|fábrica|angola)/.test(s)){bot("Grande parte da nossa produção é feita em Angola 🇦🇴 — é isso que garante frescura, fornecimento constante e apoio próximo a quem produz. A base do bom pão angolano faz-se cá.");return;}
-  // 2) pesquisa de produto na KB real
-  const r=procurar(q);
-  if(r.length){
-    const top=r[0].sc;
-    const empatados=r.filter(x=>x.sc===top);
-    if(empatados.length===1||top>=2){bot(fmtProduto(empatados[0].p));return;}
-    if(empatados.length<=6){bot("Temos várias opções: "+empatados.map(x=>"Massa Prima "+x.p.n).join(' · ')+". Sobre qual quer saber mais? Diga-me o nome completo. 🌾");return;}
-  }
-  // 3) famílias amplas
-  if(/(pao|panifica|padaria|farinha)/.test(s)){bot("Na padaria temos 7 mixes de pão 100% (Rústico, Integral, Multicereais, Centeio da Baviera, Prokorn, Shape, Pão de Forma & Hambúrguer), melhorantes (Natura, Gold) e sementes para decorar. Diga-me qual lhe interessa e explico como se usa. 🥖");return;}
-  if(/(bolo|pastel|doce|cake|queque|muffin|biscuit)/.test(s)){bot("Na pastelaria temos cakes (Chocolate, Cenoura, Laranja, Ananás, Caramelo, Noz, Neutro), Muffins, Biscuit, Brioche, Bolo Rei e apoio (Creme Pasteleiro Sublime, Chantilly, Icing Sugar). Sobre qual quer saber? 🧁");return;}
-  if(/(receita|fazer|como)/.test(s)){bot("Diga-me o nome do produto (ex.: como uso o Brioche?) e digo-lhe já o modo de preparação da ficha técnica. 👩‍🍳");return;}
-  bot("Para lhe responder com rigor, diga-me o nome do produto ou o que quer produzir — ou, se preferir, deixe-me o seu contacto que a nossa equipa fala consigo. 🌾");
-  })();
-  return _out;
-}
-// indicador "a escrever"
-function typing(on){
-  let t=document.getElementById('cp-typing');
-  if(on){ if(!t){t=document.createElement('div');t.id='cp-typing';t.className='msg bot';t.textContent='🌾 a pensar…';msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;} }
-  else if(t) t.remove();
-}
-document.getElementById('cp-form').onsubmit=async e=>{
-  e.preventDefault();const inp=document.getElementById('cp-in');const q=inp.value.trim();if(!q)return;
-  add(q,'user');inp.value='';
-  hist.push({role:'user',content:q});
-  typing(true);
-  let reply=null;
-  try{
-    const ctl=new AbortController(); const tm=setTimeout(()=>ctl.abort(),20000);
-    const r=await fetch(PRIMA_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist}),signal:ctl.signal});
-    clearTimeout(tm);
-    if(r.ok){const d=await r.json(); if(d.reply)reply=d.reply;}
-  }catch(_){/* offline ou função por publicar → regras */}
-  typing(false);
-  if(!reply) reply=ruleReply(q)||"Diga-me o nome do produto ou o que quer produzir, e eu ajudo. 🌾";
-  hist.push({role:'assistant',content:reply});
-  if(hist.length>24)hist=hist.slice(-24);
-  add(reply,'bot');
-};
-</script>
 <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"5dff754f7a8bb173057e9243ca982bf3"})});</script>
+<script src="assets/js/chefprima.js" defer></script>
 </body>
 </html>

@@ -45,6 +45,7 @@ CATÁLOGO (86 produtos; formatos reais; doses das fichas técnicas):
 - Massa Prima Muffin Chocolate [Massa Prima|Batidos com Gordura|15kg] Produto para o fabrico de muffins, queques e similares com sabor a chocolate. Dose: MP Muffin Chocolate 10.000 g; Água 4000 g; Óleo 4000 g.
 - Massa Prima Queque e Bolo de Arroz [Massa Prima|Batidos com Gordura|15kg/25kg] Produto para o fabrico de queque e bolo de arroz tradicional, contendo farinha de arroz. Dose: MP Queque e Bolo de Arroz 10.000 g; Água 4000 g; Óleo 2500 g.
 - Soft Cake Iogurte [Prodite Zeelandia|Batidos com Gordura|15kg] Produto completo para o fabrico de pastas e bolos diversos de Iogurte. Dose: Soft Cake Iogurte 1.000 g; Óleo vegetal 300 g; Ovos (± 6) 300 g; Água 225 g.
+- Soft Cake Red Velvet [Prodite Zeelandia|Batidos com Gordura|5kg] Produto completo para o fabrico de pastas, bolos diversos e queques tipo Red Velvet. Dose: Soft Cake Red Velvet 1.000 g; Ovos 350 g; Óleo vegetal* 300 g; Água 225 g.
 - Massa Prima Biscuit [Massa Prima|Batidos sem Gordura|5kg/15kg/25kg] Produto para o fabrico de entremeios, pão-de-ló, tortas, bolos de gema e similares. Dose: MP Biscuit 1.000 g; Ovos (±12 - 15) 600 - 750 g; Água 180 g.
 - Massa Prima Biscuit Chocolate [Massa Prima|Batidos sem Gordura|5kg/15kg/25kg] Produto para o fabrico de entremeios, pão-de-ló, tortas e similares de chocolate. Dose: MP Biscuit Chocolate 1.000 g; Ovos (±12-15) 600 - 750 g; Água 180 g.
 - Arabesque Dark 70% [Prodite Zeelandia|Chocolates e Sucedaneos|10kg] Chocolate de cobertura negro em pastilhas com 70% cacau.
@@ -78,6 +79,7 @@ CATÁLOGO (86 produtos; formatos reais; doses das fichas técnicas):
 - Miolo de Amêndoa com Pele [Prodite Zeelandia|Frutos Secos|10kg] Frutos secos selecionados para pastelaria e decoração.
 - Miolo de Amêndoa Laminada [Prodite Zeelandia|Frutos Secos|10kg] Frutos secos selecionados para pastelaria e decoração.
 - Miolo de Amêndoa Palitada [Prodite Zeelandia|Frutos Secos|10kg] Frutos secos selecionados para pastelaria e decoração.
+- Miolo de amêndoa sem Pele [Prodite Zeelandia|Frutos Secos|10kg] Frutos secos selecionados para pastelaria e decoração.
 - Miolo de Noz Metades [Prodite Zeelandia|Frutos Secos|10kg] Frutos secos selecionados para pastelaria e decoração.
 - Sultana [Prodite Zeelandia|Frutos Secos|10kg] Produto obtido a partir da desidratação da uva
 - Brigel Morango [Prodite Zeelandia|Geleias|7kg] Preparado aromatizado a morango, ideal para recheios e coberturas de pastelaria. Com 15% de morango na sua composição.
@@ -108,7 +110,7 @@ RECEITAS PROFISSIONAIS DO SITE (12):
 - Torta de chocolate com framboesa (Bolos & Tortas; rende 2 tortas (±20 fatias)): usa Massa Prima Cake Chocolate + Fruitful Filling Framboesa (PZ) + Scaldis Dark (PZ). Ingredientes: MP Cake Chocolate 1000 g; Óleo vegetal 300 g; Ovos (±9) 450 g; Água 250 g; Açúcar 150 g.
 - Cake de cenoura com noz e caramelo (Bolos & Tortas; rende 2 bolos médios (±20 fatias)): usa Massa Prima Cake Cenoura + Miolo de Noz (PZ) + Decorgel Caramelo (PZ). Ingredientes: MP Cake Cenoura 1.000 g; Óleo vegetal 300 g; Ovos (±6) 300 g; Água 250 g; Açúcar ---; Miolo de Noz (no batido) 150 g.
 - Torta de laranja (Bolos & Tortas; rende 2 tortas (±20 fatias)): usa Massa Prima Cake Laranja + Creme de Ovo (PZ) + Brigel Neutro (PZ). Ingredientes: MP Cake Laranja 1000 g; Óleo vegetal 300 g; Ovos (±9) 450 g; Água 250 g; Açúcar 150 g.
-- Red velvet com chantilly (Bolos & Tortas; rende 1 bolo de 2 andares (±14 fatias)): usa Soft Cake Red Velvet (PZ) + Massa Prima Chantilly Pó. Ingredientes: Soft Cake Red Velvet segundo a ficha do produto; MP Chantilly Pó 600 g; Água ou leite frio 1.000 g.
+- Red velvet com chantilly (Bolos & Tortas; rende 1 bolo de 2 andares (±14 fatias)): usa Soft Cake Red Velvet (PZ) + Massa Prima Chantilly Pó. Ingredientes: Soft Cake Red Velvet 1.000 g; Ovos 350 g; Óleo vegetal* 300 g; Água 225 g; MP Chantilly Pó 600 g; Água ou leite frio 1.000 g.
 - Muffins duplo chocolate (Vitrine & Café; rende ±180 muffins de 100 g): usa Massa Prima Muffin Chocolate + Arabesque Dark 70% (PZ). Ingredientes: MP Muffin Chocolate 10.000 g; Água 4000 g; Óleo 4000 g; Arabesque Dark picado 1.000 g.
 - Brioche recheado com creme (Vitrine & Café; rende ±28 brioches de 60 g): usa Massa Prima Brioche + Massa Prima Creme Pasteleiro Sublime. Ingredientes: Massa Prima Brioche 1.000 g; Água 400 g; Levedura 60 g; ou Levedura Seca 20 g; MP Creme Pasteleiro Sublime 1.000 g; Açúcar 1.000 g; Água fria 3.000 g.
 - Bolo de arroz tradicional (Vitrine & Café; rende ±150 bolos de 110 g): usa Massa Prima Queque e Bolo de Arroz. Ingredientes: MP Queque e Bolo de Arroz 10.000 g; Água 4000 g; Óleo 2500 g.
