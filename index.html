@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Massa Prima — A base de tudo o que é bom | Matérias-primas de panificação e pastelaria, Angola</title>
+<meta name="description" content="Mixes e matérias-primas de panificação e pastelaria, em grande parte produzidos em Angola. Qualidade que inspira resultados perfeitos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  --laranja:#EC6607; --castanho:#77310A; --bege:#FEEAD3; --bege-claro:#FFF7EC;
+  --ink:#3D1A05;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--ink);background:var(--bege-claro);line-height:1.6}
+h1,h2,h3{font-family:'Zilla Slab',serif;color:var(--castanho);line-height:1.15}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.graos-band{height:90px;background:var(--laranja) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="216" height="180"><g fill="%23FFFFFF"><ellipse cx="36" cy="34" rx="11" ry="22" transform="rotate(-24 36 34)"/><ellipse cx="112" cy="22" rx="11" ry="22" transform="rotate(-24 112 22)"/><ellipse cx="178" cy="52" rx="11" ry="22" transform="rotate(20 178 52)"/><ellipse cx="64" cy="86" rx="11" ry="22" transform="rotate(30 64 86)"/><ellipse cx="146" cy="108" rx="11" ry="22" transform="rotate(-40 146 108)"/><ellipse cx="22" cy="128" rx="11" ry="22" transform="rotate(-38 22 128)"/><ellipse cx="92" cy="152" rx="11" ry="22" transform="rotate(18 92 152)"/><ellipse cx="196" cy="158" rx="11" ry="22" transform="rotate(26 196 158)"/></g></svg>') repeat}
+/* header */
+header{position:sticky;top:0;z-index:50;background:var(--bege-claro);box-shadow:0 2px 12px rgba(119,49,10,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;max-width:1100px;margin:0 auto}
+.nav img{height:58px}
+.nav ul{display:flex;gap:26px;list-style:none;flex-wrap:wrap}
+.nav a{color:var(--castanho);text-decoration:none;font-weight:700;font-size:.95rem}
+.nav a:hover{color:var(--laranja)}
+.btn{display:inline-block;background:var(--laranja);color:#fff;padding:13px 28px;border-radius:40px;text-decoration:none;font-weight:800;border:none;cursor:pointer;font-size:1rem}
+.btn:hover{background:var(--castanho)}
+.btn.sec{background:transparent;color:var(--castanho);border:2.5px solid var(--castanho)}
+.btn.sec:hover{background:var(--castanho);color:#fff}
+/* hero */
+.hero{background:var(--bege);padding:70px 0 60px;text-align:center}
+.hero img{max-width:340px;width:70%;margin-bottom:28px}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:14px}
+.hero p{font-size:1.2rem;max-width:640px;margin:0 auto 30px}
+.hero .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+/* provas */
+.provas{background:var(--castanho);color:var(--bege);padding:34px 0}
+.provas .wrap{display:flex;gap:30px;justify-content:space-around;flex-wrap:wrap;text-align:center}
+.provas .item{max-width:280px}
+.provas .grao{font-size:1.6rem}
+.provas b{display:block;font-size:1.1rem;font-family:'Zilla Slab',serif;color:#fff}
+/* secções */
+section{padding:70px 0}
+.sec-title{text-align:center;font-size:2.1rem;margin-bottom:8px}
+.sec-sub{text-align:center;max-width:600px;margin:0 auto 44px;color:#6b4a2e}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(119,49,10,.10);display:flex;flex-direction:column}
+.card .cimg{height:180px;overflow:hidden}
+.card .cimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.card:hover .cimg img{transform:scale(1.05)}
+.card .top{background:var(--laranja);color:#fff;padding:26px 26px 22px;position:relative}
+.card .top h3{color:#fff;font-size:1.5rem}
+.card .top small{opacity:.92;font-weight:600}
+.card .body{padding:24px 26px 28px;flex:1;display:flex;flex-direction:column;gap:12px}
+.card ul{list-style:none}
+.card li{padding-left:26px;position:relative;margin-bottom:8px}
+.card li::before{content:'🌾';position:absolute;left:0;font-size:.85rem}
+.card .body .btn{margin-top:auto;align-self:flex-start}
+.nota{background:var(--bege);border-left:5px solid var(--laranja);padding:16px 20px;border-radius:8px;margin-top:30px;font-size:.95rem}
+/* showcase */
+.showcase{position:relative;height:340px;overflow:hidden}
+.showcase img{width:100%;height:100%;object-fit:cover;display:block}
+.showcase-cap{position:absolute;left:0;bottom:0;right:0;padding:60px 24px 22px;background:linear-gradient(transparent,rgba(61,26,5,.72));color:#fff;font-family:'Zilla Slab',serif;font-size:clamp(1.3rem,3vw,2rem);text-align:center;font-weight:700}
+/* receitas */
+.receitas{background:var(--bege)}
+.rec .foto{height:190px;overflow:hidden;background:var(--bege)}
+.rec .foto img{width:100%;height:100%;object-fit:cover;display:block}
+.rec .body h3{font-size:1.25rem;margin-bottom:6px}
+.tag{display:inline-block;background:var(--bege);color:var(--castanho);font-size:.8rem;font-weight:800;padding:3px 12px;border-radius:20px;margin-bottom:8px}
+/* angola */
+.angola{background:var(--castanho);color:var(--bege)}
+.angola .ang-top{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;margin-bottom:56px}
+.angola h2{color:#fff;font-size:2rem;margin-bottom:18px}
+.angola p{margin-bottom:14px}
+.selo-pill{display:inline-block;margin-top:8px;background:var(--laranja);color:#fff;font-weight:800;padding:10px 20px;border-radius:30px;font-size:.95rem}
+.angola-foto{border-radius:18px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.35);aspect-ratio:4/3}
+.angola-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.maos-title{color:#fff;font-size:1.6rem;text-align:center}
+.maos-sub{text-align:center;max-width:620px;margin:6px auto 30px;color:#f0d9bf}
+.galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.galeria figure{margin:0;position:relative;border-radius:14px;overflow:hidden;aspect-ratio:3/4}
+.galeria img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.galeria figure:hover img{transform:scale(1.06)}
+.galeria figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 12px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-family:'Zilla Slab',serif;font-weight:700;font-size:1rem}
+@media(max-width:760px){.angola .ang-top{grid-template-columns:1fr}.galeria{grid-template-columns:repeat(2,1fr)}}
+/* apoio banner */
+.apoio-banner{position:relative;border-radius:18px;overflow:hidden;margin-bottom:34px;max-height:300px}
+.apoio-banner img{width:100%;height:100%;object-fit:cover;display:block;max-height:300px}
+.apoio-banner-cap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 30px;background:linear-gradient(90deg,rgba(61,26,5,.78),rgba(61,26,5,.15));color:#fff}
+.apoio-banner-cap b{font-family:'Zilla Slab',serif;font-size:1.5rem;max-width:15ch}
+.apoio-banner-cap span{max-width:46ch;margin-top:6px}
+/* apoio */
+.apoio .cards .card .body{gap:8px}
+/* contactos */
+.contactos{background:var(--bege)}
+.contactos .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+@media(max-width:760px){.contactos .wrap{grid-template-columns:1fr}}
+.contactos form{display:flex;flex-direction:column;gap:12px}
+.contactos input,.contactos textarea,.contactos select{padding:13px 16px;border:2px solid #e8cfae;border-radius:10px;font-family:inherit;font-size:1rem;background:#fff}
+.contactos input:focus,.contactos textarea:focus{outline:2px solid var(--laranja)}
+/* footer */
+footer{background:var(--castanho);color:var(--bege);padding:46px 0 0;text-align:center}
+footer img{height:80px;margin-bottom:14px}
+footer .soc{margin:10px 0 26px;font-weight:700}
+footer .soc a{color:var(--bege);text-decoration:none;margin:0 12px}
+footer .soc a:hover{color:#fff}
+/* chef prima */
+#cp-btn{position:fixed;bottom:24px;right:24px;width:64px;height:64px;border-radius:50%;background:var(--laranja);color:#fff;font-size:1.7rem;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);z-index:100}
+#cp-btn:hover{transform:scale(1.06)}
+#cp-panel{position:fixed;bottom:100px;right:24px;width:min(360px,calc(100vw - 40px));height:480px;background:#fff;border-radius:18px;box-shadow:0 12px 44px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden;z-index:100}
+#cp-panel.open{display:flex}
+#cp-head{background:var(--laranja);color:#fff;padding:14px 18px;font-weight:800;display:flex;justify-content:space-between;align-items:center}
+#cp-head button{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer}
+#cp-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--bege-claro)}
+.msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:.92rem}
+.msg.bot{background:var(--bege);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.user{background:var(--laranja);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+#cp-form{display:flex;border-top:1px solid #eee}
+#cp-form input{flex:1;border:none;padding:14px;font-size:.95rem;font-family:inherit}
+#cp-form input:focus{outline:none}
+#cp-form button{background:var(--laranja);color:#fff;border:none;padding:0 20px;font-weight:800;cursor:pointer}
+.wa{position:fixed;bottom:24px;right:100px;background:#25D366;color:#fff;border-radius:40px;padding:14px 22px;font-weight:800;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:99}
+@media(max-width:600px){.wa{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top"><img src="assets/logo_principal.png" alt="Massa Prima by Quente e Bom"></a>
+    <ul>
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="#receitas">Receitas</a></li>
+      <li><a href="#angola">Feito em Angola</a></li>
+      <li><a href="#apoio">Apoio ao Profissional</a></li>
+      <li><a href="#contactos">Contactos</a></li>
+    </ul>
+    <a class="btn" href="#contactos">Pedir amostra</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <img src="assets/logo_principal.png" alt="Massa Prima">
+    <h1>A base de tudo o que é bom.</h1>
+    <p>Mixes e matérias-primas de panificação e pastelaria, em grande parte produzidos em Angola, para o seu negócio render todos os dias.</p>
+    <div class="ctas">
+      <a class="btn" href="#produtos">Ver produtos</a>
+      <a class="btn sec" href="#contactos">Falar com a equipa</a>
+    </div>
+  </div>
+</section>
+<div class="showcase"><img src="assets/produtos/hero.jpg" alt="Pães e bolos acabados de sair do forno"><div class="showcase-cap">Da matéria-prima ao que sai do forno.</div></div>
+
+<div class="provas">
+  <div class="wrap">
+    <div class="item"><span class="grao">🇦🇴</span><b>Feito em Angola</b>Produção em grande parte local: frescura e fornecimento constante.</div>
+    <div class="item"><span class="grao">🥖</span><b>Resultado consistente</b>Fórmulas profissionais que rendem igual, fornada após fornada.</div>
+    <div class="item"><span class="grao">🤝</span><b>Apoio incluído</b>Receitas, técnica e ideias para o seu negócio vender mais.</div>
+  </div>
+</div>
+
+<section id="produtos">
+  <div class="wrap">
+    <h2 class="sec-title">Os nossos produtos</h2>
+    <p class="sec-sub">qualidade que inspira resultados perfeitos</p>
+    <div class="cards">
+      <div class="card">
+        <div class="cimg"><img src="assets/produtos/rustic.jpg" alt="Pão de padaria"></div>
+        <div class="top"><h3>Padaria</h3><small>Mixes 100%, melhorantes e decoração</small></div>
+        <div class="body">
+          <p><b>Mixes de pão 100%:</b> Rústico · Integral · Multicereais · Centeio da Baviera · Prokorn · Shape · Pão de Forma &amp; Hambúrguer</p>
+          <p><b>Melhorantes:</b> Natura 1% · Gold 1% · Fresh 1%</p>
+          <p><b>Sementes &amp; decoração:</b> misturas de 2, 3 e 4 sementes · sésamo · decoração de milho</p>
+          <p style="font-size:.88rem;color:#8a5a34"><b>Formatos:</b> sacos de 5, 15 e 25 kg</p>
+          <a class="btn" href="#contactos">Pedir amostra</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cimg"><img src="assets/produtos/cake-chocolate.jpg" alt="Bolo de chocolate"></div>
+        <div class="top"><h3>Pastelaria</h3><small>Do cake ao brioche, acabamento profissional</small></div>
+        <div class="body">
+          <p><b>Cakes &amp; batidos:</b> Neutro · Chocolate · Cenoura · Laranja · Ananás · Caramelo · Noz · Muffin · Queque &amp; Bolo de Arroz · Biscuit</p>
+          <p><b>Massas lêvedas:</b> Brioche · Bolo Rei</p>
+          <p><b>Cremes &amp; coberturas:</b> Creme Pasteleiro Sublime · Chantilly em pó · Icing Sugar · Decor Icing · Cacau em pó · Fermento</p>
+          <p style="font-size:.88rem;color:#8a5a34"><b>Formatos:</b> sacos de 2,5 a 25 kg</p>
+          <a class="btn" href="#contactos">Pedir amostra</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cimg"><img src="assets/produtos/cocoa.jpg" alt="Cacau e ingredientes"></div>
+        <div class="top"><h3>Gama Complementar</h3><small>Tudo o que completa a sua bancada</small></div>
+        <div class="body">
+          <ul>
+            <li>Chocolates, coberturas e cacau</li>
+            <li>Frutas, frutos secos, geleias e brilhos</li>
+            <li>Margarinas técnicas, natas, desmoldantes e levedura</li>
+          </ul>
+          <p style="font-size:.92rem">Importada e selecionada pela nossa equipa para que uma só entrega resolva a sua produção.</p>
+          <a class="btn" href="#contactos">Pedir catálogo completo</a>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:34px"><a class="btn" href="catalogo.html">📖 Ver catálogo completo com fichas técnicas</a></p>
+    <p class="nota">📋 Mais de 60 referências Massa Prima, em sacos de 2,5 a 25 kg — do formato de teste ao industrial. No catálogo online encontra a ficha técnica de cada produto: ingredientes, dosagem, modo de aplicação, valores nutricionais e formatos.</p>
+  </div>
+</section>
+
+<section class="receitas" id="receitas">
+  <div class="wrap">
+    <h2 class="sec-title">Receitas &amp; ideias</h2>
+    <p class="sec-sub">Do nosso forno para o seu balcão: receitas simples com os mixes Massa Prima.</p>
+    <div class="cards">
+      <div class="card rec">
+        <div class="foto"><img src="assets/produtos/rustic.jpg" alt="Pão rústico de crosta dourada"></div>
+        <div class="body"><span class="tag">Panificação</span><h3>Pão rústico de crosta dourada</h3><p>Com o mix Massa Prima Pão Rústico 100%, o pão de fim-de-semana passa a sair todos os dias — mesmo volume, mesma crosta, mesmo miolo.</p></div>
+      </div>
+      <div class="card rec">
+        <div class="foto"><img src="assets/produtos/cake-chocolate.jpg" alt="Cake de chocolate"></div>
+        <div class="body"><span class="tag">Pastelaria</span><h3>Cake de chocolate que não desilude</h3><p>O Massa Prima Cake Chocolate dá bolos húmidos e fofos com acabamento de pastelaria. Também em cenoura, laranja, ananás, caramelo e noz.</p></div>
+      </div>
+      <div class="card rec">
+        <div class="foto"><img src="assets/produtos/muffins.jpg" alt="Muffins acabados de fazer"></div>
+        <div class="body"><span class="tag">Dica de mestre</span><h3>Fornadas que rendem mais</h3><p>Planeie as fornadas pelos picos de venda da sua zona: manhã cedo e fim de tarde. O Chef Prima ajuda a calcular.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="angola" id="angola">
+  <div class="wrap ang-top">
+    <div>
+      <h2>Feito em Angola, para o pão de Angola. 🇦🇴</h2>
+      <p>Todo o pão que aquece uma mesa angolana começa no mesmo sítio: numa boa matéria-prima. A Massa Prima nasceu na Quente e Bom com uma convicção — o que os angolanos comem todos os dias merece uma base de primeira, feita cá.</p>
+      <p>Produzir localmente significa frescura, fornecimento sem sobressaltos e uma equipa que fala a língua de quem está com as mãos na massa.</p>
+      <span class="selo-pill">🌾 Feito em Angola · by quente e bom</span>
+    </div>
+    <div class="angola-foto">
+      <img src="assets/pessoas/mestre-retrato.jpg" alt="Mestre padeiro angolano">
+    </div>
+  </div>
+  <div class="wrap">
+    <h3 class="maos-title">Nas mãos de quem sabe</h3>
+    <p class="maos-sub">Todos os dias, padeiros e pasteleiros angolanos transformam as nossas matérias-primas no pão e nos bolos deste país.</p>
+    <div class="galeria">
+      <figure><img src="assets/pessoas/maos-mistura.jpg" alt="Deitar o mix na taça"><figcaption>Do mix à massa</figcaption></figure>
+      <figure><img src="assets/pessoas/padeiro-amassar.jpg" alt="Padeiro a amassar"><figcaption>Amassar</figcaption></figure>
+      <figure><img src="assets/pessoas/padeiro-forno.jpg" alt="Padeira a tirar pão do forno"><figcaption>Ao forno</figcaption></figure>
+      <figure><img src="assets/pessoas/pasteleira-creme.jpg" alt="Pasteleira a rechear um bolo"><figcaption>A rechear</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="apoio" id="apoio">
+  <div class="wrap">
+    <h2 class="sec-title">Apoio ao Profissional</h2>
+    <p class="sec-sub">Mais do que vender matéria-prima, ajudamos o seu negócio a crescer.</p>
+    <div class="apoio-banner">
+      <img src="assets/pessoas/equipa.jpg" alt="Equipa de padaria angolana">
+      <div class="apoio-banner-cap"><b>Um parceiro, não só um fornecedor.</b><span>A nossa equipa técnica está ao lado de quem produz — da primeira fornada ao crescimento do negócio.</span></div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="body"><h3>🧑‍🍳 Apoio técnico</h3><p>Dúvidas de fermentação, forno ou conservação? A nossa equipa técnica acompanha a sua produção.</p></div></div>
+      <div class="card"><div class="body"><h3>📖 Receitas &amp; formação</h3><p>Receitas testadas e dicas práticas para tirar o máximo de cada mix.</p></div></div>
+      <div class="card"><div class="body"><h3>📈 Negócio</h3><p>Ideias para a vitrine, cálculo de custo por unidade e planeamento de produção.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="contactos" id="contactos">
+  <div class="wrap">
+    <div>
+      <h2 class="sec-title" style="text-align:left">Fale connosco</h2>
+      <p style="margin-bottom:18px">Quer testar a Massa Prima na sua produção? Peça uma amostra ou o catálogo completo. Respondemos em horário de expediente.</p>
+      <p style="font-weight:800;color:var(--castanho)">📱 WhatsApp: <span style="color:var(--laranja)">[número a definir]</span><br>✉️ geral@massaprima.co.ao <em style="font-weight:400">(a ativar)</em><br>📍 Luanda, Angola</p>
+    </div>
+    <form onsubmit="event.preventDefault();alert('Obrigado! A nossa equipa entrará em contacto consigo. (Formulário a ligar ao e-mail/CRM na fase de produção)')">
+      <input required placeholder="Nome / Empresa">
+      <input required placeholder="Telefone ou WhatsApp">
+      <select><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
+      <textarea rows="3" placeholder="O que precisa? (amostra, catálogo, preços…)"></textarea>
+      <button class="btn" type="submit">Pedir contacto</button>
+    </form>
+  </div>
+</section>
+
+<div class="graos-band"></div>
+<footer>
+  <div class="wrap">
+    <img src="assets/logo_bege.png" alt="Massa Prima">
+    <p><em>qualidade que inspira resultados perfeitos</em></p>
+    <p class="soc"><a href="#">Instagram</a>·<a href="#">Facebook</a>·<a href="#">WhatsApp</a></p>
+    <p style="font-size:.8rem;padding-bottom:18px;opacity:.75">© 2026 Massa Prima · Quente e Bom, Angola</p>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/244XXXXXXXXX" title="WhatsApp">💬 WhatsApp</a>
+<button id="cp-btn" title="Falar com o Chef Prima">🌾</button>
+<div id="cp-panel">
+  <div id="cp-head"><span>Chef Prima 🌾</span><button id="cp-close">✕</button></div>
+  <div id="cp-msgs"></div>
+  <form id="cp-form"><input id="cp-in" placeholder="Escreva a sua pergunta…" autocomplete="off"><button type="submit">➤</button></form>
+</div>
+
+<script>
+// ===== Chef Prima — assistente com base de conhecimento real (34 produtos das fichas técnicas) =====
+// v1 rule-based + KB local; na fase de produção liga-se a IA (como Terrae/Água Minda), mantendo esta KB.
+const KB = JSON.parse('[{"n":"Amido de Milho","d":"","fo":["5"],"m":""},{"n":"Biscuit","d":"Produto para o fabrico de entremeios, pão-de-ló, tortas, bolos de gema e similares.","fo":["5","15","25"],"m":"Bater os ingredientes com varas durante 7 - 10 minutos na velocidade máxima. Entremeios e Pão-de-Ló:"},{"n":"Biscuit Chocolate","d":"Produto para o fabrico de entremeios, pão-de-ló, tortas e similares de chocolate.","fo":["5","15","25"],"m":"Bater os ingredientes com varas durante 7 - 10 minutos na velocidade máxima. Entremeios e Pão-de-Ló:"},{"n":"Bolo Rei","d":"Produto completo para o fabrico de Bolo Rei.","fo":["15","25"],"m":"Amassar os ingredientes do Aparelho 1 durante ± 15 minutos. Temperatura da massa: 28° C"},{"n":"Brioche","d":"Produto completo para o fabrico de massas lêvedas, tais como croissant, brioche, bolas de berlim, pão de leite tipo brioche e similares","fo":["15","25"],"m":"Amassar todos os ingredientes do Aparelho 1 durante 3 minutos em 1ª velocidade e 8 minutos em 2ª velocidade até obter uma massa bem desenvolvida. Temperatura da massa: 26°C-28°C"},{"n":"Cake Ananás","d":"Produto completo para o fabrico de pastas, bolos diversos e queques com pedaços de ananás.","fo":["15"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Caramelo","d":"Produto completo para o fabrico de pastas, bolos diversos e queques com pedaços de caramelo.","fo":["15"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Cenoura","d":"Produto completo para o fabrico de pastas, queques, tortas e bolos diversos de cenoura.","fo":["5","15","25"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Chocolate","d":"Produto completo para o fabrico de pastas, queques, tortas e bolos diversos de chocolate.","fo":["5","15","25"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Laranja","d":"Produto completo para o fabrico de pastas, queques, tortas e bolos diversos de laranja.","fo":["5","15","25"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Neutro","d":"Produto completo para o fabrico de pastas, bolo mármore, fatias fantasia e queques.","fo":["5","15"],"m":"Receita Base: Misturar todos os ingredientes e bater com raquete durante aproximadamente 5 minutos em velocidade moderada, até obter um preparado homogéneo."},{"n":"Cake Noz","d":"Produto completo para o fabrico de pastas, bolos diversos e queques com noz.","fo":["15"],"m":""},{"n":"Chantilly Pó","d":"Produto completo para a elaboração de creme tipo chantilly com boa estrutura e fácil preparação.","fo":["5"],"m":"Adicionar MP Chantilly Pó à água ou leite frio e bater com varas na velocidade máxima durante 4 - 5 minutos, até obter a consistência desejada."},{"n":"Creme Pasteleiro Sublime","d":"Produto para a elaboração de creme pasteleiro a frio, com excelente textura e sabor.","fo":["5"],"m":"A frio: Misturar previamente o açúcar com o RAP. Adicionar à água e bater 3 a 5 minutos com varas até obter um preparado homogéneo."},{"n":"Decor Icing","d":"Pasta de açúcar colorida para cobertura, decoração e modelagem em cake design.","fo":["2.5"],"m":"Retirar a quantidade desejada da embalagem e amassar com as maos até obter a plasticidade pretendida. Em caso de necessidade aconselha-se a trabalhar o Decor Icing com amido."},{"n":"Fermento Pastelaria","d":"Fermento em pó para pastelaria.","fo":["5","15"],"m":"Pronto a utilizar."},{"n":"Icing Sugar","d":"Açúcar em pó para decoração e cobertura de bolos.","fo":["5","15"],"m":"Aplicação directa."},{"n":"Melhorante Gold","d":"Melhorante para o fabrico de todos os tipos de pão.","fo":["5","15"],"m":""},{"n":"Melhorante Natura","d":"Melhorante clean label para todos os tipos de pão.","fo":["5","15"],"m":""},{"n":"Pão Centeio da Baviera 100%","d":"Produto completo para o fabrico de pão com centeio.","fo":["15"],"m":"Amassar os ingredientes cerca de 10 minutos. Deixar descansar 20 minutos e pesar no tamanho desejado."},{"n":"Pão Integral 100%","d":"Produto completo para o fabrico de pão integral e fibras pré-embalado.","fo":["15"],"m":"Juntar todos os ingredientes e amassar cerca de 10 minutos. Temperatura da massa: 26º C"},{"n":"Pão Multicereais 100%","d":"Produto completo para o fabrico de pão especial com cereais.","fo":["15","25"],"m":"Misturar todos os ingredientes e amassar cerca de 12 minutos. Deixar repousar 15 minutos, enrolar e descansar mais 10 minutos."},{"n":"Pão Prokorn 100%","d":"Produto completo para o fabrico de pão especial de trigo com cereais. Fonte de cálcio e de magnésio.","fo":["15","25"],"m":"Misturar os ingredientes durante 4 minutos em 1ª velocidade e 12 minutos em 2ª velocidade (6 minutos se usar espiral). Temperatura da massa: 26º C"},{"n":"Pão de Forma e Hamburguer 100%","d":"Produto completo para o fabrico de pão especial e hambúrguer pré-embalados.","fo":["15","25"],"m":"Juntar todos os ingredientes e amassar durante 15 minutos. Deixar repousar 20 minutos."},{"n":"Pão Rústico 100%","d":"Produto completo p/ fabrico de pão especial rústico.","fo":["15","25"],"m":"Amassar os ingredientes inicialmente com 60% da água e ir adicionando a restante ao longo da amassadura. Temperatura da massa: 24-26º C"},{"n":"Pão Shape 100%","d":"Produto completo para o fabrico de pão de trigo integral pré-embalado fatiado.","fo":["15","25"],"m":"Amassar todos os ingredientes* (adicionar apenas 60% da água no início da amassadura e restante adição de forma progressiva) e amassar 4 a 5 min. em 1ª velocidade e 10 min. em 2ª velocidade, até obter uma massa bem desenvolvida. Temperatura da massa: 25ºC - 27ºC."},{"n":"Propionato de Cálcio","d":"Produto utilizado como aditivo alimentar que cumpre os critérios de pureza estabelecidos no Regulamento (UE) n.º 231/2012.","fo":["5"],"m":"A utilização desta matéria-prima em produtos de Padaria e Pastelaria deverá cumprir os limites estabelecidos no Regulamento (CE) n.° 1333/2008."},{"n":"Mistura 4 Sementes","d":"Sementes selecionadas para decoração de pão.","fo":["5"],"m":""},{"n":"Sementes de Sésamo sem Pele","d":"Sementes selecionadas para decoração de pão.","fo":["5"],"m":""},{"n":"Queque e Bolo de Arroz","d":"Produto para o fabrico de queque e bolo de arroz tradicional, contendo farinha de arroz.","fo":["15","25"],"m":"Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo. Distribuir o batido pelas formas."},{"n":"Muffin","d":"Produto para o fabrico de muffins, queques e similares.","fo":["15"],"m":"Muffins:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Muffins.Cozer os Muffins a uma temperatura de cerca de 200ºC (lar) e 180ºC (tecto), durante aproximadamente 25 minutos.Abrir o ar, quando os bolos começarem a formar cabeça. 2332Queques:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Queques.Para Queques, cozer a cerca de 220ºC (lar) e 210ºC (tecto).Abrir o ar, quando os bolos começarem a formar cabeça."},{"n":"Muffin Chocolate","d":"Produto para o fabrico de muffins, queques e similares com sabor a chocolate.","fo":["15"],"m":"Muffins:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Muffins.Cozer os Muffins a uma temperatura de cerca de 200ºC (lar) e 180ºC (tecto), durante aproximadamente 25 minutos.Abrir o ar, quando os bolos começarem a formar cabeça. 2332Queques:Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo.Distribuir o batido pelas formas de Queques.Para Queques, cozer a cerca de 220ºC (lar) e 210ºC (tecto).Abrir o ar, quando os bolos começarem a formar cabeça."},{"n":"Cacau em Pó","d":"Cacau em pó","fo":["5"],"m":"Pronto a aplicar"},{"n":"Coco Ralado Ceilão","d":"Coco ralado","fo":["5"],"m":""}]');
+const painel=document.getElementById('cp-panel'),msgs=document.getElementById('cp-msgs');
+document.getElementById('cp-btn').onclick=()=>{painel.classList.toggle('open');if(!msgs.children.length)bot("Olá! Sou o Chef Prima 🌾 Conheço toda a gama Massa Prima — posso dizer-lhe que mix usar, como se prepara e em que formatos, ou pôr a nossa equipa em contacto consigo. Experimente perguntar-me sobre um produto (ex.: como uso o Cake Chocolate?).");};
+document.getElementById('cp-close').onclick=()=>painel.classList.remove('open');
+function add(t,c){const d=document.createElement('div');d.className='msg '+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function bot(t){setTimeout(()=>add(t,'bot'),350);}
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function frase1(m){ // primeira(s) instrução(ões), limpa
+  if(!m) return '';
+  let x=m.replace(/([a-zç])\.([A-ZÀ-Ú])/g,'$1. $2').replace(/\b\d{4,}\b/g,' ').replace(/\s+/g,' ').trim();
+  const p=x.split(/(?<=\.)\s/); return (p[0]+(p[1]&&p[0].length<70?' '+p[1]:'')).trim();
+}
+const STOP=new Set(['massa','prima','de','da','do','e','o','a','com','para','sem','em','100%','pao','pão']);
+function tokens(s){return norm(s).replace(/[^a-z0-9% ]/g,' ').split(/\s+/).filter(w=>w&&!STOP.has(w)&&w.length>2);}
+function procurar(q){
+  const qt=tokens(q); if(!qt.length) return [];
+  return KB.map(p=>{const nt=tokens(p.n);let sc=0;for(const w of qt){if(nt.some(n=>n===w||n.startsWith(w)||w.startsWith(n)))sc++;}return{p,sc};})
+    .filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc);
+}
+function fmtProduto(p){
+  let t="🌾 Massa Prima "+p.n+". ";
+  if(p.d) t+=p.d+" ";
+  if(p.m) t+="Como usar: "+frase1(p.m)+" ";
+  if(p.fo&&p.fo.length) t+="Disponível em sacos de "+p.fo.join(', ').replace('2.5','2,5')+" kg. ";
+  t+="Quer receber a ficha técnica completa ou uma amostra? É só deixar-me o seu contacto.";
+  return t;
+}
+let leadMode=false;
+document.getElementById('cp-form').onsubmit=e=>{
+  e.preventDefault();const inp=document.getElementById('cp-in');const q=inp.value.trim();if(!q)return;
+  add(q,'user');inp.value='';
+  if(leadMode){bot("Anotado! ✅ A nossa equipa vai entrar em contacto consigo o mais depressa possível. Precisa de mais alguma coisa?");leadMode=false;return;}
+  const s=norm(q);
+  // 1) intenções comerciais primeiro
+  if(/(amostra|testar|experimentar)/.test(s)){leadMode=true;bot("Boa escolha! Para lhe fazermos chegar uma amostra, deixe-me numa mensagem o seu nome, localidade e contacto (telefone ou WhatsApp). 🌾");return;}
+  if(/(preco|custa|quanto|tabela)/.test(s)){leadMode=true;bot("Os preços dependem do produto e da quantidade. Deixe-me o seu contacto e a nossa equipa comercial responde-lhe com a tabela certa para o seu caso.");return;}
+  if(/(onde|comprar|loja|distribuidor|revenda|ponto de venda)/.test(s)){leadMode=true;bot("Diga-me a sua localidade e o seu contacto, e indicamos-lhe o ponto de venda mais próximo — ou entregamos diretamente, se for cliente profissional.");return;}
+  if(/(contacto|falar|equipa|whatsapp|telefone|liga|email)/.test(s)){leadMode=true;bot("Com certeza! Deixe-me o seu nome e número de telefone/WhatsApp, e a nossa equipa liga-lhe em horário de expediente.");return;}
+  if(/(ola|bom dia|boa tarde|boa noite|^oi\b)/.test(s)){bot("Olá! 👋 Em que posso ajudar? Posso falar-lhe de qualquer produto Massa Prima, dizer-lhe como se usa, ou pedir à equipa que entre em contacto.");return;}
+  if(/(obrigad|fixe|top|excelente)/.test(s)){bot("Sempre às ordens! 🌾 Quando quiser testar a Massa Prima na sua produção, é só pedir uma amostra.");return;}
+  if(/(feito em angola|produzi|fabrica|fábrica|angola)/.test(s)){bot("Grande parte da nossa produção é feita em Angola 🇦🇴 — é isso que garante frescura, fornecimento constante e apoio próximo a quem produz. A base do bom pão angolano faz-se cá.");return;}
+  // 2) pesquisa de produto na KB real
+  const r=procurar(q);
+  if(r.length){
+    const top=r[0].sc;
+    const empatados=r.filter(x=>x.sc===top);
+    if(empatados.length===1||top>=2){bot(fmtProduto(empatados[0].p));return;}
+    if(empatados.length<=6){bot("Temos várias opções: "+empatados.map(x=>"Massa Prima "+x.p.n).join(' · ')+". Sobre qual quer saber mais? Diga-me o nome completo. 🌾");return;}
+  }
+  // 3) famílias amplas
+  if(/(pao|panifica|padaria|farinha)/.test(s)){bot("Na padaria temos 7 mixes de pão 100% (Rústico, Integral, Multicereais, Centeio da Baviera, Prokorn, Shape, Pão de Forma & Hambúrguer), melhorantes (Natura, Gold) e sementes para decorar. Diga-me qual lhe interessa e explico como se usa. 🥖");return;}
+  if(/(bolo|pastel|doce|cake|queque|muffin|biscuit)/.test(s)){bot("Na pastelaria temos cakes (Chocolate, Cenoura, Laranja, Ananás, Caramelo, Noz, Neutro), Muffins, Biscuit, Brioche, Bolo Rei e apoio (Creme Pasteleiro Sublime, Chantilly, Icing Sugar). Sobre qual quer saber? 🧁");return;}
+  if(/(receita|fazer|como)/.test(s)){bot("Diga-me o nome do produto (ex.: como uso o Brioche?) e digo-lhe já o modo de preparação da ficha técnica. 👩‍🍳");return;}
+  bot("Para lhe responder com rigor, diga-me o nome do produto ou o que quer produzir — ou, se preferir, deixe-me o seu contacto que a nossa equipa fala consigo. 🌾");
+};
+</script>
+</body>
+</html>

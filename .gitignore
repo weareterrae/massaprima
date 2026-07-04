@@ -1,0 +1,7 @@
+# Pré-visualizações e ficheiros de trabalho (não publicar)
+preview_*.jpeg
+preview_*.jpg
+*.tmp
+Thumbs.db
+.DS_Store
+desktop.ini
