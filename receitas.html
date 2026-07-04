@@ -104,7 +104,7 @@ footer p{font-size:.85rem;opacity:.85}
 <header>
   <div class="nav">
     <a class="logo" href="index.html"><img src="assets/logo_principal.png" alt="Massa Prima"></a>
-    <div class="links"><a href="catalogo.html">Catálogo</a><a href="index.html">← Voltar ao site</a></div>
+    <div class="links"><a href="catalogo.html">Catálogo</a><a href="foodcost.html">🎓 Food Cost</a><a href="index.html">← Voltar ao site</a></div>
   </div>
 </header>
 
@@ -171,8 +171,9 @@ function abrir(id){
       <div class="block dica"><h4>💡 Dica de mestre</h4><p>${r.dica}</p></div>
       <div class="block venda"><h4>Para vender mais</h4><p>${r.venda}</p></div>
       <div class="sh-cta">
+        <a class="btn pri" href="foodcost.html#${r.id}">🎓 Calcular o food cost desta receita</a>
         <button class="btn gho" onclick="window.print()">Imprimir / PDF</button>
-        <a class="btn pri" href="index.html#contactos">Falar com a equipa</a>
+        <a class="btn gho" href="index.html#contactos">Falar com a equipa</a>
       </div>
       <p class="disc">Dosagens conforme as fichas técnicas oficiais dos produtos. Ajuste tempos e temperaturas ao seu equipamento.</p>
     </div>`;

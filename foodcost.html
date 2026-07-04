@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Cost — Escola Massa Prima | Calcule o custo e o preço certo</title>
+<meta name="description" content="Aprenda a calcular o food cost das suas receitas e o preço de venda certo. Calculadora interativa gratuita da Massa Prima para padarias e pastelarias.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--laranja:#EC6607;--laranja-d:#c9550a;--castanho:#77310A;--bege:#FEEAD3;--bege-claro:#FFF7EC;--ink:#3D1A05;--sand:#efe0cd;--sand-line:#e6d3b8;--muted:#8a6a4a;--ok:#2e7d32;--warn:#b4530f}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;color:var(--ink);background:var(--bege-claro);line-height:1.55}
+h1,h2,h3,h4{font-family:'Zilla Slab',serif;color:var(--castanho);line-height:1.15}
+.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:40;background:var(--bege-claro);border-bottom:1px solid var(--sand-line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 22px;max-width:1100px;margin:0 auto}
+.nav a.logo img{height:52px;display:block}
+.nav .links{display:flex;gap:18px}
+.nav .links a{font-weight:700;text-decoration:none;color:var(--castanho);font-size:.92rem}
+.nav .links a:hover{color:var(--laranja)}
+.top{background:var(--bege);padding:38px 0 30px;border-bottom:1px solid var(--sand-line)}
+.top h1{font-size:clamp(1.7rem,4vw,2.5rem)}
+.top p{color:var(--muted);max-width:680px;margin-top:8px;font-size:1.05rem}
+.passos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:26px 0 8px}
+.passo{background:#fff;border:1px solid var(--sand-line);border-radius:14px;padding:18px 20px}
+.passo b{display:flex;align-items:center;gap:10px;font-family:'Zilla Slab',serif;color:var(--castanho);font-size:1.05rem;margin-bottom:6px}
+.passo b span{background:var(--laranja);color:#fff;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;flex:none}
+.passo p{font-size:.9rem;color:var(--muted)}
+main{padding:30px 0 70px}
+.calc{display:grid;grid-template-columns:1.5fr 1fr;gap:22px;align-items:start}
+@media(max-width:860px){.calc{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--sand-line);border-radius:16px;padding:22px 24px}
+.card h3{font-size:1.15rem;margin-bottom:14px}
+label.lbl{display:block;font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--laranja-d);margin:0 0 6px}
+select,input[type=number],input[type=text]{padding:10px 12px;border:2px solid var(--sand-line);border-radius:10px;font:inherit;font-size:.95rem;background:#fff;width:100%}
+select:focus,input:focus{outline:2px solid var(--laranja)}
+table.ing{width:100%;border-collapse:collapse;margin-top:14px}
+table.ing th{font-family:'Zilla Slab',serif;color:var(--castanho);font-size:.8rem;text-align:left;padding:6px 6px;border-bottom:2px solid var(--sand)}
+table.ing td{padding:6px 4px;border-bottom:1px solid var(--sand);vertical-align:middle}
+table.ing input{padding:8px 9px;font-size:.9rem}
+table.ing .custo{font-weight:800;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;min-width:90px}
+table.ing .rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:4px}
+table.ing .rm:hover{color:var(--warn)}
+.addrow{margin-top:12px;background:var(--bege);border:none;border-radius:26px;padding:10px 20px;font:inherit;font-weight:800;color:var(--castanho);cursor:pointer}
+.addrow:hover{background:var(--sand)}
+.extras{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px}
+@media(max-width:560px){.extras{grid-template-columns:1fr}}
+.resultado{position:sticky;top:86px}
+.big{background:var(--castanho);color:var(--bege);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.big .v{font-family:'Zilla Slab',serif;font-size:2rem;color:#fff;font-variant-numeric:tabular-nums}
+.big small{font-size:.82rem;opacity:.9}
+.linha{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--sand);font-size:.95rem}
+.linha b{font-variant-numeric:tabular-nums}
+.fc-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-weight:800;font-size:.85rem}
+.fc-ok{background:#e5f2e6;color:var(--ok)} .fc-alto{background:#fdeee0;color:var(--warn)} .fc-baixo{background:#e8f0fe;color:#1a56b0}
+.dica-fc{background:#fff6ee;border:1px solid #f3c99b;border-radius:14px;padding:16px 18px;font-size:.9rem;margin-top:14px}
+.btn{border:none;border-radius:30px;padding:12px 22px;font:inherit;font-weight:800;cursor:pointer;background:var(--laranja);color:#fff;font-size:.95rem;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--laranja-d)}
+.btn.gho{background:transparent;border:2px solid var(--castanho);color:var(--castanho)}
+.btn.gho:hover{background:var(--castanho);color:#fff}
+.note{color:var(--muted);font-size:.8rem;margin-top:12px}
+footer{background:var(--castanho);color:var(--bege);text-align:center;padding:30px 0;margin-top:40px}
+footer img{height:52px;margin-bottom:8px}
+footer p{font-size:.85rem;opacity:.85}
+@media print{ header,.top,.passos,.addrow,.rm,footer,.no-print{display:none!important} .calc{grid-template-columns:1fr} body{background:#fff} .card,.big{border:1px solid #ccc} .big{background:#fff;color:#000} .big .v{color:#000} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html"><img src="assets/logo_principal.png" alt="Massa Prima"></a>
+    <div class="links"><a href="catalogo.html">Catálogo</a><a href="receitas.html">Receitas</a><a href="index.html">← Site</a></div>
+  </div>
+</header>
+
+<section class="top">
+  <div class="wrap">
+    <h1>🎓 Food Cost — Escola Massa Prima</h1>
+    <p>Saber quanto custa cada pão ou fatia é a diferença entre trabalhar muito e ganhar bem. Escolha uma receita, ponha os <b>seus</b> preços, e veja o custo real e o preço de venda certo.</p>
+    <div class="passos">
+      <div class="passo"><b><span>1</span> Escolha a receita</b><p>Comece por uma das nossas receitas (quantidades já preenchidas) ou monte a sua do zero.</p></div>
+      <div class="passo"><b><span>2</span> Ponha os seus preços</b><p>Indique quanto paga por kg de cada ingrediente. Ficam guardados no seu dispositivo para a próxima vez.</p></div>
+      <div class="passo"><b><span>3</span> Decida o preço certo</b><p>Veja o custo por unidade e o preço de venda sugerido para um food cost saudável (25–35%).</p></div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="calc">
+    <div>
+      <div class="card">
+        <h3>1 · Receita e ingredientes</h3>
+        <label class="lbl" for="sel">Receita</label>
+        <select id="sel"></select>
+        <table class="ing">
+          <thead><tr><th style="width:42%">Ingrediente</th><th>Qtd (g)</th><th>Preço (Kz/kg)</th><th style="text-align:right">Custo</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <button class="addrow" id="add">+ Adicionar ingrediente</button>
+        <p class="note">💾 Os preços que escrever ficam guardados neste dispositivo e preenchem-se sozinhos nas próximas receitas.</p>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h3>2 · Produção e custos extra</h3>
+        <div class="extras">
+          <div><label class="lbl" for="un">Unidades produzidas</label><input type="number" id="un" min="1" value="10"></div>
+          <div><label class="lbl" for="emb">Embalagem (Kz/un)</label><input type="number" id="emb" min="0" value="0"></div>
+          <div><label class="lbl" for="ind">Custos indiretos (%)</label><input type="number" id="ind" min="0" max="100" value="10"></div>
+        </div>
+        <p class="note">Custos indiretos: energia, gás, mão-de-obra, desperdício — em % sobre o custo dos ingredientes (10–20% é comum).</p>
+      </div>
+    </div>
+
+    <div class="resultado">
+      <div class="big"><small>CUSTO POR UNIDADE</small><div class="v" id="r-cu">— Kz</div><small id="r-tot">custo total: —</small></div>
+      <div class="card">
+        <h3>3 · Preço de venda</h3>
+        <label class="lbl" for="alvo">Food cost alvo</label>
+        <select id="alvo"><option value="0.25">25% (premium)</option><option value="0.30" selected>30% (recomendado)</option><option value="0.35">35% (competitivo)</option></select>
+        <div class="linha"><span>Preço sugerido/un</span><b id="r-sug">—</b></div>
+        <div style="margin-top:14px"><label class="lbl" for="pv">Ou o seu preço atual (Kz/un)</label><input type="number" id="pv" min="0" placeholder="ex.: 500"></div>
+        <div class="linha"><span>Food cost real</span><b id="r-fc">—</b></div>
+        <div class="linha"><span>Lucro bruto/un</span><b id="r-lucro">—</b></div>
+        <div style="margin-top:12px" id="r-badge"></div>
+        <div class="dica-fc">💡 <b>Regra do mestre:</b> em padaria e pastelaria, o custo dos ingredientes deve ser 25–35% do preço de venda. Abaixo de 25%? Pode estar a cobrar de mais para a sua zona. Acima de 35%? Está a trabalhar para pagar a matéria-prima.</div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap" class="no-print">
+          <button class="btn gho" onclick="window.print()">Imprimir</button>
+          <a class="btn" href="index.html#contactos">Falar com a equipa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><img src="assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p>© 2026 Massa Prima · Quente e Bom, Angola</p></div>
+</footer>
+
+<script id="dados" type="application/json">[{"id":"pao-rustico","t":"Pão rústico de todos os dias","rend":"±30 pães de 500 g (em massa)","un":30,"ing":[["MP Pão Rústico 100%",10000],["Levedura Fresca",300],["ou Levedura Seca",100],["Água",7000]]},{"id":"broa-milho","t":"Broa de milho amarela","rend":"±32 broas de 500 g (em massa)","un":32,"ing":[["Broa de Milho Amarelo",10000],["Água (30 ºC - 40 ºC)",6000],["Levedura Fresca",150],["ou Levedura Seca",50]]},{"id":"multicereais","t":"Pão multicereais decorado","rend":"±32 pães de 500 g (em massa)","un":32,"ing":[["MP Pão Multicereais 100% LD",10000],["Levedura Fresca",300],["ou Levedura Seca",100],["Água",5900]]},{"id":"pao-hamburguer","t":"Pão de hambúrguer profissional","rend":"±180 pães de 90 g (em massa)","un":180,"ing":[["MP Pão de Forma e Hamburguer 100% LD",10000],["Levedura Fresca",500],["ou Levedura Seca",170],["Água",5200],["Gorpan ou Margarina Perla Massas",500],["ou Fresh Plus",200]]},{"id":"torta-chocolate-framboesa","t":"Torta de chocolate com framboesa","rend":"2 tortas (±20 fatias)","un":20,"ing":[["MP Cake Chocolate",1000],["Óleo vegetal",300],["Ovos",450],["Água",250],["Açúcar",150]]},{"id":"cenoura-noz","t":"Cake de cenoura com noz e caramelo","rend":"2 bolos médios (±20 fatias)","un":20,"ing":[["MP Cake Cenoura",1000],["Óleo vegetal",300],["Ovos",300],["Água",250],["Miolo de Noz (no batido)",150]]},{"id":"torta-laranja","t":"Torta de laranja","rend":"2 tortas (±20 fatias)","un":20,"ing":[["MP Cake Laranja",1000],["Óleo vegetal",300],["Ovos",450],["Água",250],["Açúcar",150]]},{"id":"red-velvet","t":"Red velvet com chantilly","rend":"1 bolo de 2 andares (±14 fatias)","un":14,"ing":[["MP Chantilly Pó",600],["Água ou leite frio",1000]]},{"id":"muffins-duplo-choc","t":"Muffins duplo chocolate","rend":"±180 muffins de 100 g","un":180,"ing":[["MP Muffin Chocolate",10000],["Água",4000],["Óleo",4000],["Arabesque Dark picado",1000]]},{"id":"brioche-creme","t":"Brioche recheado com creme","rend":"±28 brioches de 60 g","un":28,"ing":[["Massa Prima Brioche",1000],["Água",400],["Levedura",60],["ou Levedura Seca",20],["MP Creme Pasteleiro Sublime",1000],["Açúcar",1000],["Água fria",3000]]},{"id":"bolo-arroz","t":"Bolo de arroz tradicional","rend":"±150 bolos de 110 g","un":150,"ing":[["MP Queque e Bolo de Arroz",10000],["Água",4000],["Óleo",2500]]},{"id":"bolo-festivo","t":"Bolo festivo por encomenda","rend":"1 bolo de festa (±20 fatias)","un":20,"ing":[["MP Cake Neutro",1000],["Óleo vegetal",300],["Ovos",300],["Água",225]]}]</script>
+<script>
+const D=JSON.parse(document.getElementById('dados').textContent);
+const rows=document.getElementById('rows'), sel=document.getElementById('sel');
+const fmt=n=>isFinite(n)?Math.round(n).toLocaleString('pt-PT').replace(/ /g,' ')+' Kz':'—';
+const normn=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'');
+const PRECOS=JSON.parse(localStorage.getItem('mp-precos')||'{}');
+function savePreco(nome,v){ if(v>0){PRECOS[normn(nome)]=v; localStorage.setItem('mp-precos',JSON.stringify(PRECOS));} }
+
+sel.innerHTML='<option value="">— Começar do zero —</option>'+D.map((r,i)=>`<option value="${i}">${r.t}</option>`).join('');
+
+function row(nome,qtd){
+  const tr=document.createElement('tr');
+  const preco=PRECOS[normn(nome||'')]||'';
+  tr.innerHTML=`<td><input type="text" class="i-n" value="${(nome||'').replace(/"/g,'&quot;')}" placeholder="Ingrediente"></td>
+    <td><input type="number" class="i-q" min="0" value="${qtd||''}" placeholder="g"></td>
+    <td><input type="number" class="i-p" min="0" value="${preco}" placeholder="Kz/kg"></td>
+    <td class="custo">—</td>
+    <td><button class="rm" title="Remover">✕</button></td>`;
+  tr.querySelector('.rm').onclick=()=>{tr.remove();calc();};
+  tr.querySelectorAll('input').forEach(i=>i.addEventListener('input',()=>{ if(i.classList.contains('i-p'))savePreco(tr.querySelector('.i-n').value,+i.value); calc(); }));
+  rows.appendChild(tr);
+}
+function load(i){
+  rows.innerHTML='';
+  if(i===''){ for(let k=0;k<3;k++)row('',''); document.getElementById('un').value=10; }
+  else{ const r=D[+i]; r.ing.forEach(([n,g])=>row(n,g)); document.getElementById('un').value=r.un; }
+  calc();
+}
+sel.onchange=()=>load(sel.value);
+document.getElementById('add').onclick=()=>{row('','');calc();};
+['un','emb','ind','pv','alvo'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+
+function calc(){
+  let total=0;
+  rows.querySelectorAll('tr').forEach(tr=>{
+    const q=+tr.querySelector('.i-q').value||0, p=+tr.querySelector('.i-p').value||0;
+    const c=q/1000*p; total+=c;
+    tr.querySelector('.custo').textContent=c>0?fmt(c):'—';
+  });
+  const ind=(+document.getElementById('ind').value||0)/100;
+  const un=Math.max(1,+document.getElementById('un').value||1);
+  const emb=+document.getElementById('emb').value||0;
+  const totalG=total*(1+ind)+emb*un;
+  const cu=totalG/un;
+  document.getElementById('r-cu').textContent=total>0?fmt(cu):'— Kz';
+  document.getElementById('r-tot').textContent='custo total: '+(total>0?fmt(totalG):'—')+' ('+un+' un)';
+  const alvo=+document.getElementById('alvo').value;
+  document.getElementById('r-sug').textContent=total>0?fmt(cu/alvo):'—';
+  const pv=+document.getElementById('pv').value||0;
+  const badge=document.getElementById('r-badge');
+  if(pv>0&&total>0){
+    const fc=cu/pv;
+    document.getElementById('r-fc').textContent=Math.round(fc*100)+'%';
+    document.getElementById('r-lucro').textContent=fmt(pv-cu);
+    badge.innerHTML=fc<=0.25?'<span class="fc-badge fc-baixo">Margem folgada — pode investir em qualidade ou baixar preço</span>':fc<=0.35?'<span class="fc-badge fc-ok">✓ Food cost saudável</span>':'<span class="fc-badge fc-alto">⚠ Food cost alto — reveja o preço ou os custos</span>';
+  } else { document.getElementById('r-fc').textContent='—'; document.getElementById('r-lucro').textContent='—'; badge.innerHTML=''; }
+}
+// deep-link #id → pré-seleciona receita
+const h=location.hash.slice(1);
+const idx=D.findIndex(r=>r.id===h);
+if(idx>=0){sel.value=idx;load(String(idx));} else load('');
+</script>
+</body>
+</html>

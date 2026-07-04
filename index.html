@@ -132,6 +132,7 @@ footer .soc a:hover{color:#fff}
       <li><a href="#produtos">Produtos</a></li>
       <li><a href="catalogo.html">Catálogo</a></li>
       <li><a href="receitas.html">Receitas</a></li>
+      <li><a href="foodcost.html">Food Cost</a></li>
       <li><a href="#angola">Feito em Angola</a></li>
       <li><a href="#apoio">Apoio ao Profissional</a></li>
       <li><a href="#contactos">Contactos</a></li>
@@ -276,13 +277,38 @@ footer .soc a:hover{color:#fff}
       <p style="margin-bottom:18px">Quer levar a Massa Prima para a sua produção? Peça o catálogo completo ou fale com a nossa equipa comercial. Respondemos em horário de expediente.</p>
       <p style="font-weight:800;color:var(--castanho)">✉️ <a href="mailto:geral@quenteebom.co.ao" style="color:var(--laranja);text-decoration:none">geral@quenteebom.co.ao</a><br>📍 Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8<br>Viana — Luanda, Angola</p>
     </div>
-    <form onsubmit="event.preventDefault();alert('Obrigado! A nossa equipa entrará em contacto consigo. (Formulário a ligar ao e-mail/CRM na fase de produção)')">
-      <input required placeholder="Nome / Empresa">
-      <input required placeholder="Telefone ou e-mail">
-      <select><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
-      <textarea rows="3" placeholder="O que precisa? (catálogo, preços, parceria…)"></textarea>
-      <button class="btn" type="submit">Pedir contacto</button>
+    <form id="form-contacto">
+      <input required name="nome" placeholder="Nome / Empresa">
+      <input required name="contacto" placeholder="Telefone ou e-mail">
+      <select name="tipo"><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
+      <textarea rows="3" name="mensagem" placeholder="O que precisa? (catálogo, preços, parceria…)"></textarea>
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <button class="btn" type="submit" id="form-btn">Pedir contacto</button>
+      <p id="form-status" style="font-weight:700;display:none"></p>
     </form>
+    <script>
+    document.getElementById('form-contacto').onsubmit=async function(e){
+      e.preventDefault();
+      const f=this, st=document.getElementById('form-status'), btn=document.getElementById('form-btn');
+      if(f._honey.value)return;
+      btn.disabled=true;btn.textContent='A enviar…';st.style.display='none';
+      try{
+        const r=await fetch('https://formsubmit.co/ajax/geral@quenteebom.co.ao',{
+          method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({
+            _subject:'🌾 Novo contacto — site Massa Prima',_template:'table',_captcha:'false',
+            Nome:f.nome.value,Contacto:f.contacto.value,Tipo:f.tipo.value,Mensagem:f.mensagem.value||'—'
+          })});
+        if(!r.ok)throw 0;
+        st.textContent='✅ Recebido! A nossa equipa entra em contacto consigo em horário de expediente.';
+        st.style.color='#2e7d32';f.reset();
+      }catch(_){
+        st.textContent='⚠️ Não foi possível enviar agora. Escreva-nos diretamente para geral@quenteebom.co.ao';
+        st.style.color='#b4530f';
+      }
+      st.style.display='block';btn.disabled=false;btn.textContent='Pedir contacto';
+    };
+    </script>
   </div>
 </section>
 
@@ -333,11 +359,14 @@ function fmtProduto(p){
   t+="Quer receber a ficha técnica completa ou falar com a nossa equipa? É só deixar-me o seu contacto.";
   return t;
 }
+// ===== Chef Prima v2: IA (Supabase Edge Function) com fallback rule-based =====
+const PRIMA_ENDPOINT='https://qciagsktkqljvknmahfu.supabase.co/functions/v1/prima-web';
+let hist=[]; // histórico para a IA
 let leadMode=false;
-document.getElementById('cp-form').onsubmit=e=>{
-  e.preventDefault();const inp=document.getElementById('cp-in');const q=inp.value.trim();if(!q)return;
-  add(q,'user');inp.value='';
-  if(leadMode){bot("Anotado! ✅ A nossa equipa vai entrar em contacto consigo o mais depressa possível. Precisa de mais alguma coisa?");leadMode=false;return;}
+function ruleReply(q){
+  let _out=null; const bot=t=>{_out=t;};
+  (function(){
+  if(leadMode){leadMode=false;bot("Anotado! ✅ A nossa equipa vai entrar em contacto consigo o mais depressa possível. Precisa de mais alguma coisa?");return;}
   const s=norm(q);
   // 1) intenções comerciais primeiro
   if(/(amostra|testar|experimentar|comprar|encomend|cat[áa]logo|pre[çc]o)/.test(s)){leadMode=true;bot("Com todo o gosto! Deixe-me numa mensagem o seu nome, localidade e contacto (telefone ou e-mail) e a nossa equipa comercial fala consigo. 🌾");return;}
@@ -360,6 +389,32 @@ document.getElementById('cp-form').onsubmit=e=>{
   if(/(bolo|pastel|doce|cake|queque|muffin|biscuit)/.test(s)){bot("Na pastelaria temos cakes (Chocolate, Cenoura, Laranja, Ananás, Caramelo, Noz, Neutro), Muffins, Biscuit, Brioche, Bolo Rei e apoio (Creme Pasteleiro Sublime, Chantilly, Icing Sugar). Sobre qual quer saber? 🧁");return;}
   if(/(receita|fazer|como)/.test(s)){bot("Diga-me o nome do produto (ex.: como uso o Brioche?) e digo-lhe já o modo de preparação da ficha técnica. 👩‍🍳");return;}
   bot("Para lhe responder com rigor, diga-me o nome do produto ou o que quer produzir — ou, se preferir, deixe-me o seu contacto que a nossa equipa fala consigo. 🌾");
+  })();
+  return _out;
+}
+// indicador "a escrever"
+function typing(on){
+  let t=document.getElementById('cp-typing');
+  if(on){ if(!t){t=document.createElement('div');t.id='cp-typing';t.className='msg bot';t.textContent='🌾 a pensar…';msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;} }
+  else if(t) t.remove();
+}
+document.getElementById('cp-form').onsubmit=async e=>{
+  e.preventDefault();const inp=document.getElementById('cp-in');const q=inp.value.trim();if(!q)return;
+  add(q,'user');inp.value='';
+  hist.push({role:'user',content:q});
+  typing(true);
+  let reply=null;
+  try{
+    const ctl=new AbortController(); const tm=setTimeout(()=>ctl.abort(),20000);
+    const r=await fetch(PRIMA_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist}),signal:ctl.signal});
+    clearTimeout(tm);
+    if(r.ok){const d=await r.json(); if(d.reply)reply=d.reply;}
+  }catch(_){/* offline ou função por publicar → regras */}
+  typing(false);
+  if(!reply) reply=ruleReply(q)||"Diga-me o nome do produto ou o que quer produzir, e eu ajudo. 🌾";
+  hist.push({role:'assistant',content:reply});
+  if(hist.length>24)hist=hist.slice(-24);
+  add(reply,'bot');
 };
 </script>
 </body>
