@@ -145,16 +145,25 @@ footer p{font-size:.85rem;opacity:.85}
 
 @media(max-width:560px){ .controls{top:69px} .sh-top h2{font-size:1.4rem} }
 
-/* print — só a ficha aberta */
+/* print — só a ficha aberta, com logótipo e sem páginas em branco */
+.print-head,.print-foot{display:none}
 @media print{
-  body *{visibility:hidden}
-  .sheet,.sheet *{visibility:visible}
-  .sheet{position:absolute;transform:none;box-shadow:none;width:100%;height:auto;overflow:visible;background:#fff}
-  .sh-top{color:#000 !important;background:#fff !important;border-bottom:2px solid #000}
-  .sh-top .tag{color:#000;background:#eee}
-  .sh-top h2,.sh-top .tag{color:#000}
-  .close,.sh-cta{display:none}
-  .block{break-inside:avoid;border:1px solid #ccc}
+  @page{margin:14mm}
+  html,body{background:#fff !important;overflow:visible !important;height:auto !important}
+  body>*{display:none !important}
+  .sheet{display:block !important;position:static !important;transform:none !important;box-shadow:none !important;width:100% !important;max-width:100% !important;height:auto !important;max-height:none !important;overflow:visible !important;border-radius:0 !important;background:#fff !important}
+  .print-head{display:flex !important;align-items:center;justify-content:space-between;border-bottom:2px solid #77310A;padding-bottom:10px;margin-bottom:16px}
+  .print-head img{height:44px}
+  .print-head span{font-weight:800;color:#77310A;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase}
+  .sh-top{position:static !important;color:#000 !important;background:#fff !important;padding:0 0 12px !important;border-bottom:1px solid #ccc;margin-bottom:14px}
+  .sh-top h2,.sh-top .tag{color:#000 !important}
+  .sh-top .tag{background:#eee !important}
+  .close,.sh-cta,.disc{display:none !important}
+  .sh-hero{max-height:58mm;overflow:hidden;border-radius:8px;margin-bottom:14px}
+  .sh-hero img{width:100%;height:auto}
+  .sh-body{padding:0 !important}
+  .block{break-inside:avoid;border:1px solid #ccc;margin-bottom:10px}
+  .print-foot{display:block !important;margin-top:18px;padding-top:10px;border-top:1px solid #77310A;font-size:.72rem;color:#77310A;text-align:center;line-height:1.5}
 }
 </style>
 </head>
@@ -313,6 +322,7 @@ function abrir(id){
   const p=P.find(x=>x.id===id); if(!p)return;
   const s=document.getElementById('sheet');
   s.innerHTML=`
+    <div class="print-head"><img src="assets/logo_principal.png" alt="Massa Prima"><span>Ficha Técnica</span></div>
     <div class="sh-top" style="background-color:${cor(p.segmento)}">
       <button class="close" onclick="fechar()" aria-label="Fechar">✕</button>
       <span class="tag">${p.marca} · ${p.segmento} · ${p.subfamilia}</span>
@@ -329,11 +339,12 @@ function abrir(id){
       ${p.alergenios?`<div class="block alerg"><h4>⚠ Alergénios</h4><p>${p.alergenios}</p></div>`:''}
       <div class="block"><h4>Validade &amp; conservação</h4><p>${p.validade||''}${p.validade&&p.conservacao?'<br>':''}${p.conservacao||''}</p></div>
       <div class="sh-cta">
-        <a class="btn pri" href="index.html#contactos">Falar com a equipa</a>
+        <a class="btn pri" href="cotacao.html">🧾 Pedir cotação</a>
         <button class="btn gho" onclick="window.print()">Imprimir / PDF</button>
       </div>
       <p class="disc">Informação técnica indicativa retirada da ficha oficial do produto. Confirme sempre as dosagens e condições com a nossa equipa técnica antes de produção em escala.</p>
-    </div>`;
+    </div>
+    <div class="print-foot">🌾 Massa Prima · qualidade que inspira resultados perfeitos<br>massaprima.com · geral@quenteebom.co.ao · Viana, Luanda — Angola</div>`;
   s.classList.add('on'); s.setAttribute('aria-hidden','false');
   document.getElementById('ov').classList.add('on');
   document.body.style.overflow='hidden';
