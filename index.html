@@ -289,7 +289,8 @@ footer .soc a:hover{color:#fff}
       <p style="margin-bottom:18px">Quer levar a Massa Prima para a sua produção? Peça o catálogo completo ou fale com a nossa equipa comercial. Respondemos em horário de expediente.</p>
       <p style="font-weight:800;color:var(--castanho)">✉️ <a href="mailto:geral@quenteebom.co.ao" style="color:var(--laranja);text-decoration:none">geral@quenteebom.co.ao</a><br>📍 Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8<br>Viana — Luanda, Angola</p>
     </div>
-    <form id="form-contacto">
+    <form id="form-contacto" name="contacto" method="POST" data-netlify="true" netlify-honeypot="_honey">
+      <input type="hidden" name="form-name" value="contacto">
       <input required name="nome" placeholder="Nome / Empresa">
       <input required name="contacto" placeholder="Telefone ou e-mail">
       <select name="tipo"><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
@@ -305,14 +306,10 @@ footer .soc a:hover{color:#fff}
       if(f._honey.value)return;
       btn.disabled=true;btn.textContent='A enviar…';st.style.display='none';
       try{
-        const r=await fetch('https://formsubmit.co/ajax/geral@quenteebom.co.ao',{
-          method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body:JSON.stringify({
-            _subject:'🌾 Novo contacto — site Massa Prima',_template:'table',_captcha:'false',
-            Nome:f.nome.value,Contacto:f.contacto.value,Tipo:f.tipo.value,Mensagem:f.mensagem.value||'—'
-          })});
-        const d=await r.json().catch(()=>({}));
-        if(!r.ok || String(d.success)!=='true') throw new Error(d.message||'falha no envio');
+        // Netlify Forms: POST urlencoded para o próprio site (funciona no domínio Netlify)
+        const body=new URLSearchParams(new FormData(f)).toString();
+        const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
+        if(!r.ok) throw new Error('falha no envio');
         st.textContent='✅ Recebido! A nossa equipa entra em contacto consigo em horário de expediente.';
         st.style.color='#2e7d32';f.reset();
       }catch(_){
