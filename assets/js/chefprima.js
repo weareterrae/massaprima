@@ -28,6 +28,8 @@ const css=`
 #cpx-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
 .cpx-m{max-width:86%;padding:10px 14px;border-radius:14px;font-size:.92rem;line-height:1.45;white-space:pre-wrap}
 .cpx-m.bot{background:#FEEAD3;border-bottom-left-radius:4px;align-self:flex-start;color:#3D1A05}
+.cpx-m.bot a{color:#c9550a;font-weight:800;text-decoration:underline;text-underline-offset:2px}
+.cpx-m.bot a:hover{color:#EC6607}
 .cpx-m.user{background:#EC6607;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
 #cpx-chips{display:flex;gap:8px;padding:0 14px 10px;flex-wrap:wrap}
 #cpx-chips button{background:#fff;border:1.5px solid #e6d3b8;color:#77310A;border-radius:20px;padding:7px 13px;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}
@@ -63,7 +65,20 @@ document.body.appendChild(el);
 const panel=document.getElementById('cpx-panel'),msgs=document.getElementById('cpx-msgs'),chipsEl=document.getElementById('cpx-chips');
 let hist=[];try{hist=JSON.parse(sessionStorage.getItem('cpx-hist')||'[]')}catch(_){ }
 function save(){try{sessionStorage.setItem('cpx-hist',JSON.stringify(hist.slice(-24)))}catch(_){ }}
-function add(t,c){const d=document.createElement('div');d.className='cpx-m '+c;d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;}
+// renderizar mensagens do bot: escapar HTML e transformar [texto](url) em links clicáveis (só destinos internos/mailto)
+function safeHref(u){
+  u=u.trim();
+  if(/^mailto:/i.test(u))return u;
+  if(/^(catalogo|receitas|foodcost|index)\.html(#[\w-]*)?$/i.test(u))return u;
+  if(/^https:\/\/weareterrae\.github\.io\/massaprima\//i.test(u))return u;
+  return null;
+}
+function render(t){
+  let h=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  h=h.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(m,txt,url)=>{const u=safeHref(url);return u?`<a href="${u}">${txt}</a>`:txt;});
+  return h;
+}
+function add(t,c){const d=document.createElement('div');d.className='cpx-m '+c;if(c==='bot')d.innerHTML=render(t);else d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;}
 function chips(){chipsEl.innerHTML='';CHIPS.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>send(q);chipsEl.appendChild(b);});}
 function openPanel(){
   panel.classList.add('on');document.getElementById('cpx-btn').style.display='none';teaserOff();
@@ -91,7 +106,7 @@ async function send(q){
     if(r.ok){const d=await r.json();if(d.reply)reply=d.reply;}
   }catch(_){}
   if(!reply)reply='Estou com dificuldades de ligação neste momento 🌾 Tente outra vez daqui a pouco, ou escreva-nos para geral@quenteebom.co.ao que a equipa responde em horário de expediente.';
-  t.textContent=reply;
+  t.innerHTML=render(reply);
   hist.push({role:'assistant',content:reply});save();
 }
 document.getElementById('cpx-form').onsubmit=e=>{e.preventDefault();const i=document.getElementById('cpx-in');const q=i.value.trim();i.value='';send(q);};
