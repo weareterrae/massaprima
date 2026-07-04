@@ -44,6 +44,14 @@ header{position:sticky;top:0;z-index:40;background:var(--bege-claro);border-bott
 .nav a.logo img{height:52px;display:block}
 .nav .back{font-weight:700;text-decoration:none;color:var(--castanho);font-size:.92rem}
 .nav .back:hover{color:var(--laranja)}
+@media(max-width:640px){
+  html,body{overflow-x:hidden}
+  .nav{flex-wrap:wrap;justify-content:center;gap:6px 14px;padding:10px 14px;text-align:center}
+  .nav a.logo{flex-basis:100%}
+  .nav a.logo img{height:44px;margin:0 auto}
+  .nav>span{flex-basis:100%;display:flex;justify-content:center;flex-wrap:wrap;gap:8px 16px}
+  .nav .back{margin-right:0!important}
+}
 
 /* hero */
 .top{background:var(--bege);padding:40px 0 34px;border-bottom:1px solid var(--sand-line)}
