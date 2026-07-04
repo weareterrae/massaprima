@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1556990136150680');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1556990136150680&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<title>Pedir Cotação — Massa Prima | Escolha os artigos e receba a proposta</title>
+<meta name="description" content="Escolha os produtos Massa Prima e Prodite Zeelandia, indique as quantidades e a nossa equipa comercial responde com a cotação e o plano de entregas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>:root{--laranja:#EC6607;--castanho:#77310A;--bege:#FEEAD3;--bege-claro:#FFF7EC;--ink:#3D1A05;--line:#e8d6bc;--mut:#8a6a4a}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--ink);background:var(--bege-claro);line-height:1.6;padding-bottom:76px}
+h1,h2,h3{font-family:'Zilla Slab',serif;color:var(--castanho);line-height:1.15}
+a{color:var(--laranja)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.btn{display:inline-block;background:var(--laranja);color:#fff;padding:13px 26px;border-radius:40px;border:none;cursor:pointer;font-weight:800;font-size:1rem;text-decoration:none;font-family:inherit}
+.btn:hover{background:var(--castanho)}
+.btn.sec{background:transparent;color:var(--castanho);border:2.5px solid var(--castanho)}
+.btn:disabled{opacity:.55;cursor:default}
+header{position:sticky;top:0;z-index:50;background:var(--bege-claro);box-shadow:0 2px 12px rgba(119,49,10,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 22px;max-width:1180px;margin:0 auto}
+.nav a.logo img{height:52px;display:block}
+.nav .links{display:flex;gap:18px;align-items:center}
+.nav .links a{font-weight:700;text-decoration:none;color:var(--castanho);font-size:.92rem}
+.nav .links a:hover{color:var(--laranja)}
+@media(max-width:640px){
+  html,body{overflow-x:hidden}
+  .nav{flex-wrap:wrap;justify-content:center;gap:6px 14px;padding:10px 14px;text-align:center}
+  .nav a.logo{flex-basis:100%}.nav a.logo img{height:44px;margin:0 auto}
+  .nav .links{flex-basis:100%;justify-content:center;flex-wrap:wrap;gap:8px 16px}
+}
+.top{background:var(--bege);padding:34px 0 30px}
+.top h1{font-size:clamp(1.8rem,5vw,2.6rem)}
+.top p{max-width:70ch;margin-top:10px;color:#5f4530}
+.top .steps{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.top .steps span{background:#fff;border:1px solid var(--line);border-radius:30px;padding:7px 15px;font-weight:700;font-size:.86rem;color:var(--castanho)}
+section.blk{padding:30px 0}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.hd .num{width:38px;height:38px;border-radius:11px;background:var(--castanho);color:#fff;font-family:'Zilla Slab',serif;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.hd h2{font-size:1.4rem}
+/* filters */
+.tools{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.srch{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:40px;padding:11px 18px}
+.srch input{border:none;outline:none;font:inherit;flex:1;background:transparent;color:var(--ink)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:#fff;border:1.5px solid var(--line);color:var(--castanho);border-radius:30px;padding:7px 15px;font-weight:700;font-size:.86rem;cursor:pointer}
+.chip.on{background:var(--laranja);color:#fff;border-color:var(--laranja)}
+.count{color:var(--mut);font-weight:700;font-size:.88rem}
+/* product grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;gap:12px;align-items:center}
+.pcard.in{border-color:var(--laranja);box-shadow:0 0 0 2px rgba(236,102,7,.14)}
+.pcard .thumb{width:62px;height:62px;border-radius:10px;object-fit:cover;background:var(--bege);flex:0 0 auto}
+.pcard .info{flex:1;min-width:0}
+.pcard .info b{display:block;color:var(--castanho);font-size:.98rem;line-height:1.2}
+.pcard .mk{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--laranja)}
+.pcard .mk.pz{color:#8a5a12}
+.pcard .fmt{border:1px solid var(--line);border-radius:8px;font:inherit;font-size:.82rem;padding:4px 6px;margin-top:5px;max-width:100%;color:var(--ink)}
+.pcard .add{background:var(--laranja);color:#fff;border:none;border-radius:30px;padding:9px 16px;font-weight:800;cursor:pointer;font-size:.86rem;white-space:nowrap}
+.step{display:flex;align-items:center;gap:8px}
+.step button{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--laranja);background:#fff;color:var(--laranja);font-size:1.3rem;font-weight:800;cursor:pointer;line-height:1}
+.step .q{min-width:26px;text-align:center;font-weight:800;color:var(--castanho)}
+.empty-grid{grid-column:1/-1;color:var(--mut);padding:24px;text-align:center}
+/* cart */
+.cart{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.cart .empty{color:var(--mut);text-align:center;padding:18px 0}
+.citem{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.citem:first-child{border-top:none}
+.citem .cinfo{flex:1;min-width:0}
+.citem .cinfo b{color:var(--castanho);font-size:.95rem}
+.citem .cinfo small{display:block;color:var(--mut);font-size:.8rem}
+.citem .rm{background:none;border:none;color:#b4530f;cursor:pointer;font-size:1.1rem;font-weight:800}
+/* form */
+.formg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.formg .full{grid-column:1/-1}
+.field label{display:block;font-weight:700;font-size:.85rem;color:var(--castanho);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;color:var(--ink);background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--laranja)}
+.req{color:var(--laranja)}
+#status{font-weight:700;margin-top:14px;display:none;padding:14px 16px;border-radius:12px}
+/* sticky bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--castanho);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;box-shadow:0 -4px 18px rgba(0,0,0,.18)}
+.bar .n{font-weight:800}
+.bar .n b{background:var(--laranja);border-radius:20px;padding:2px 10px;margin-right:8px}
+.bar a{background:var(--laranja);color:#fff;border-radius:30px;padding:10px 20px;font-weight:800;text-decoration:none}
+.graos-band{height:70px;background:var(--laranja) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="216" height="180"><g fill="%23FFFFFF"><ellipse cx="36" cy="34" rx="11" ry="22" transform="rotate(-24 36 34)"/><ellipse cx="112" cy="22" rx="11" ry="22" transform="rotate(-24 112 22)"/><ellipse cx="178" cy="52" rx="11" ry="22" transform="rotate(20 178 52)"/><ellipse cx="64" cy="86" rx="11" ry="22" transform="rotate(30 64 86)"/><ellipse cx="146" cy="108" rx="11" ry="22" transform="rotate(-40 146 108)"/><ellipse cx="22" cy="128" rx="11" ry="22" transform="rotate(-38 22 128)"/></g></svg>') repeat}
+footer{background:var(--castanho);color:var(--bege);text-align:center;padding:30px 0}
+footer img{height:52px;margin-bottom:8px}
+footer .soc a{color:var(--bege);text-decoration:none;margin:0 6px}
+@media(max-width:760px){.formg{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html"><img src="assets/logo_principal.png" alt="Massa Prima"></a>
+    <div class="links"><a href="catalogo.html">Catálogo</a><a href="receitas.html">Receitas</a><a href="foodcost.html">🎓 Food Cost</a><a href="index.html">← Site</a></div>
+  </div>
+</header>
+
+<section class="top">
+  <div class="wrap">
+    <h1>Pedir cotação</h1>
+    <p>Escolha os artigos que precisa, indique as quantidades e os seus dados. A nossa equipa comercial responde com a <b>cotação e o plano de entregas</b> em horário de expediente. Sem compromisso.</p>
+    <div class="steps"><span>1 · Escolha os artigos</span><span>2 · Reveja o pedido</span><span>3 · Os seus dados</span></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <div class="hd"><span class="num">1</span><h2>Escolha os artigos</h2></div>
+    <div class="tools">
+      <div class="srch"><span>🔎</span><input id="q" type="search" placeholder="Procurar produto (ex.: pão, muffin, creme, chocolate…)" autocomplete="off"></div>
+      <div class="chips" id="fseg"><button class="chip on" data-v="">Todos os segmentos</button><button class="chip" data-v="Padaria">Padaria</button><button class="chip" data-v="Pastelaria">Pastelaria</button></div>
+      <div class="chips" id="fmar"><button class="chip on" data-v="">Todas as marcas</button><button class="chip" data-v="Massa Prima">Massa Prima</button><button class="chip" data-v="Prodite Zeelandia">Prodite Zeelandia</button></div>
+      <div class="count" id="count"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="blk" id="pedido" style="background:var(--bege)">
+  <div class="wrap">
+    <div class="hd"><span class="num">2</span><h2>O seu pedido</h2></div>
+    <div class="cart" id="cart"><div class="empty">Ainda não adicionou artigos. Use o passo 1 para os escolher. 🌾</div></div>
+  </div>
+</section>
+
+<section class="blk" id="dados">
+  <div class="wrap">
+    <div class="hd"><span class="num">3</span><h2>Os seus dados</h2></div>
+    <form id="fc" name="cotacao" method="POST" data-netlify="true" netlify-honeypot="_honey">
+      <input type="hidden" name="form-name" value="cotacao">
+      <p style="display:none"><label>Não preencher: <input name="_honey"></label></p>
+      <textarea id="artigos" name="artigos" style="display:none"></textarea>
+      <input type="hidden" name="total_artigos" id="total_artigos">
+      <div class="formg">
+        <div class="field full"><label>Nome da empresa / padaria <span class="req">*</span></label><input required name="empresa" placeholder="Ex.: Padaria Bom Pão"></div>
+        <div class="field"><label>Responsável <span class="req">*</span></label><input required name="responsavel" placeholder="O seu nome"></div>
+        <div class="field"><label>Telefone <span class="req">*</span></label><input required name="telefone" inputmode="tel" placeholder="9XX XXX XXX"></div>
+        <div class="field"><label>E-mail</label><input type="email" name="email" placeholder="opcional"></div>
+        <div class="field"><label>Província <span class="req">*</span></label><select required name="provincia"><option>Luanda</option><option>Bengo</option><option>Benguela</option><option>Bié</option><option>Cabinda</option><option>Cuando Cubango</option><option>Cuanza Norte</option><option>Cuanza Sul</option><option>Cunene</option><option>Huambo</option><option>Huíla</option><option>Lunda Norte</option><option>Lunda Sul</option><option>Malanje</option><option>Moxico</option><option>Namibe</option><option>Uíge</option><option>Zaire</option><option>Outra</option></select></div>
+        <div class="field full"><label>Tipo de negócio</label><select name="tipo"><option>Padaria</option><option>Pastelaria</option><option>Padaria e pastelaria</option><option>Hotelaria / restauração</option><option>Café / snack</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option><option>Outro</option></select></div>
+        <div class="field full"><label>Observações</label><textarea rows="3" name="mensagem" placeholder="Frequência de entrega, prazos, ou qualquer detalhe que ajude a preparar a proposta."></textarea></div>
+      </div>
+      <div style="margin-top:18px"><button class="btn" type="submit" id="send">Enviar pedido de cotação</button></div>
+      <p id="status"></p>
+    </form>
+  </div>
+</section>
+
+<div class="bar" id="bar" style="display:none">
+  <span class="n"><b id="barn">0</b>artigos no pedido</span>
+  <a href="#pedido">Ver pedido →</a>
+</div>
+
+<div class="graos-band"></div>
+<footer>
+  <div class="wrap">
+    <img src="assets/logo_bege.png" alt="Massa Prima">
+    <p><em>qualidade que inspira resultados perfeitos</em></p>
+    <p class="soc"><a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p>
+    <p style="font-size:.8rem;opacity:.75">© 2026 Massa Prima · Quente e Bom, Angola</p>
+  </div>
+</footer>
+
+<script id="produtos" type="application/json">[{"id":"pz-carlex-1000","n":"Carlex 1000","m":"Prodite Zeelandia","s":"Padaria","sf":"Desmoldantes e Lubrificantes","f":["15 lt"],"img":"assets/produtos/pz-desmoldante-formas.jpg"},{"id":"pz-carlex-spray","n":"Carlex Spray","m":"Prodite Zeelandia","s":"Padaria","sf":"Desmoldantes e Lubrificantes","f":["600 ml (cx 6)"],"img":"assets/produtos/pz-desmoldante-spray.jpg"},{"id":"pz-carlo","n":"Carlo","m":"Prodite Zeelandia","s":"Padaria","sf":"Desmoldantes e Lubrificantes","f":["15 lt"],"img":"assets/produtos/pz-desmoldante-carlo.jpg"},{"id":"pz-levedura-seca","n":"Levedura Seca","m":"Prodite Zeelandia","s":"Padaria","sf":"Melhorantes Panificação","f":["10 kg"],"img":"assets/produtos/pz-levedura.jpg"},{"id":"melhorante-gold","n":"Massa Prima Melhorante Gold","m":"Massa Prima","s":"Padaria","sf":"Melhorantes Panificação","f":["5 kg","15 kg"],"img":"assets/produtos/melhorante-gold.jpg"},{"id":"melhorante-natura","n":"Massa Prima Melhorante Natura","m":"Massa Prima","s":"Padaria","sf":"Melhorantes Panificação","f":["5 kg","15 kg"],"img":"assets/produtos/melhorante-natura.jpg"},{"id":"pz-broa-de-milho-amarelo","n":"Broa de Milho Amarelo","m":"Prodite Zeelandia","s":"Padaria","sf":"Mixes Panificação","f":["15 kg"],"img":"assets/produtos/pz-broa.jpg"},{"id":"pao-centeio-da-baviera","n":"Massa Prima Pão Centeio da Baviera 100%","m":"Massa Prima","s":"Padaria","sf":"Mixes Panificação","f":["15 kg","25 kg"],"img":"assets/produtos/rye.jpg"},{"id":"pao-de-forma-e-hamburguer","n":"Massa Prima Pão de Forma e Hamburguer 100%","m":"Massa Prima","s":"Padaria","sf":"Mixes Panificação","f":["15 kg","25 kg"],"img":"assets/produtos/burger.jpg"},{"id":"pao-integral","n":"Massa Prima Pão Integral 100%","m":"Massa Prima","s":"Padaria","sf":"Mixes Panificação","f":["15 kg","25 kg"],"img":"assets/produtos/wholemeal.jpg"},{"id":"pao-multicereais","n":"Massa Prima Pão Multicereais 100%","m":"Massa Prima","s":"Padaria","sf":"Mixes Panificação","f":["15 kg","25 kg"],"img":"assets/produtos/multicereais.jpg"},{"id":"pao-prokorn","n":"Massa Prima Pão Prokorn 100%","m":"Massa Prima","s":"Padaria","sf":"Mixes Panificação","f":["15 kg","25 kg"],"img":"assets/produtos/prokorn.jpg"},{"id":"pao-rustico","n":"Massa Prima Pão Rústico 100%","m":"Massa Prima","s":"Padaria","sf":"Mixes Panificação","f":["15 kg","25 kg"],"img":"assets/produtos/rustic.jpg"},{"id":"pao-shape","n":"Massa Prima Pão Shape 100%","m":"Massa Prima","s":"Padaria","sf":"Mixes Panificação","f":["15 kg","25 kg"],"img":"assets/produtos/pao-shape.jpg"},{"id":"pz-panovite-alfarroba","n":"Panovite Alfarroba","m":"Prodite Zeelandia","s":"Padaria","sf":"Mixes Panificação","f":["15 kg"],"img":"assets/produtos/pz-alfarroba.jpg"},{"id":"pz-panovite-milho-e-girassol-50","n":"Panovite Milho e Girassol 50%","m":"Prodite Zeelandia","s":"Padaria","sf":"Mixes Panificação","f":["15 kg"],"img":"assets/produtos/pz-milho-girassol.jpg"},{"id":"pz-gorpan","n":"Gorpan","m":"Prodite Zeelandia","s":"Padaria","sf":"Produtos Complementares","f":["10 kg"],"img":"assets/produtos/pz-gorpan.jpg"},{"id":"amido-de-milho","n":"Massa Prima Amido de Milho","m":"Massa Prima","s":"Padaria","sf":"Produtos Complementares","f":["5 kg"],"img":"assets/produtos/amido.jpg"},{"id":"propionato-de-calcio","n":"Massa Prima Propionato de Cálcio","m":"Massa Prima","s":"Padaria","sf":"Produtos Complementares","f":["5 kg"],"img":"assets/produtos/baking.jpg"},{"id":"mistura-4-sementes","n":"Massa Prima Mistura 4 Sementes","m":"Massa Prima","s":"Padaria","sf":"Sementes e Decoração","f":["5 kg"],"img":"assets/produtos/seeds.jpg"},{"id":"sementes-de-sesamo-sem-pele","n":"Massa Prima Sementes de Sésamo sem Pele","m":"Massa Prima","s":"Padaria","sf":"Sementes e Decoração","f":["5 kg"],"img":"assets/produtos/sesamo.jpg"},{"id":"cake-ananas","n":"Massa Prima Cake Ananás","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["15 kg"],"img":"assets/produtos/ananas.jpg"},{"id":"cake-caramelo","n":"Massa Prima Cake Caramelo","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["15 kg"],"img":"assets/produtos/caramelo.jpg"},{"id":"cake-cenoura","n":"Massa Prima Cake Cenoura","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["5 kg","15 kg","25 kg"],"img":"assets/produtos/carrot.jpg"},{"id":"cake-chocolate","n":"Massa Prima Cake Chocolate","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["5 kg","15 kg","25 kg"],"img":"assets/produtos/cake-chocolate.jpg"},{"id":"cake-laranja","n":"Massa Prima Cake Laranja","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["5 kg","15 kg","25 kg"],"img":"assets/produtos/citrus.jpg"},{"id":"cake-neutro","n":"Massa Prima Cake Neutro","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["5 kg","15 kg","25 kg"],"img":"assets/produtos/marble.jpg"},{"id":"cake-noz","n":"Massa Prima Cake Noz","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["15 kg"],"img":"assets/produtos/noz.jpg"},{"id":"muffin","n":"Massa Prima Muffin","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["15 kg"],"img":"assets/produtos/muffins.jpg"},{"id":"muffin-chocolate","n":"Massa Prima Muffin Chocolate","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["15 kg"],"img":"assets/produtos/muffin-choco.jpg"},{"id":"queque-e-bolo-de-arroz","n":"Massa Prima Queque e Bolo de Arroz","m":"Massa Prima","s":"Pastelaria","sf":"Batidos com Gordura","f":["15 kg","25 kg"],"img":"assets/produtos/queque.jpg"},{"id":"pz-soft-cake-iogurte","n":"Soft Cake Iogurte","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Batidos com Gordura","f":["15 kg"],"img":"assets/produtos/pz-sc-iogurte.jpg"},{"id":"pz-soft-cake-red-velvet","n":"Soft Cake Red Velvet","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Batidos com Gordura","f":["5 kg"],"img":"assets/produtos/pz-redvelvet.jpg"},{"id":"biscuit","n":"Massa Prima Biscuit","m":"Massa Prima","s":"Pastelaria","sf":"Batidos sem Gordura","f":["5 kg","15 kg","25 kg"],"img":"assets/produtos/biscuitroll.jpg"},{"id":"biscuit-chocolate","n":"Massa Prima Biscuit Chocolate","m":"Massa Prima","s":"Pastelaria","sf":"Batidos sem Gordura","f":["5 kg","15 kg","25 kg"],"img":"assets/produtos/biscuit-choco.jpg"},{"id":"pz-arabesq-dark-70","n":"Arabesque Dark 70%","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["10 kg"],"img":"assets/produtos/pz-arabesque-dark.jpg"},{"id":"pz-arabesq-milk-34","n":"Arabesque Milk 34%","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["10 kg"],"img":"assets/produtos/pz-arabesque-milk.jpg"},{"id":"pz-arabesq-white-30","n":"Arabesque White 30%","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["10 kg"],"img":"assets/produtos/pz-arabesque-white.jpg"},{"id":"pz-chocolatier-forno","n":"Chocolatier Forno","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["6 kg"],"img":"assets/produtos/pz-choc-forno.jpg"},{"id":"pz-chocolatier-nocciola","n":"Chocolatier Nocciola","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["6 kg"],"img":"assets/produtos/pz-choc-nocciola.jpg"},{"id":"pz-cobertura-barra","n":"Cobertura Barra","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["5 kg"],"img":"assets/produtos/pz-cob-barra.jpg"},{"id":"pz-cobertura-branca-em-barra","n":"Cobertura Branca em Barra","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["5 kg"],"img":"assets/produtos/pz-cob-branca.jpg"},{"id":"pz-cremito","n":"Cremito","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["10 kg"],"img":"assets/produtos/pz-cremito.jpg"},{"id":"cacau-em-po","n":"Massa Prima Cacau em Pó","m":"Massa Prima","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["5 kg"],"img":"assets/produtos/cocoa.jpg"},{"id":"pz-choco-negretta-trufla","n":"Negretta Trufla","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["8 kg"],"img":"assets/produtos/pz-negretta.jpg"},{"id":"pz-scaldis-dark","n":"Scaldis Dark","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["10 kg"],"img":"assets/produtos/pz-scaldis-dark.jpg"},{"id":"pz-scaldis-white","n":"Scaldis White","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["10 kg"],"img":"assets/produtos/pz-scaldis-white.jpg"},{"id":"pz-vermicelli-granulado-de-cacau","n":"Vermicelli - Granulado de Cacau","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Chocolates e Sucedaneos","f":["10 kg"],"img":"assets/produtos/pz-vermicelli.jpg"},{"id":"creme-pasteleiro-sublime","n":"Massa Prima Creme Pasteleiro Sublime","m":"Massa Prima","s":"Pastelaria","sf":"Cremes Pasteleiro","f":["5 kg"],"img":"assets/produtos/custard.jpg"},{"id":"pz-natas-caselle","n":"Caselle","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Cremes Tipo Chantilly","f":["1 lt (cx 12)"],"img":"assets/produtos/pz-caselle.jpg"},{"id":"chantilly-po","n":"Massa Prima Chantilly Pó","m":"Massa Prima","s":"Pastelaria","sf":"Cremes Tipo Chantilly","f":["5 kg"],"img":"assets/produtos/chantilly.jpg"},{"id":"pz-natas-pritchtts-gold","n":"Pritchitts Gold","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Cremes Tipo Chantilly","f":["1 lt (cx 12)"],"img":"assets/produtos/pz-pritchitts.jpg"},{"id":"pz-abobora-branca-laminada","n":"Abóbora Branca Laminada","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-abobora-branca.jpg"},{"id":"pz-abobora-verde-laminada","n":"Abóbora Verde Laminada","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-abobora-verde.jpg"},{"id":"pz-abobora-vermelha-laminada","n":"Abóbora Vermelha Laminada","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-abobora-vermelha.jpg"},{"id":"pz-casca-de-laranja","n":"Casca de Laranja","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-casca-laranja.jpg"},{"id":"pz-cereja-vermelha","n":"Cereja","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-cereja-img.jpg"},{"id":"pz-doce-de-gila","n":"Doce de Gila","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["14 kg"],"img":"assets/produtos/pz-gila.jpg"},{"id":"pz-figo","n":"Figo","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-figo.jpg"},{"id":"pz-pera","n":"Pera","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-pera.jpg"},{"id":"pz-fruta-sortida-picada","n":"Sortida Picada","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutas Escorridas","f":["10 kg"],"img":"assets/produtos/pz-sortida.jpg"},{"id":"coco-ralado-ceilao","n":"Massa Prima Coco Ralado Ceilão","m":"Massa Prima","s":"Pastelaria","sf":"Frutos Secos","f":["5 kg"],"img":"assets/produtos/coconut.jpg"},{"id":"pz-miolo-de-avela-com-pele","n":"Miolo Avelã com pele","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutos Secos","f":["10 kg"],"img":"assets/produtos/pz-avela.jpg"},{"id":"pz-miolo-amendoa-com-pele","n":"Miolo de Amêndoa com Pele","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutos Secos","f":["10 kg"],"img":"assets/produtos/pz-amendoa-pele.jpg"},{"id":"pz-miolo-de-amendoa-laminada","n":"Miolo de Amêndoa Laminada","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutos Secos","f":["10 kg"],"img":"assets/produtos/pz-amendoa-laminada.jpg"},{"id":"pz-miolo-de-amendoa-palitada","n":"Miolo de Amêndoa Palitada","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutos Secos","f":["10 kg"],"img":"assets/produtos/pz-amendoa-palitada.jpg"},{"id":"pz-miolo-amendoa-sem-pele","n":"Miolo de amêndoa sem Pele","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutos Secos","f":["10 kg"],"img":"assets/produtos/pz-amendoa.jpg"},{"id":"pz-miolo-de-noz-metades","n":"Miolo de Noz Metades","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutos Secos","f":["10 kg"],"img":"assets/produtos/pz-noz.jpg"},{"id":"pz-sultanas","n":"Sultana","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Frutos Secos","f":["10 kg"],"img":"assets/produtos/pz-sultana.jpg"},{"id":"pz-brigel-morango","n":"Brigel Morango","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Geleias","f":["7 kg"],"img":"assets/produtos/pz-brigel-morango.jpg"},{"id":"pz-brigel-neutro","n":"Brigel Neutro","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Geleias","f":["12.5 kg"],"img":"assets/produtos/pz-brigel-neutro-img.jpg"},{"id":"pz-decorgel-caramelo","n":"Decorgel Caramelo","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Geleias","f":["6 kg"],"img":"assets/produtos/pz-decorgel-caramelo.jpg"},{"id":"pz-decorgel-chocolate","n":"Decorgel Chocolate","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Geleias","f":["6 kg"],"img":"assets/produtos/pz-decorgel-choco.jpg"},{"id":"pz-margarina-para-bolo-rei","n":"Margarina Perla Bolo Rei","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Margarinas","f":["20 kg"],"img":"assets/produtos/pz-marg-bolorei.jpg"},{"id":"pz-margarina-para-folhados","n":"Margarina Perla Folhados Placas","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Margarinas","f":["12 kg"],"img":"assets/produtos/pz-folhados.jpg"},{"id":"bolo-rei","n":"Massa Prima Bolo Rei","m":"Massa Prima","s":"Pastelaria","sf":"Massas Lêvedas","f":["15 kg","25 kg"],"img":"assets/produtos/bolorei.jpg"},{"id":"brioche","n":"Massa Prima Brioche","m":"Massa Prima","s":"Pastelaria","sf":"Massas Lêvedas","f":["15 kg","25 kg"],"img":"assets/produtos/brioche.jpg"},{"id":"fermento-pastelaria","n":"Massa Prima Fermento Pastelaria","m":"Massa Prima","s":"Pastelaria","sf":"Mixes para Pastelaria","f":["5 kg","15 kg"],"img":"assets/produtos/fermento.jpg"},{"id":"pz-creme-pastel-de-nata","n":"Pastel de Nata","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Mixes para Pastelaria","f":["10 kg"],"img":"assets/produtos/pz-pastel-nata.jpg"},{"id":"pz-creme-de-ovo","n":"Creme de Ovo","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Recheios e Coberturas","f":["7 kg"],"img":"assets/produtos/pz-creme-ovo.jpg"},{"id":"pz-fondant","n":"Fondant","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Recheios e Coberturas","f":["14 kg"],"img":"assets/produtos/pz-fondant-img.jpg"},{"id":"pz-fruitful-covering-maracuja","n":"Fruitful Covering Maracujá","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Recheios e Coberturas","f":["850 grs (cx 3)"],"img":"assets/produtos/pz-cov-maracuja.jpg"},{"id":"pz-fruitfull-filling-framboesa","n":"Fruitful Filling Framboesa","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Recheios e Coberturas","f":["2.7 kg (cx 2)"],"img":"assets/produtos/pz-ff-framboesa.jpg"},{"id":"pz-fruitful-filling-frutos-silvestres","n":"Fruitful Filling Frutos Silvestres","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Recheios e Coberturas","f":["2.7 kg (cx 2)"],"img":"assets/produtos/pz-ff-silvestres.jpg"},{"id":"pz-fruitful-filling-maca","n":"Fruitful Filling Maçã","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Recheios e Coberturas","f":["2.7 kg (cx 2)"],"img":"assets/produtos/pz-ff-maca.jpg"},{"id":"pz-fruitful-filling-morango","n":"Fruitful Filling Morango","m":"Prodite Zeelandia","s":"Pastelaria","sf":"Recheios e Coberturas","f":["2.7 kg (cx 2)"],"img":"assets/produtos/pz-ff-morango.jpg"},{"id":"decor-icing","n":"Massa Prima Decor Icing","m":"Massa Prima","s":"Pastelaria","sf":"Recheios e Coberturas","f":["2.5 kg"],"img":"assets/produtos/decor.jpg"},{"id":"icing-sugar","n":"Massa Prima Icing Sugar","m":"Massa Prima","s":"Pastelaria","sf":"Recheios e Coberturas","f":["5 kg","15 kg"],"img":"assets/produtos/icing.jpg"}]</script>
+<script>
+const PROD=JSON.parse(document.getElementById('produtos').textContent);
+const cart=new Map(); // id -> {p, qty, fmt}
+let fSeg='', fMar='', fQ='';
+const grid=document.getElementById('grid'), cnt=document.getElementById('count');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+function match(p){
+  if(fSeg&&p.s!==fSeg)return false;
+  if(fMar&&p.m!==fMar)return false;
+  if(fQ){const t=(p.n+' '+p.sf+' '+p.m).toLowerCase();if(!t.includes(fQ))return false;}
+  return true;
+}
+function fmtOpts(p){
+  if(!p.f.length)return '<span class="fmt">formato a combinar</span>';
+  if(p.f.length===1)return '<span class="fmt">'+esc(p.f[0])+'</span>';
+  return '<select class="fmt" data-fmt="'+p.id+'">'+p.f.map(f=>'<option>'+esc(f)+'</option>').join('')+'</select>';
+}
+function card(p){
+  const inC=cart.has(p.id);
+  const ctrl=inC
+    ? '<div class="step"><button data-dec="'+p.id+'">−</button><span class="q">'+cart.get(p.id).qty+'</span><button data-inc="'+p.id+'">+</button></div>'
+    : '<button class="add" data-add="'+p.id+'">+ Adicionar</button>';
+  const mk=p.m==='Prodite Zeelandia'?'mk pz':'mk';
+  const img=p.img?('<img class="thumb" src="'+esc(p.img)+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">'):'<div class="thumb"></div>';
+  return '<div class="pcard'+(inC?' in':'')+'" data-card="'+p.id+'">'+img+
+    '<div class="info"><span class="'+mk+'">'+esc(p.m)+'</span><b>'+esc(p.n)+'</b>'+fmtOpts(p)+'</div>'+ctrl+'</div>';
+}
+function renderGrid(){
+  const list=PROD.filter(match);
+  cnt.textContent=list.length+' de '+PROD.length+' produtos';
+  grid.innerHTML=list.length?list.map(card).join(''):'<div class="empty-grid">Nada encontrado. Tente outra pesquisa. 🌾</div>';
+}
+function selectedFmt(id){
+  const sel=document.querySelector('[data-fmt="'+id+'"]');
+  if(sel)return sel.value;
+  const p=PROD.find(x=>x.id===id);
+  return p&&p.f.length?p.f[0]:'formato a combinar';
+}
+function updateCard(id){const el=document.querySelector('[data-card="'+id+'"]');if(el){const p=PROD.find(x=>x.id===id);el.outerHTML=card(p);}}
+function afterChange(id){updateCard(id);renderCart();serialize();bar();}
+function add(id){const p=PROD.find(x=>x.id===id);cart.set(id,{p,qty:1,fmt:selectedFmt(id)});afterChange(id);}
+function inc(id){const c=cart.get(id);if(c){c.qty++;afterChange(id);}}
+function dec(id){const c=cart.get(id);if(c){c.qty--;if(c.qty<=0)cart.delete(id);afterChange(id);}}
+function removeItem(id){cart.delete(id);afterChange(id);}
+function renderCart(){
+  const el=document.getElementById('cart');
+  if(!cart.size){el.innerHTML='<div class="empty">Ainda não adicionou artigos. Use o passo 1 para os escolher. 🌾</div>';return;}
+  let h='';
+  cart.forEach((c,id)=>{h+='<div class="citem"><div class="cinfo"><b>'+esc(c.p.n)+'</b><small>'+esc(c.p.m)+' · '+esc(c.fmt)+'</small></div>'+
+    '<div class="step"><button data-dec="'+id+'">−</button><span class="q">'+c.qty+'</span><button data-inc="'+id+'">+</button></div>'+
+    '<button class="rm" data-rm="'+id+'" title="Remover">✕</button></div>';});
+  el.innerHTML=h;
+}
+function serialize(){
+  let lines=[];
+  cart.forEach(c=>lines.push('• '+c.p.n+' ('+c.p.m+') — '+c.qty+' × '+c.fmt));
+  document.getElementById('artigos').value=lines.join('\n');
+  document.getElementById('total_artigos').value=cart.size;
+}
+function bar(){
+  const b=document.getElementById('bar');
+  if(cart.size){b.style.display='flex';document.getElementById('barn').textContent=[...cart.values()].reduce((a,c)=>a+c.qty,0);}
+  else b.style.display='none';
+}
+function sync(){renderGrid();renderCart();serialize();bar();}
+
+document.addEventListener('click',e=>{
+  const t=e.target;
+  if(t.dataset.add)add(t.dataset.add);
+  else if(t.dataset.inc)inc(t.dataset.inc);
+  else if(t.dataset.dec)dec(t.dataset.dec);
+  else if(t.dataset.rm)removeItem(t.dataset.rm);
+});
+document.addEventListener('change',e=>{
+  const s=e.target;
+  if(s.dataset.fmt&&cart.has(s.dataset.fmt)){cart.get(s.dataset.fmt).fmt=s.value;renderCart();serialize();}
+});
+document.getElementById('q').addEventListener('input',e=>{fQ=e.target.value.trim().toLowerCase();renderGrid();});
+document.getElementById('fseg').addEventListener('click',e=>{if(!e.target.dataset.hasOwnProperty('v'))return;fSeg=e.target.dataset.v;[...e.currentTarget.children].forEach(c=>c.classList.toggle('on',c===e.target));renderGrid();});
+document.getElementById('fmar').addEventListener('click',e=>{if(!e.target.dataset.hasOwnProperty('v'))return;fMar=e.target.dataset.v;[...e.currentTarget.children].forEach(c=>c.classList.toggle('on',c===e.target));renderGrid();});
+
+document.getElementById('fc').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const f=this, st=document.getElementById('status'), btn=document.getElementById('send');
+  if(f._honey.value)return;
+  if(!cart.size){st.style.display='block';st.style.background='#fbeecb';st.style.color='#8a5a12';st.textContent='⚠️ Adicione pelo menos um artigo ao pedido (passo 1).';document.getElementById('pedido').scrollIntoView({behavior:'smooth'});return;}
+  serialize();
+  btn.disabled=true;btn.textContent='A enviar…';st.style.display='none';
+  try{
+    const body=new URLSearchParams(new FormData(f)).toString();
+    const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
+    if(!r.ok)throw new Error('falha');
+    if(window.fbq)fbq('track','Lead',{content_name:'Pedido de cotação',num_items:cart.size});
+    st.style.display='block';st.style.background='#e2f3e2';st.style.color='#2e7d32';
+    st.textContent='✅ Pedido recebido! A nossa equipa comercial vai preparar a cotação e entra em contacto consigo em horário de expediente. Obrigado!';
+    cart.clear();sync();f.reset();window.scrollTo({top:0,behavior:'smooth'});
+  }catch(_){
+    st.style.display='block';st.style.background='#fbe3d3';st.style.color='#b4530f';
+    st.textContent='⚠️ Não foi possível enviar agora. Escreva-nos diretamente para geral@quenteebom.co.ao com a sua lista.';
+  }
+  btn.disabled=false;btn.textContent='Enviar pedido de cotação';
+});
+
+renderGrid();
+</script>
+<script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"5dff754f7a8bb173057e9243ca982bf3"})});</script>
+<script src="assets/js/chefprima.js" defer></script>
+</body>
+</html>
