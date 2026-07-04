@@ -121,8 +121,6 @@ footer .soc a:hover{color:#fff}
 #cp-form input{flex:1;border:none;padding:14px;font-size:.95rem;font-family:inherit}
 #cp-form input:focus{outline:none}
 #cp-form button{background:var(--laranja);color:#fff;border:none;padding:0 20px;font-weight:800;cursor:pointer}
-.wa{position:fixed;bottom:24px;right:100px;background:#25D366;color:#fff;border-radius:40px;padding:14px 22px;font-weight:800;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:99}
-@media(max-width:600px){.wa{display:none}}
 </style>
 </head>
 <body>
@@ -275,11 +273,11 @@ footer .soc a:hover{color:#fff}
     <div>
       <h2 class="sec-title" style="text-align:left">Fale connosco</h2>
       <p style="margin-bottom:18px">Quer testar a Massa Prima na sua produção? Peça uma amostra ou o catálogo completo. Respondemos em horário de expediente.</p>
-      <p style="font-weight:800;color:var(--castanho)">📱 WhatsApp: <span style="color:var(--laranja)">[número a definir]</span><br>✉️ geral@massaprima.co.ao <em style="font-weight:400">(a ativar)</em><br>📍 Luanda, Angola</p>
+      <p style="font-weight:800;color:var(--castanho)">✉️ <a href="mailto:geral@quenteebom.co.ao" style="color:var(--laranja);text-decoration:none">geral@quenteebom.co.ao</a><br>📍 Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8<br>Viana — Luanda, Angola</p>
     </div>
     <form onsubmit="event.preventDefault();alert('Obrigado! A nossa equipa entrará em contacto consigo. (Formulário a ligar ao e-mail/CRM na fase de produção)')">
       <input required placeholder="Nome / Empresa">
-      <input required placeholder="Telefone ou WhatsApp">
+      <input required placeholder="Telefone ou e-mail">
       <select><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
       <textarea rows="3" placeholder="O que precisa? (amostra, catálogo, preços…)"></textarea>
       <button class="btn" type="submit">Pedir contacto</button>
@@ -292,12 +290,11 @@ footer .soc a:hover{color:#fff}
   <div class="wrap">
     <img src="assets/logo_bege.png" alt="Massa Prima">
     <p><em>qualidade que inspira resultados perfeitos</em></p>
-    <p class="soc"><a href="#">Instagram</a>·<a href="#">Facebook</a>·<a href="#">WhatsApp</a></p>
+    <p class="soc"><a href="#">Instagram</a>·<a href="#">Facebook</a>·<a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p>
     <p style="font-size:.8rem;padding-bottom:18px;opacity:.75">© 2026 Massa Prima · Quente e Bom, Angola</p>
   </div>
 </footer>
 
-<a class="wa" href="https://wa.me/244XXXXXXXXX" title="WhatsApp">💬 WhatsApp</a>
 <button id="cp-btn" title="Falar com o Chef Prima">🌾</button>
 <div id="cp-panel">
   <div id="cp-head"><span>Chef Prima 🌾</span><button id="cp-close">✕</button></div>
@@ -342,10 +339,10 @@ document.getElementById('cp-form').onsubmit=e=>{
   if(leadMode){bot("Anotado! ✅ A nossa equipa vai entrar em contacto consigo o mais depressa possível. Precisa de mais alguma coisa?");leadMode=false;return;}
   const s=norm(q);
   // 1) intenções comerciais primeiro
-  if(/(amostra|testar|experimentar)/.test(s)){leadMode=true;bot("Boa escolha! Para lhe fazermos chegar uma amostra, deixe-me numa mensagem o seu nome, localidade e contacto (telefone ou WhatsApp). 🌾");return;}
+  if(/(amostra|testar|experimentar)/.test(s)){leadMode=true;bot("Boa escolha! Para lhe fazermos chegar uma amostra, deixe-me numa mensagem o seu nome, localidade e contacto (telefone ou e-mail). 🌾");return;}
   if(/(preco|custa|quanto|tabela)/.test(s)){leadMode=true;bot("Os preços dependem do produto e da quantidade. Deixe-me o seu contacto e a nossa equipa comercial responde-lhe com a tabela certa para o seu caso.");return;}
   if(/(onde|comprar|loja|distribuidor|revenda|ponto de venda)/.test(s)){leadMode=true;bot("Diga-me a sua localidade e o seu contacto, e indicamos-lhe o ponto de venda mais próximo — ou entregamos diretamente, se for cliente profissional.");return;}
-  if(/(contacto|falar|equipa|whatsapp|telefone|liga|email)/.test(s)){leadMode=true;bot("Com certeza! Deixe-me o seu nome e número de telefone/WhatsApp, e a nossa equipa liga-lhe em horário de expediente.");return;}
+  if(/(contacto|falar|equipa|whatsapp|telefone|liga|email|e-mail)/.test(s)){leadMode=true;bot("Com certeza! Pode escrever-nos para geral@quenteebom.co.ao, ou deixe-me aqui o seu nome e contacto que a nossa equipa fala consigo em horário de expediente.");return;}
   if(/(ola|bom dia|boa tarde|boa noite|^oi\b)/.test(s)){bot("Olá! 👋 Em que posso ajudar? Posso falar-lhe de qualquer produto Massa Prima, dizer-lhe como se usa, ou pedir à equipa que entre em contacto.");return;}
   if(/(obrigad|fixe|top|excelente)/.test(s)){bot("Sempre às ordens! 🌾 Quando quiser testar a Massa Prima na sua produção, é só pedir uma amostra.");return;}
   if(/(feito em angola|produzi|fabrica|fábrica|angola)/.test(s)){bot("Grande parte da nossa produção é feita em Angola 🇦🇴 — é isso que garante frescura, fornecimento constante e apoio próximo a quem produz. A base do bom pão angolano faz-se cá.");return;}

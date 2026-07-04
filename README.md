@@ -14,4 +14,6 @@ Site 100% estático — publicado via **GitHub Pages**.
 
 Servido diretamente da branch `main` (raiz). O ficheiro `.nojekyll` desativa o processamento Jekyll.
 
-> Notas pendentes antes do lançamento público: número de WhatsApp comercial, e-mail e domínio próprio (ex.: massaprima.co.ao). O assistente Chef Prima é, nesta versão, baseado em regras + base de conhecimento local; a ligação a IA fica para a fase seguinte.
+Contacto: **geral@quenteebom.co.ao** · morada partilhada com a Quente e Bom (Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8, Viana — Luanda).
+
+> Nota: o assistente Chef Prima é, nesta versão, baseado em regras + base de conhecimento local; a ligação a IA fica para a fase seguinte.
