@@ -136,7 +136,7 @@ footer .soc a:hover{color:#fff}
       <li><a href="#apoio">Apoio ao Profissional</a></li>
       <li><a href="#contactos">Contactos</a></li>
     </ul>
-    <a class="btn" href="#contactos">Pedir amostra</a>
+    <a class="btn" href="#contactos">Falar com a equipa</a>
   </div>
 </header>
 
@@ -174,7 +174,7 @@ footer .soc a:hover{color:#fff}
           <p><b>Melhorantes:</b> Natura 1% · Gold 1% · Fresh 1%</p>
           <p><b>Sementes &amp; decoração:</b> misturas de 2, 3 e 4 sementes · sésamo · decoração de milho</p>
           <p style="font-size:.88rem;color:#8a5a34"><b>Formatos:</b> sacos de 5, 15 e 25 kg</p>
-          <a class="btn" href="#contactos">Pedir amostra</a>
+          <a class="btn" href="#contactos">Falar com a equipa</a>
         </div>
       </div>
       <div class="card">
@@ -185,7 +185,7 @@ footer .soc a:hover{color:#fff}
           <p><b>Massas lêvedas:</b> Brioche · Bolo Rei</p>
           <p><b>Cremes &amp; coberturas:</b> Creme Pasteleiro Sublime · Chantilly em pó · Icing Sugar · Decor Icing · Cacau em pó · Fermento</p>
           <p style="font-size:.88rem;color:#8a5a34"><b>Formatos:</b> sacos de 2,5 a 25 kg</p>
-          <a class="btn" href="#contactos">Pedir amostra</a>
+          <a class="btn" href="#contactos">Falar com a equipa</a>
         </div>
       </div>
       <div class="card">
@@ -272,14 +272,14 @@ footer .soc a:hover{color:#fff}
   <div class="wrap">
     <div>
       <h2 class="sec-title" style="text-align:left">Fale connosco</h2>
-      <p style="margin-bottom:18px">Quer testar a Massa Prima na sua produção? Peça uma amostra ou o catálogo completo. Respondemos em horário de expediente.</p>
+      <p style="margin-bottom:18px">Quer levar a Massa Prima para a sua produção? Peça o catálogo completo ou fale com a nossa equipa comercial. Respondemos em horário de expediente.</p>
       <p style="font-weight:800;color:var(--castanho)">✉️ <a href="mailto:geral@quenteebom.co.ao" style="color:var(--laranja);text-decoration:none">geral@quenteebom.co.ao</a><br>📍 Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8<br>Viana — Luanda, Angola</p>
     </div>
     <form onsubmit="event.preventDefault();alert('Obrigado! A nossa equipa entrará em contacto consigo. (Formulário a ligar ao e-mail/CRM na fase de produção)')">
       <input required placeholder="Nome / Empresa">
       <input required placeholder="Telefone ou e-mail">
       <select><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
-      <textarea rows="3" placeholder="O que precisa? (amostra, catálogo, preços…)"></textarea>
+      <textarea rows="3" placeholder="O que precisa? (catálogo, preços, parceria…)"></textarea>
       <button class="btn" type="submit">Pedir contacto</button>
     </form>
   </div>
@@ -329,7 +329,7 @@ function fmtProduto(p){
   if(p.d) t+=p.d+" ";
   if(p.m) t+="Como usar: "+frase1(p.m)+" ";
   if(p.fo&&p.fo.length) t+="Disponível em sacos de "+p.fo.join(', ').replace('2.5','2,5')+" kg. ";
-  t+="Quer receber a ficha técnica completa ou uma amostra? É só deixar-me o seu contacto.";
+  t+="Quer receber a ficha técnica completa ou falar com a nossa equipa? É só deixar-me o seu contacto.";
   return t;
 }
 let leadMode=false;
@@ -339,12 +339,12 @@ document.getElementById('cp-form').onsubmit=e=>{
   if(leadMode){bot("Anotado! ✅ A nossa equipa vai entrar em contacto consigo o mais depressa possível. Precisa de mais alguma coisa?");leadMode=false;return;}
   const s=norm(q);
   // 1) intenções comerciais primeiro
-  if(/(amostra|testar|experimentar)/.test(s)){leadMode=true;bot("Boa escolha! Para lhe fazermos chegar uma amostra, deixe-me numa mensagem o seu nome, localidade e contacto (telefone ou e-mail). 🌾");return;}
+  if(/(amostra|testar|experimentar|comprar|encomend|cat[áa]logo|pre[çc]o)/.test(s)){leadMode=true;bot("Com todo o gosto! Deixe-me numa mensagem o seu nome, localidade e contacto (telefone ou e-mail) e a nossa equipa comercial fala consigo. 🌾");return;}
   if(/(preco|custa|quanto|tabela)/.test(s)){leadMode=true;bot("Os preços dependem do produto e da quantidade. Deixe-me o seu contacto e a nossa equipa comercial responde-lhe com a tabela certa para o seu caso.");return;}
   if(/(onde|comprar|loja|distribuidor|revenda|ponto de venda)/.test(s)){leadMode=true;bot("Diga-me a sua localidade e o seu contacto, e indicamos-lhe o ponto de venda mais próximo — ou entregamos diretamente, se for cliente profissional.");return;}
   if(/(contacto|falar|equipa|whatsapp|telefone|liga|email|e-mail)/.test(s)){leadMode=true;bot("Com certeza! Pode escrever-nos para geral@quenteebom.co.ao, ou deixe-me aqui o seu nome e contacto que a nossa equipa fala consigo em horário de expediente.");return;}
   if(/(ola|bom dia|boa tarde|boa noite|^oi\b)/.test(s)){bot("Olá! 👋 Em que posso ajudar? Posso falar-lhe de qualquer produto Massa Prima, dizer-lhe como se usa, ou pedir à equipa que entre em contacto.");return;}
-  if(/(obrigad|fixe|top|excelente)/.test(s)){bot("Sempre às ordens! 🌾 Quando quiser testar a Massa Prima na sua produção, é só pedir uma amostra.");return;}
+  if(/(obrigad|fixe|top|excelente)/.test(s)){bot("Sempre às ordens! 🌾 Quando quiser levar a Massa Prima para a sua produção, é só falar connosco.");return;}
   if(/(feito em angola|produzi|fabrica|fábrica|angola)/.test(s)){bot("Grande parte da nossa produção é feita em Angola 🇦🇴 — é isso que garante frescura, fornecimento constante e apoio próximo a quem produz. A base do bom pão angolano faz-se cá.");return;}
   // 2) pesquisa de produto na KB real
   const r=procurar(q);
