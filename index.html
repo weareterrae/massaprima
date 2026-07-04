@@ -311,7 +311,8 @@ footer .soc a:hover{color:#fff}
             _subject:'🌾 Novo contacto — site Massa Prima',_template:'table',_captcha:'false',
             Nome:f.nome.value,Contacto:f.contacto.value,Tipo:f.tipo.value,Mensagem:f.mensagem.value||'—'
           })});
-        if(!r.ok)throw 0;
+        const d=await r.json().catch(()=>({}));
+        if(!r.ok || String(d.success)!=='true') throw new Error(d.message||'falha no envio');
         st.textContent='✅ Recebido! A nossa equipa entra em contacto consigo em horário de expediente.';
         st.style.color='#2e7d32';f.reset();
       }catch(_){
