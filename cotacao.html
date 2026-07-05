@@ -84,16 +84,18 @@ section.blk{padding:30px 0}
 .count{color:var(--mut);font-weight:700;font-size:.88rem}
 /* product grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-.pcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;gap:12px;align-items:center}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:11px}
 .pcard.in{border-color:var(--laranja);box-shadow:0 0 0 2px rgba(236,102,7,.14)}
-.pcard .thumb{width:62px;height:62px;border-radius:10px;object-fit:cover;background:var(--bege);flex:0 0 auto}
+.pcard .prow{display:flex;gap:12px;align-items:center}
+.pcard .thumb{width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--bege);flex:0 0 auto}
 .pcard .info{flex:1;min-width:0}
-.pcard .info b{display:block;color:var(--castanho);font-size:.98rem;line-height:1.2}
-.pcard .mk{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--laranja)}
+.pcard .info b{display:block;color:var(--castanho);font-size:.97rem;line-height:1.25;margin-top:3px}
+.pcard .mk{display:block;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.3px;color:var(--laranja);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pcard .mk.pz{color:#8a5a12}
-.pcard .fmt{border:1px solid var(--line);border-radius:8px;font:inherit;font-size:.82rem;padding:4px 6px;margin-top:5px;max-width:100%;color:var(--ink)}
-.pcard .add{background:var(--laranja);color:#fff;border:none;border-radius:30px;padding:9px 16px;font-weight:800;cursor:pointer;font-size:.86rem;white-space:nowrap}
-.step{display:flex;align-items:center;gap:8px}
+.pcard .fmt{display:block;width:100%;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:.84rem;padding:8px 10px;color:var(--ink);background:#fff}
+.pcard .add{width:100%;background:var(--laranja);color:#fff;border:none;border-radius:30px;padding:11px 16px;font-weight:800;cursor:pointer;font-size:.9rem}
+.pcard .add:hover{background:var(--castanho)}
+.step{display:flex;align-items:center;justify-content:center;gap:16px}
 .step button{width:34px;height:34px;border-radius:9px;border:1.5px solid var(--laranja);background:#fff;color:var(--laranja);font-size:1.3rem;font-weight:800;cursor:pointer;line-height:1}
 .step .q{min-width:26px;text-align:center;font-weight:800;color:var(--castanho)}
 .empty-grid{grid-column:1/-1;color:var(--mut);padding:24px;text-align:center}
@@ -225,8 +227,9 @@ function card(p){
     : '<button class="add" data-add="'+p.id+'">+ Adicionar</button>';
   const mk=p.m==='Prodite Zeelandia'?'mk pz':'mk';
   const img=p.img?('<img class="thumb" src="'+esc(p.img)+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">'):'<div class="thumb"></div>';
-  return '<div class="pcard'+(inC?' in':'')+'" data-card="'+p.id+'">'+img+
-    '<div class="info"><span class="'+mk+'">'+esc(p.m)+'</span><b>'+esc(p.n)+'</b>'+fmtOpts(p)+'</div>'+ctrl+'</div>';
+  return '<div class="pcard'+(inC?' in':'')+'" data-card="'+p.id+'">'+
+    '<div class="prow">'+img+'<div class="info"><span class="'+mk+'">'+esc(p.m)+'</span><b>'+esc(p.n)+'</b></div></div>'+
+    fmtOpts(p)+ctrl+'</div>';
 }
 function renderGrid(){
   const list=PROD.filter(match);
