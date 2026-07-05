@@ -41,21 +41,22 @@ h1,h2,h3{font-family:'Zilla Slab',serif;color:var(--castanho);line-height:1.15}
 .graos-band{height:90px;background:var(--laranja) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="216" height="180"><g fill="%23FFFFFF"><ellipse cx="36" cy="34" rx="11" ry="22" transform="rotate(-24 36 34)"/><ellipse cx="112" cy="22" rx="11" ry="22" transform="rotate(-24 112 22)"/><ellipse cx="178" cy="52" rx="11" ry="22" transform="rotate(20 178 52)"/><ellipse cx="64" cy="86" rx="11" ry="22" transform="rotate(30 64 86)"/><ellipse cx="146" cy="108" rx="11" ry="22" transform="rotate(-40 146 108)"/><ellipse cx="22" cy="128" rx="11" ry="22" transform="rotate(-38 22 128)"/><ellipse cx="92" cy="152" rx="11" ry="22" transform="rotate(18 92 152)"/><ellipse cx="196" cy="158" rx="11" ry="22" transform="rotate(26 196 158)"/></g></svg>') repeat}
 /* header */
 header{position:sticky;top:0;z-index:50;background:var(--bege-claro);box-shadow:0 2px 12px rgba(119,49,10,.08)}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;max-width:1100px;margin:0 auto}
-.nav img{height:58px}
-.nav ul{display:flex;gap:26px;list-style:none;flex-wrap:wrap}
-.nav a{color:var(--castanho);text-decoration:none;font-weight:700;font-size:.95rem}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:12px 24px;max-width:1220px;margin:0 auto}
+.nav img{height:50px}
+.nav ul{display:flex;gap:26px;list-style:none;flex-wrap:nowrap;margin:0 auto}
+.nav a{color:var(--castanho);text-decoration:none;font-weight:700;font-size:.94rem;white-space:nowrap}
 .nav a:hover{color:var(--laranja)}
-.btn{display:inline-block;background:var(--laranja);color:#fff;padding:13px 28px;border-radius:40px;text-decoration:none;font-weight:800;border:none;cursor:pointer;font-size:1rem}
+.btn{display:inline-block;background:var(--laranja);color:#fff;padding:13px 28px;border-radius:40px;text-decoration:none;font-weight:800;border:none;cursor:pointer;font-size:1rem;white-space:nowrap}
 .btn:hover{background:var(--castanho)}
 .btn.sec{background:transparent;color:var(--castanho);border:2.5px solid var(--castanho)}
 .btn.sec:hover{background:var(--castanho);color:#fff}
+.nav .navcta{padding:11px 22px;font-size:.95rem;flex:none}
 .burger{display:none}
 .navtog{display:none}
-@media(max-width:880px){
+@media(max-width:1024px){
   html,body{overflow-x:hidden}
-  .nav{flex-wrap:wrap;padding:12px 18px}
-  .nav ul{flex-wrap:nowrap}
+  .nav{flex-wrap:wrap;padding:12px 18px;gap:0}
+  .nav ul{flex-wrap:nowrap;margin:0}
   .nav>a.logo img{height:44px}
   .burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:48px;height:44px;margin-left:auto;cursor:pointer;border-radius:10px;-webkit-tap-highlight-color:transparent}
   .burger span{display:block;width:26px;height:3px;background:var(--castanho);border-radius:2px;transition:transform .25s,opacity .2s}
@@ -163,13 +164,11 @@ footer .soc a:hover{color:#fff}
     <input type="checkbox" id="navtog" class="navtog" hidden>
     <label for="navtog" class="burger" aria-label="Abrir menu"><span></span><span></span><span></span></label>
     <ul>
-      <li><a href="#produtos">Produtos</a></li>
       <li><a href="catalogo.html">Catálogo</a></li>
       <li><a href="receitas.html">Receitas</a></li>
       <li><a href="foodcost.html">Food Cost</a></li>
       <li><a href="#angola">Feito em Angola</a></li>
       <li><a href="#apoio">Apoio ao Profissional</a></li>
-      <li><a href="cotacao.html">Pedir cotação</a></li>
       <li><a href="#contactos">Contactos</a></li>
     </ul>
     <a class="btn navcta" href="cotacao.html">Pedir cotação</a>
