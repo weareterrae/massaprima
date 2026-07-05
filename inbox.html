@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Massa Prima — Inbox</title>
+</head>
+<body style="margin:0">
+  <div style="font-family:Georgia,'Times New Roman',serif;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#FFF7EC">
+    <div style="text-align:center;max-width:460px;padding:48px 32px">
+      <div id="ico" style="font-size:56px">🌾</div>
+      <h1 id="msg" style="color:#77310A;font-weight:400;font-size:28px;line-height:1.35">A processar…</h1>
+      <p style="color:#EC6607;letter-spacing:2px;text-transform:uppercase;font-family:-apple-system,'Segoe UI',Arial,sans-serif;font-size:12px;margin-top:22px">Massa Prima · a base de tudo o que é bom</p>
+      <p style="color:#9a7a5e;font-family:-apple-system,'Segoe UI',Arial,sans-serif;font-size:13px">Pode fechar esta página.</p>
+    </div>
+  </div>
+<script>
+  var p = new URLSearchParams(location.search);
+  var ok = p.get("ok") === "1";
+  document.getElementById("ico").textContent = ok ? "🌾" : "⚠️";
+  document.getElementById("msg").textContent = p.get("m") || (ok ? "Enviado!" : "Algo correu mal.");
+</script>
+</body>
+</html>
