@@ -1,7 +1,7 @@
 /* Chef Prima — assistente IA da Massa Prima (widget partilhado, vive em todas as páginas)
-   IA: Supabase Edge Function CHEFPRIMAIA · cérebro: prima-prompt.txt (git push = atualizado) */
+   IA: Netlify Function /api/chef-prima (AI Gateway) · cérebro: prima-prompt.txt (git push = atualizado) */
 (function(){
-const ENDPOINT='https://qciagsktkqljvknmahfu.supabase.co/functions/v1/CHEFPRIMAIA';
+const ENDPOINT='/api/chef-prima';
 const css=`
 #cpx-btn{position:fixed;bottom:22px;right:22px;z-index:9990;display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #EC6607;border-radius:50px;padding:8px 20px 8px 8px;cursor:pointer;box-shadow:0 10px 30px rgba(119,49,10,.28);font-family:'Nunito',sans-serif;transition:transform .15s}
 #cpx-btn:hover{transform:translateY(-2px)}
