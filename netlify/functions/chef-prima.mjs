@@ -65,6 +65,35 @@ const json = (obj, status = 200) =>
     headers: { "content-type": "application/json; charset=utf-8" },
   });
 
+// PLANO B: se o Claude falhar (erro/429), tenta o Gemini — pelo MESMO gateway da
+// Netlify (GEMINI_API_KEY + GOOGLE_GEMINI_BASE_URL injetados; sem chaves pessoais).
+async function planoBGemini(system, mensagens, maxTokens) {
+  const chave = process.env.GEMINI_API_KEY;
+  const base = (process.env.GOOGLE_GEMINI_BASE_URL || "").replace(/\/$/, "");
+  if (!chave || !base) return null;
+  try {
+    const r = await fetch(`${base}/v1beta/models/gemini-2.5-flash:generateContent`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-goog-api-key": chave },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: system }] },
+        contents: mensagens.map((m) => ({
+          role: m.role === "assistant" ? "model" : "user",
+          parts: [{ text: typeof m.content === "string" ? m.content : "" }],
+        })),
+        generationConfig: { maxOutputTokens: maxTokens },
+      }),
+    });
+    if (!r.ok) { console.error("chef-prima: Gemini", r.status, (await r.text()).slice(0, 200)); return null; }
+    const j = await r.json();
+    const texto = (j?.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("").trim();
+    return texto || null;
+  } catch (e) {
+    console.error("chef-prima: Gemini falha de rede", e);
+    return null;
+  }
+}
+
 export default async (req, context) => {
   if (req.method !== "POST") return json({ error: "POST only" }, 405);
   if (!origemValida(req)) return json({ error: "origem" }, 403);
@@ -103,14 +132,16 @@ export default async (req, context) => {
     });
     if (!r.ok) {
       console.error("chef-prima: Anthropic", r.status, await r.text());
-      return json({ reply: CONTINGENCIA });
+      const b = await planoBGemini(system, messages, 500);
+      return json({ reply: b || CONTINGENCIA });
     }
     const data = await r.json();
     const reply = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
     return json({ reply });
   } catch (e) {
     console.error("chef-prima: falha de rede", e);
-    return json({ reply: CONTINGENCIA });
+    const b = await planoBGemini(system, messages, 500);
+    return json({ reply: b || CONTINGENCIA });
   }
 };
 
