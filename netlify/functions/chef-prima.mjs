@@ -128,19 +128,24 @@ export default async (req, context) => {
         "anthropic-version": "2023-06-01",
         "content-type": "application/json",
       },
-      body: JSON.stringify({ model: modelo, max_tokens: 500, system, messages }),
+      body: JSON.stringify({ model: modelo, max_tokens: 900, system, messages }),
     });
     if (!r.ok) {
       console.error("chef-prima: Anthropic", r.status, await r.text());
-      const b = await planoBGemini(system, messages, 500);
+      const b = await planoBGemini(system, messages, 900);
       return json({ reply: b || CONTINGENCIA });
     }
     const data = await r.json();
-    const reply = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
+    let reply = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
+    // Se mesmo assim o limite cortar a resposta, apara a última linha incompleta
+    // (evita markdown pendurado tipo "[Chantilly" no ecrã).
+    if (data.stop_reason === "max_tokens") {
+      reply = reply.replace(/\n[^\n]*$/, "").trim() || reply;
+    }
     return json({ reply });
   } catch (e) {
     console.error("chef-prima: falha de rede", e);
-    const b = await planoBGemini(system, messages, 500);
+    const b = await planoBGemini(system, messages, 900);
     return json({ reply: b || CONTINGENCIA });
   }
 };
