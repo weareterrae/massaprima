@@ -121,7 +121,7 @@ export default async (req, context) => {
   const base = (process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com").replace(/\/$/, "");
 
   try {
-    const r = await fetch(`${base}/v1/messages`, {
+    const pedirClaude = () => fetch(`${base}/v1/messages`, {
       method: "POST",
       headers: {
         "x-api-key": chave,
@@ -130,6 +130,13 @@ export default async (req, context) => {
       },
       body: JSON.stringify({ model: modelo, max_tokens: 900, system, messages }),
     });
+    let r = await pedirClaude();
+    // As rajadas de 429 do gateway duram ~1s — uma segunda tentativa resolve quase sempre.
+    if (!r.ok && (r.status === 429 || r.status >= 500)) {
+      console.error("chef-prima: Anthropic", r.status, "→ retry em 1.2s");
+      await new Promise((res) => setTimeout(res, 1200));
+      r = await pedirClaude();
+    }
     if (!r.ok) {
       console.error("chef-prima: Anthropic", r.status, await r.text());
       const b = await planoBGemini(system, messages, 900);
