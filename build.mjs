@@ -200,6 +200,8 @@ function head({ title, desc, canonical, jsonld }) {
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>${BRAND_CSS}</style>
 ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join("\n")}
+<script>window.MP_CFG={ga4:"",gtm:""};</script>
+<script src="/assets/js/analytics.js" defer></script>
 </head><body>
 <header><div class="nav">
 <a class="logo" href="/index.html"><img src="/assets/logo_principal.png" alt="Massa Prima"></a>
