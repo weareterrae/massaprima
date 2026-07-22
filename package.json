@@ -6,6 +6,7 @@
   "description": "Site massaprima.com — build estático a partir de fonte de verdade única (data/).",
   "scripts": {
     "build": "node build.mjs",
-    "validate": "node build.mjs --validate-only"
+    "validate": "node build.mjs --validate-only",
+    "test": "node build.mjs && node test.mjs"
   }
 }

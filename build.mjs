@@ -346,6 +346,15 @@ if (!validateOnly) {
   rec = rec.replace(/\b42 receitas\b/g, `${counts.receitas} receitas`);
   fs.writeFileSync("receitas.html", rec); changed.push("receitas.html");
 
+  // homepage: contadores derivados dos dados (P0 — nunca hard-code; evita drift)
+  try {
+    let idx = read("index.html"); const before = idx;
+    idx = idx.replace(/(data-count=")\d+(">0<\/div><div class="lbl">produtos)/, `$1${counts.produtos}$2`);
+    idx = idx.replace(/(data-count=")\d+(">0<\/div><div class="lbl">receitas)/, `$1${counts.receitas}$2`);
+    idx = idx.replace(/\b\d+( receitas profissionais)/g, `${counts.receitas}$1`);
+    if (idx !== before) { fs.writeFileSync("index.html", idx); changed.push("index.html (contadores)"); }
+  } catch (_) {}
+
   // páginas individuais /catalogo/<slug>/ e /receitas/<slug>/
   let np = 0, nr = 0;
   for (const p of P) { fs.mkdirSync(`catalogo/${p.slug}`, { recursive: true }); fs.writeFileSync(`catalogo/${p.slug}/index.html`, productPage(p)); np++; }
