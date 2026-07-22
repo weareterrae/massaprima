@@ -1,0 +1,11 @@
+{
+  "name": "massaprima-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site massaprima.com — build estático a partir de fonte de verdade única (data/).",
+  "scripts": {
+    "build": "node build.mjs",
+    "validate": "node build.mjs --validate-only"
+  }
+}

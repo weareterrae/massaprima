@@ -1,0 +1,18 @@
+{
+  "produtos": 88,
+  "produtosPorSegmento": {
+    "Padaria": 21,
+    "Pastelaria": 67
+  },
+  "produtosPorMarca": {
+    "Prodite Zeelandia": 54,
+    "Massa Prima": 34
+  },
+  "receitas": 88,
+  "receitasPorCategoria": {
+    "Pão": 16,
+    "Bolos & Tortas": 18,
+    "Vitrine & Café": 22,
+    "Tradicional & Festas": 32
+  }
+}
