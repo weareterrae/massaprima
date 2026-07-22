@@ -14,6 +14,7 @@ const read = (f) => fs.readFileSync(f, "utf8");
 const validateOnly = process.argv.includes("--validate-only");
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const slugify = (s) => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/&/g, " e ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 // ---- carregar fonte única ----
 const products = JSON.parse(read("data/products.json"));
@@ -202,7 +203,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</sc
 </head><body>
 <header><div class="nav">
 <a class="logo" href="/index.html"><img src="/assets/logo_principal.png" alt="Massa Prima"></a>
-<nav><a href="/catalogo.html">Catálogo</a><a href="/receitas.html">Receitas</a><a href="/foodcost.html">Food Cost</a><a href="/formacao.html">Formação</a><a class="cta" href="/cotacao.html">Pedir cotação</a></nav>
+<nav><a href="/catalogo.html">Catálogo</a><a href="/receitas.html">Receitas</a><a href="/foodcost.html">Food Cost</a><a href="/formacao">Formação</a><a class="cta" href="/cotacao.html">Pedir cotação</a></nav>
 </div></header>`;
 }
 const FOOT = `<footer><div class="wrap"><img src="/assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p style="margin-top:8px">Massa Prima <span style="opacity:.7">by Quente e Bom</span> · <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p><p style="opacity:.7;font-size:.85rem;margin-top:6px">© 2026 Massa Prima · Quente e Bom, Angola</p></div></footer></body></html>`;
@@ -279,10 +280,38 @@ ${rel.length ? `<section class="rel"><h2>Mais receitas de ${esc(r.cat)}</h2><div
 </main>` + FOOT;
 }
 
+function categoryGrid(items) {
+  return items.map((it) => {
+    const isProd = it.segmento !== undefined;
+    const href = isProd ? `/catalogo/${esc(it.slug)}/` : `/receitas/${esc(it.slug)}/`;
+    const img = isProd ? it.img : it.foto;
+    const nome = isProd ? it.nome.replace("Massa Prima ", "") : it.titulo;
+    return `<a href="${href}"><div class="th">${img ? `<img loading="lazy" src="/${esc(img)}" alt="${esc(nome)}">` : ""}</div><div class="t">${esc(nome)}</div></a>`;
+  }).join("");
+}
+function productCategoryPage(seg) {
+  const items = P.filter((p) => p.segmento === seg), slug = slugify(seg), url = `${SITE}/catalogo/categoria/${slug}/`;
+  const cb = [{ name: "Início", href: "/index.html" }, { name: "Catálogo", href: "/catalogo.html" }, { name: seg }];
+  const ld = { "@context": "https://schema.org", "@type": "CollectionPage", name: `${seg} — Catálogo Massa Prima`, url };
+  return head({ title: `${seg} — matérias-primas | Massa Prima`, desc: `Gama ${seg} da Massa Prima: ${items.length} produtos com ficha técnica, dosagem e formatos.`, canonical: url, jsonld: [ld, breadcrumbLd(cb)] }) +
+    `<main class="wrap">${crumbs(cb)}<h1>${esc(seg)}</h1><p class="lead" style="margin-bottom:18px">${items.length} produtos com ficha técnica. <a href="/catalogo.html">Ver catálogo completo →</a></p><div class="rgrid">${categoryGrid(items)}</div></main>` + FOOT;
+}
+function recipeCategoryPage(cat) {
+  const items = R.filter((r) => r.cat === cat), slug = slugify(cat), url = `${SITE}/receitas/categoria/${slug}/`;
+  const cb = [{ name: "Início", href: "/index.html" }, { name: "Receitas", href: "/receitas.html" }, { name: cat }];
+  const ld = { "@context": "https://schema.org", "@type": "CollectionPage", name: `Receitas de ${cat} — Massa Prima`, url };
+  return head({ title: `Receitas de ${cat} | Massa Prima`, desc: `${items.length} receitas profissionais de ${cat} com produtos Massa Prima e food cost.`, canonical: url, jsonld: [ld, breadcrumbLd(cb)] }) +
+    `<main class="wrap">${crumbs(cb)}<h1>${esc(cat)}</h1><p class="lead" style="margin-bottom:18px">${items.length} receitas profissionais. <a href="/receitas.html">Ver todas as receitas →</a></p><div class="rgrid">${categoryGrid(items)}</div></main>` + FOOT;
+}
+const productCats = [...new Set(P.map((p) => p.segmento))];
+const recipeCats = [...new Set(R.map((r) => r.cat))];
+
 function buildSitemap() {
   const pages = ["/", "/catalogo.html", "/receitas.html", "/foodcost.html", "/cotacao.html", "/formacao.html", "/privacidade.html"];
   const urls = [
     ...pages.map((u) => ({ loc: SITE + u })),
+    ...productCats.map((c) => ({ loc: `${SITE}/catalogo/categoria/${slugify(c)}/` })),
+    ...recipeCats.map((c) => ({ loc: `${SITE}/receitas/categoria/${slugify(c)}/` })),
     ...P.map((p) => ({ loc: `${SITE}/catalogo/${p.slug}/` })),
     ...R.map((r) => ({ loc: `${SITE}/receitas/${r.slug}/` })),
   ];
@@ -320,6 +349,11 @@ if (!validateOnly) {
   for (const p of P) { fs.mkdirSync(`catalogo/${p.slug}`, { recursive: true }); fs.writeFileSync(`catalogo/${p.slug}/index.html`, productPage(p)); np++; }
   for (const r of R) { fs.mkdirSync(`receitas/${r.slug}`, { recursive: true }); fs.writeFileSync(`receitas/${r.slug}/index.html`, recipePage(r)); nr++; }
   changed.push(`${np} páginas de produto`, `${nr} páginas de receita`);
+
+  // páginas de categoria
+  for (const c of productCats) { const s = slugify(c); fs.mkdirSync(`catalogo/categoria/${s}`, { recursive: true }); fs.writeFileSync(`catalogo/categoria/${s}/index.html`, productCategoryPage(c)); }
+  for (const c of recipeCats) { const s = slugify(c); fs.mkdirSync(`receitas/categoria/${s}`, { recursive: true }); fs.writeFileSync(`receitas/categoria/${s}/index.html`, recipeCategoryPage(c)); }
+  changed.push(`${productCats.length}+${recipeCats.length} páginas de categoria`);
 
   // sitemap.xml regenerado com todas as URLs
   fs.writeFileSync("sitemap.xml", buildSitemap()); changed.push("sitemap.xml");

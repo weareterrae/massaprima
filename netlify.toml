@@ -1,0 +1,45 @@
+# Configuração Netlify — massaprima.com
+# (Site estático gerado localmente por build.mjs; sem build no Netlify.)
+
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+
+# ── Chef Prima (Netlify Function) ─────────────────────────────
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# ── Rota canónica /formacao servida por formacao.html ─────────
+[[redirects]]
+  from = "/formacao"
+  to = "/formacao.html"
+  status = 200
+
+[[redirects]]
+  from = "/formacao.html"
+  to = "/formacao"
+  status = 301
+  force = true
+
+# ── Security headers ──────────────────────────────────────────
+# NOTA: sem Content-Security-Policy por agora (o site usa scripts inline,
+# Google Fonts, Metricool e Meta Pixel; uma CSP mal calibrada parte tudo).
+# Adicionar CSP num passo dedicado, testando em preview primeiro.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Cache longo para assets estáticos
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
