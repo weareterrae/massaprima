@@ -147,10 +147,13 @@ footer p{font-size:.85rem;opacity:.85}
         <h3>2 · Produção e custos extra</h3>
         <div class="extras">
           <div><label class="lbl" for="un">Unidades produzidas</label><input type="number" id="un" min="1" value="10"></div>
+          <div><label class="lbl" for="desp">Desperdício / perdas (%)</label><input type="number" id="desp" min="0" max="100" value="0"></div>
           <div><label class="lbl" for="emb">Embalagem (Kz/un)</label><input type="number" id="emb" min="0" value="0"></div>
-          <div><label class="lbl" for="ind">Custos indiretos (%)</label><input type="number" id="ind" min="0" max="100" value="10"></div>
+          <div><label class="lbl" for="mo">Mão de obra (Kz/un)</label><input type="number" id="mo" min="0" value="0"></div>
+          <div><label class="lbl" for="out">Transporte / outros (Kz/un)</label><input type="number" id="out" min="0" value="0"></div>
+          <div><label class="lbl" for="ind">Custos fixos indiretos (%)</label><input type="number" id="ind" min="0" max="100" value="10"></div>
         </div>
-        <p class="note">Custos indiretos: energia, gás, mão-de-obra, desperdício — em % sobre o custo dos ingredientes (10–20% é comum).</p>
+        <p class="note">Desperdício = perdas de produção, aplicado sobre o custo dos ingredientes. Custos fixos indiretos: energia, gás, renda, amortizações — em % sobre os ingredientes (10–20% é comum). Mão de obra e transporte por unidade, se os quiser incluir.</p>
       </div>
     </div>
 
@@ -161,11 +164,13 @@ footer p{font-size:.85rem;opacity:.85}
         <label class="lbl" for="alvo">Food cost alvo</label>
         <select id="alvo"><option value="0.25">25% (premium)</option><option value="0.30" selected>30% (recomendado)</option><option value="0.35">35% (competitivo)</option></select>
         <div class="linha"><span>Preço sugerido/un</span><b id="r-sug">—</b></div>
+        <div id="r-cenarios" style="margin:8px 0 4px;padding-top:6px;border-top:1px dashed var(--line,#e6d3b8)"></div>
         <div style="margin-top:14px"><label class="lbl" for="pv">Ou o seu preço atual (Kz/un)</label><input type="number" id="pv" min="0" placeholder="ex.: 500"></div>
         <div class="linha"><span>Food cost real</span><b id="r-fc">—</b></div>
         <div class="linha"><span>Lucro bruto/un</span><b id="r-lucro">—</b></div>
         <div style="margin-top:12px" id="r-badge"></div>
-        <div class="dica-fc">💡 <b>Regra do mestre:</b> em padaria e pastelaria, o custo dos ingredientes deve ser 25–35% do preço de venda. Abaixo de 25%? Pode estar a cobrar de mais para a sua zona. Acima de 35%? Está a trabalhar para pagar a matéria-prima.</div>
+        <div class="dica-fc">💡 <b>Regra do mestre:</b> em padaria e pastelaria, o custo dos ingredientes costuma ficar entre 25% e 35% do preço de venda. Abaixo de 25%, a margem é folgada — confirme se o preço acompanha a qualidade e é competitivo na sua zona. Acima de 35%, o preço ou os custos precisam de revisão.</div>
+        <p class="note" style="margin-top:10px">ℹ️ O resultado é uma <b>estimativa de apoio à decisão</b>. Só inclui os custos que introduzir aqui; confirme os restantes custos do seu negócio e os preços praticados no seu mercado antes de decidir.</p>
         <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap" class="no-print">
           <button class="btn gho" onclick="window.print()">Imprimir</button>
           <a class="btn" href="index.html#contactos">Falar com a equipa</a>
@@ -210,7 +215,7 @@ function load(i){
 }
 sel.onchange=()=>load(sel.value);
 document.getElementById('add').onclick=()=>{row('','');calc();};
-['un','emb','ind','pv','alvo'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+['un','desp','emb','mo','out','ind','pv','alvo'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
 
 function calc(){
   let total=0;
@@ -219,22 +224,25 @@ function calc(){
     const c=q/1000*p; total+=c;
     tr.querySelector('.custo').textContent=c>0?fmt(c):'—';
   });
-  const ind=(+document.getElementById('ind').value||0)/100;
-  const un=Math.max(1,+document.getElementById('un').value||1);
-  const emb=+document.getElementById('emb').value||0;
-  const totalG=total*(1+ind)+emb*un;
+  const val=id=>+document.getElementById(id).value||0;
+  const desp=val('desp')/100, ind=val('ind')/100;
+  const un=Math.max(1,val('un')||1);
+  const emb=val('emb'), mo=val('mo'), out=val('out');
+  const ingrAdj=total*(1+desp);
+  const totalG=ingrAdj*(1+ind)+(emb+mo+out)*un;
   const cu=totalG/un;
   document.getElementById('r-cu').textContent=total>0?fmt(cu):'— Kz';
   document.getElementById('r-tot').textContent='custo total: '+(total>0?fmt(totalG):'—')+' ('+un+' un)';
   const alvo=+document.getElementById('alvo').value;
   document.getElementById('r-sug').textContent=total>0?fmt(cu/alvo):'—';
-  const pv=+document.getElementById('pv').value||0;
+  document.getElementById('r-cenarios').innerHTML=total>0?[0.25,0.30,0.35].map(a=>'<div class="linha"><span>Preço a '+Math.round(a*100)+'% food cost</span><b>'+fmt(cu/a)+'</b></div>').join(''):'';
+  const pv=val('pv');
   const badge=document.getElementById('r-badge');
   if(pv>0&&total>0){
     const fc=cu/pv;
     document.getElementById('r-fc').textContent=Math.round(fc*100)+'%';
     document.getElementById('r-lucro').textContent=fmt(pv-cu);
-    badge.innerHTML=fc<=0.25?'<span class="fc-badge fc-baixo">Margem folgada — pode investir em qualidade ou baixar preço</span>':fc<=0.35?'<span class="fc-badge fc-ok">✓ Food cost saudável</span>':'<span class="fc-badge fc-alto">⚠ Food cost alto — reveja o preço ou os custos</span>';
+    badge.innerHTML=fc<=0.25?'<span class="fc-badge fc-baixo">Margem folgada — confirme se o preço é competitivo na sua zona</span>':fc<=0.35?'<span class="fc-badge fc-ok">✓ Food cost saudável (25–35%)</span>':'<span class="fc-badge fc-alto">⚠ Food cost alto — reveja o preço ou os custos</span>';
   } else { document.getElementById('r-fc').textContent='—'; document.getElementById('r-lucro').textContent='—'; badge.innerHTML=''; }
 }
 // deep-link #id → pré-seleciona receita
