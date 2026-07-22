@@ -69,7 +69,7 @@ const json = (obj, status = 200) =>
 // Netlify (GEMINI_API_KEY + GOOGLE_GEMINI_BASE_URL injetados; sem chaves pessoais).
 async function planoBGemini(system, mensagens, maxTokens) {
   const chave = process.env.GEMINI_API_KEY;
-  const base = (process.env.GOOGLE_GEMINI_BASE_URL || "").replace(/\/$/, "");
+  const base = (process.env.GOOGLE_GEMINI_BASE_URL || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
   if (!chave || !base) return null;
   try {
     const r = await fetch(`${base}/v1beta/models/gemini-2.5-flash:generateContent`, {
