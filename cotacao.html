@@ -171,6 +171,8 @@ footer .soc a{color:var(--bege);text-decoration:none;margin:0 6px}
       <p style="display:none"><label>Não preencher: <input name="_honey"></label></p>
       <textarea id="artigos" name="artigos" style="display:none"></textarea>
       <input type="hidden" name="total_artigos" id="total_artigos">
+      <input type="hidden" name="referencia" id="referencia">
+      <input type="hidden" name="origem" id="origem">
       <div class="formg">
         <div class="field full"><label>Nome da empresa / padaria <span class="req">*</span></label><input required name="empresa" placeholder="Ex.: Padaria Bom Pão"></div>
         <div class="field"><label>Responsável <span class="req">*</span></label><input required name="responsavel" placeholder="O seu nome"></div>
@@ -205,6 +207,33 @@ footer .soc a{color:var(--bege);text-decoration:none;margin:0 6px}
 <script>
 const PROD=JSON.parse(document.getElementById('produtos').textContent);
 const cart=new Map(); // id -> {p, qty, fmt}
+const CART_KEY='mp-cotacao-cart';
+function persist(){try{localStorage.setItem(CART_KEY,JSON.stringify([...cart.values()].map(c=>({id:c.p.id,qty:c.qty,fmt:c.fmt}))));}catch(_){}}
+function captureOrigem(){
+  try{
+    const q=new URLSearchParams(location.search), utm={};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{if(q.get(k))utm[k]=q.get(k);});
+    const parts=[];
+    if(Object.keys(utm).length)parts.push(Object.entries(utm).map(([k,v])=>k+'='+v).join(' '));
+    if(document.referrer)parts.push('ref:'+document.referrer);
+    const el=document.getElementById('origem'); if(el&&parts.length)el.value=parts.join(' | ').slice(0,300);
+  }catch(_){}
+}
+function restore(){
+  let saved=[];
+  try{saved=JSON.parse(localStorage.getItem(CART_KEY)||'[]');}catch(_){}
+  saved.forEach(it=>{const p=PROD.find(x=>x.id===it.id);if(p)cart.set(it.id,{p,qty:Math.max(1,it.qty|0)||1,fmt:it.fmt||(p.f[0]||'formato a combinar')});});
+  // prefill vindo das páginas individuais: ?produto=<id> ou ?produtos=id1,id2
+  const q=new URLSearchParams(location.search), ids=[];
+  if(q.get('produto'))ids.push(q.get('produto'));
+  if(q.get('produtos'))q.get('produtos').split(',').forEach(x=>ids.push(x));
+  let added=0;
+  ids.forEach(raw=>{const id=raw.trim();const p=PROD.find(x=>x.id===id);if(p&&!cart.has(id)){cart.set(id,{p,qty:1,fmt:p.f[0]||'formato a combinar'});added++;}});
+  captureOrigem();
+  if(added){persist();history.replaceState(null,'',location.pathname);}
+  sync();
+  if(added){const st=document.getElementById('status');if(st){st.style.display='block';st.style.background='#e2f3e2';st.style.color='#2e7d32';st.textContent='✅ '+added+' produto'+(added>1?'s adicionados':' adicionado')+' ao seu pedido. Reveja e envie. 🌾';}const alvo=document.getElementById('pedido');if(alvo)alvo.scrollIntoView({behavior:'smooth'});}
+}
 let fSeg='', fMar='', fQ='';
 const grid=document.getElementById('grid'), cnt=document.getElementById('count');
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -262,6 +291,7 @@ function serialize(){
   cart.forEach(c=>lines.push('• '+c.p.n+' ('+c.p.m+') — '+c.qty+' × '+c.fmt));
   document.getElementById('artigos').value=lines.join('\n');
   document.getElementById('total_artigos').value=cart.size;
+  persist();
 }
 function bar(){
   const b=document.getElementById('bar');
@@ -291,23 +321,29 @@ document.getElementById('fc').addEventListener('submit',async function(e){
   if(f._honey.value)return;
   if(!cart.size){st.style.display='block';st.style.background='#fbeecb';st.style.color='#8a5a12';st.textContent='⚠️ Adicione pelo menos um artigo ao pedido (passo 1).';document.getElementById('pedido').scrollIntoView({behavior:'smooth'});return;}
   serialize();
+  if(btn.dataset.sending==='1')return;            // anti-duplo-envio (inclui tecla Enter)
+  btn.dataset.sending='1';
+  const n=cart.size;
+  const ref='MP-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+  document.getElementById('referencia').value=ref;
   btn.disabled=true;btn.textContent='A enviar…';st.style.display='none';
   try{
     const body=new URLSearchParams(new FormData(f)).toString();
     const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
     if(!r.ok)throw new Error('falha');
-    if(window.fbq)fbq('track','Lead',{content_name:'Pedido de cotação',num_items:cart.size});
+    if(window.fbq)fbq('track','Lead',{content_name:'Pedido de cotação',num_items:n});
     st.style.display='block';st.style.background='#e2f3e2';st.style.color='#2e7d32';
-    st.textContent='✅ Pedido recebido! A nossa equipa comercial vai preparar a cotação e entra em contacto consigo em horário de expediente. Obrigado!';
+    st.innerHTML='✅ <b>Pedido recebido!</b> A sua referência é <b>'+ref+'</b>. A nossa equipa comercial vai preparar a cotação e entra em contacto em horário de expediente. Obrigado! 🌾';
+    try{localStorage.removeItem(CART_KEY);}catch(_){}
     cart.clear();sync();f.reset();window.scrollTo({top:0,behavior:'smooth'});
   }catch(_){
     st.style.display='block';st.style.background='#fbe3d3';st.style.color='#b4530f';
     st.textContent='⚠️ Não foi possível enviar agora. Escreva-nos diretamente para geral@quenteebom.co.ao com a sua lista.';
   }
-  btn.disabled=false;btn.textContent='Enviar pedido de cotação';
+  btn.disabled=false;btn.textContent='Enviar pedido de cotação';btn.dataset.sending='0';
 });
 
-renderGrid();
+restore();
 </script>
 <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"5dff754f7a8bb173057e9243ca982bf3"})});</script>
 <script src="assets/js/chefprima.js" defer></script>

@@ -258,6 +258,8 @@ function recipePage(r) {
   const recipeLd = { "@context": "https://schema.org", "@type": "Recipe", name: r.titulo, recipeCategory: r.cat, ...(r.foto ? { image: `${SITE}/${r.foto}` } : {}), ...(r.rend ? { recipeYield: r.rend } : {}), recipeIngredient: ingr, recipeInstructions: (r.metodo || []).map((m) => ({ "@type": "HowToStep", text: m })) };
   const rel = R.filter((x) => x.id !== r.id && x.cat === r.cat).slice(0, 6);
   const usados = (r.usados || []).map((u) => (u.id && P.some((p) => p.id === u.id)) ? `<a href="/catalogo/${esc(u.id)}/">${esc(u.n)}</a>` : `<span>${esc(u.n)}</span>`).join(" · ");
+  const usadosIds = (r.usados || []).filter((u) => u.id && P.some((p) => p.id === u.id)).map((u) => u.id).join(",");
+  const cotaHref = usadosIds ? `/cotacao.html?produtos=${usadosIds}` : "/cotacao.html";
   const tabela = (r.tabela || []).map((row) => (row[1] === "" && /^—/.test(row[0])) ? `<tr class="grp"><td colspan="2">${esc(row[0].replace(/—/g, "").trim())}</td></tr>` : `<tr><td>${esc(row[0])}</td><td class="num">${esc(row[1])}</td></tr>`).join("");
   return head({ title, desc, canonical: url, jsonld: [recipeLd, breadcrumbLd(cb)] }) + `<main class="wrap">
 ${crumbs(cb)}
@@ -265,7 +267,7 @@ ${crumbs(cb)}
 <span class="eyebrow">${esc(r.cat)}</span>
 <h1>${esc(r.titulo)}</h1>
 <p class="lead">⏱ ${esc(r.tempo)} · 🥖 ${esc(r.rend)}${r.dificuldade ? " · " + esc(r.dificuldade) : ""}</p>
-<div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=${esc(r.slug)}">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?receita=${esc(r.slug)}">Adicionar ingredientes à cotação</a></div>
+<div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=${esc(r.slug)}">Calcular food cost</a><a class="btn ghost" href="${cotaHref}">Adicionar ingredientes à cotação</a></div>
 </div></article>
 ${tabela ? `<div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody>${tabela}</tbody></table></div></div>` : ""}
 ${usados ? `<div class="block"><h2>Produtos Massa Prima usados</h2><p>${usados}</p></div>` : ""}
