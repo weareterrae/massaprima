@@ -208,10 +208,10 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</sc
 </head><body>
 <header><div class="nav">
 <a class="logo" href="/index.html"><img src="/assets/logo_principal.png" alt="Massa Prima"></a>
-<nav><a href="/catalogo.html">Catálogo</a><a href="/receitas.html">Receitas</a><a href="/foodcost.html">Food Cost</a><a href="/formacao">Formação</a><a href="/contactos/">Contactos</a><a class="cta" href="/cotacao.html">Pedir cotação</a></nav>
+<nav><a href="/catalogo.html">Catálogo</a><a href="/receitas.html">Receitas</a><a href="/solucoes/">Soluções</a><a href="/foodcost.html">Food Cost</a><a href="/formacao">Formação</a><a href="/contactos/">Contactos</a><a class="cta" href="/cotacao.html">Pedir cotação</a></nav>
 </div></header>`;
 }
-const FOOT = `<footer><div class="wrap"><img src="/assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p style="margin-top:8px">Massa Prima <span style="opacity:.7">by Quente e Bom</span> · <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p><p style="opacity:.7;font-size:.85rem;margin-top:6px">© 2026 Massa Prima · Quente e Bom, Angola</p></div></footer></body></html>`;
+const FOOT = `<footer><div class="wrap"><img src="/assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p style="margin-top:8px">Massa Prima <span style="opacity:.7">by Quente e Bom</span> · <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p><p style="opacity:.7;font-size:.85rem;margin-top:6px">© 2026 Massa Prima · Doce, Quente e Bom Angola, Lda · NIF 5417154385 · Viana, Luanda</p></div></footer></body></html>`;
 
 const crumbs = (arr) => `<nav class="crumbs" aria-label="Breadcrumb">${arr.map((c, i) => (c.href ? `<a href="${c.href}">${esc(c.name)}</a>` : `<span>${esc(c.name)}</span>`) + (i < arr.length - 1 ? " › " : "")).join("")}</nav>`;
 const breadcrumbLd = (arr) => ({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: arr.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, ...(c.href ? { item: SITE + c.href } : {}) })) });
@@ -316,9 +316,9 @@ function contactosPage() {
   const cb = [{ name: "Início", href: "/index.html" }, { name: "Contactos" }];
   const ld = {
     "@context": "https://schema.org", "@type": "Organization",
-    name: "Massa Prima", legalName: "Quente e Bom", url: SITE, logo: `${SITE}/assets/logo_principal.png`,
+    name: "Massa Prima", legalName: "Doce, Quente e Bom Angola, Lda", taxID: "5417154385", url: SITE, logo: `${SITE}/assets/logo_principal.png`,
     email: "geral@quenteebom.co.ao",
-    address: { "@type": "PostalAddress", streetAddress: "Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8", addressLocality: "Viana", addressRegion: "Luanda", addressCountry: "AO" },
+    address: { "@type": "PostalAddress", streetAddress: "Estrada do Calumbo/Zango, Condomínio Viana Park, Armazém 1Q8", addressLocality: "Viana", addressRegion: "Luanda", addressCountry: "AO" },
     sameAs: ["https://www.instagram.com/massaprima", "https://www.facebook.com/1109918612215834"],
   };
   return head({ title: "Contactos — Massa Prima | Fale com a nossa equipa", desc: "Contactos da Massa Prima (by Quente e Bom), Viana — Luanda: email, morada, redes e pedido de cotação para padarias e pastelarias.", canonical: url, jsonld: [ld, breadcrumbLd(cb)] }) +
@@ -327,19 +327,72 @@ function contactosPage() {
 <p class="lead" style="margin-bottom:20px">A <b>Massa Prima</b> é uma marca da <b>Quente e Bom</b> — matérias-primas de panificação e pastelaria para padarias, pastelarias e quem produz para vender, em toda a Angola.</p>
 <div class="block"><h2>Falar com a equipa comercial</h2><dl class="kv">
 <dt>E-mail</dt><dd><a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></dd>
-<dt>Morada</dt><dd>Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8, Viana — Luanda, Angola</dd>
+<dt>Morada</dt><dd>Estrada do Calumbo/Zango, Condomínio Viana Park, Armazém 1Q8, Viana — Luanda, Angola</dd>
 <dt>Instagram</dt><dd><a href="https://www.instagram.com/massaprima" target="_blank" rel="noopener">@massaprima</a></dd>
 <dt>Facebook</dt><dd><a href="https://www.facebook.com/1109918612215834" target="_blank" rel="noopener">Massa Prima</a></dd>
 </dl>
 <div class="cta-row" style="margin-top:18px"><a class="btn primary" href="/cotacao.html">Pedir cotação</a><a class="btn ghost" href="mailto:geral@quenteebom.co.ao?subject=Massa%20Prima%20%E2%80%94%20contacto">Enviar e-mail</a></div>
 </div>
+<div class="block"><h2>Empresa e faturação</h2><dl class="kv">
+<dt>Entidade</dt><dd>Doce, Quente e Bom Angola, Lda</dd>
+<dt>NIF</dt><dd>5417154385</dd>
+<dt>Marca</dt><dd>Massa Prima — matérias-primas de panificação e pastelaria</dd>
+</dl></div>
 <div class="block"><h2>Preços, encomendas e amostras</h2><p>Não publicamos preços no site — cada negócio é diferente. Peça a sua cotação e a nossa equipa prepara uma proposta à medida, com o plano de entregas.</p></div>
 <div class="block"><h2>Privacidade e ferramentas</h2><p>Os preços que introduz na <a href="/foodcost.html">calculadora de food cost</a> ficam guardados só no seu dispositivo. Consulte a nossa <a href="/privacidade.html">Política de Privacidade</a>.</p></div>
 </main>` + FOOT;
 }
 
+// ── Soluções por segmento ─────────────────────────────────────
+const SEGMENTOS = [
+  { slug: "padarias-pastelarias", nome: "Padarias e pastelarias",
+    lead: "Mixes e matérias-primas para produzir pão, bolos e doçaria com a mesma qualidade todos os dias — e vender mais.",
+    necessidades: ["Pão que rende igual, fornada após fornada", "Vitrine variada de bolos e doçaria", "Controlar o custo e acertar o preço de venda", "Formar a equipa e resolver problemas de produção"],
+    seg: "Padaria", cats: ["Pão", "Vitrine & Café"] },
+  { slug: "hotelaria-restauracao", nome: "Hotéis, restauração e catering",
+    lead: "Produção própria de pão, sobremesas e pastelaria para o seu serviço, com receitas testadas e apoio técnico.",
+    necessidades: ["Sobremesas e pastelaria de qualidade constante", "Pão e viennoiserie para o serviço", "Produção que se antecipa e conserva bem", "Custo por dose sob controlo"],
+    seg: "Pastelaria", cats: ["Bolos & Tortas", "Vitrine & Café", "Tradicional & Festas"] },
+  { slug: "producao-industrial", nome: "Produção industrial",
+    lead: "Matérias-primas para produção em escala, com fichas técnicas, rendimento consistente e formatos de trabalho.",
+    necessidades: ["Rendimento e resultado constantes em grande volume", "Fichas técnicas com dosagem e aplicação", "Formatos adequados à produção", "Conservação e validade claras"],
+    seg: "Padaria", cats: ["Pão"] },
+  { slug: "revendedores-distribuidores", nome: "Revendedores e distribuidores",
+    lead: "Uma gama completa de padaria e pastelaria para revender, com fichas técnicas e apoio à sua rede de clientes.",
+    necessidades: ["Gama completa num só fornecedor", "Fichas técnicas que apoiam a venda", "Apoio técnico e formação para os seus clientes", "Receitas e food cost como material de apoio"],
+    seg: null, cats: ["Pão", "Vitrine & Café", "Bolos & Tortas"] },
+];
+function solucoesPage(s) {
+  const url = `${SITE}/solucoes/${s.slug}/`;
+  const cb = [{ name: "Início", href: "/index.html" }, { name: "Soluções", href: "/solucoes/" }, { name: s.nome }];
+  const prods = P.filter((p) => !s.seg || p.segmento === s.seg).slice(0, 6);
+  const recs = R.filter((r) => s.cats.includes(r.cat)).slice(0, 6);
+  const prodGrid = prods.map((p) => `<a href="/catalogo/${esc(p.slug)}/"><div class="th">${p.img ? pic(p.img, `<img loading="lazy" src="/${esc(p.img)}" alt="${esc(p.nome)}">`) : ""}</div><div class="t">${esc(p.nome.replace("Massa Prima ", ""))}</div></a>`).join("");
+  const recGrid = recs.map((r) => `<a href="/receitas/${esc(r.slug)}/"><div class="th">${pic(r.foto, `<img loading="lazy" src="/${esc(r.foto)}" alt="${esc(r.titulo)}">`)}</div><div class="t">${esc(r.titulo)}</div></a>`).join("");
+  const ld = { "@context": "https://schema.org", "@type": "CollectionPage", name: `${s.nome} — Soluções Massa Prima`, url };
+  return head({ title: `${s.nome} — Soluções | Massa Prima`, desc: `${s.lead} Produtos, receitas, formação e apoio técnico da Massa Prima para ${s.nome.toLowerCase()}.`.slice(0, 155), canonical: url, jsonld: [ld, breadcrumbLd(cb)] }) +
+    `<main class="wrap">${crumbs(cb)}
+<span class="eyebrow">Soluções</span>
+<h1>${esc(s.nome)}</h1>
+<p class="lead" style="margin-bottom:16px">${esc(s.lead)}</p>
+<div class="cta-row" style="margin-bottom:8px"><a class="btn primary" href="/cotacao.html">Pedir cotação</a><a class="btn ghost" href="/formacao">Pedir demonstração</a></div>
+<div class="block"><h2>O que este segmento precisa</h2><ul>${s.necessidades.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>
+${prodGrid ? `<section class="rel"><h2>Produtos indicados</h2><div class="rgrid">${prodGrid}</div><p style="margin-top:10px"><a href="/catalogo.html">Ver catálogo completo →</a></p></section>` : ""}
+${recGrid ? `<section class="rel"><h2>Receitas para começar</h2><div class="rgrid">${recGrid}</div><p style="margin-top:10px"><a href="/receitas.html">Ver todas as receitas →</a></p></section>` : ""}
+<div class="block"><h2>Não vendemos só matéria-prima. Ensinamos.</h2><p>A nossa equipa técnica vai à sua produção, demonstra os produtos ao vivo e forma a sua equipa — incluído no acompanhamento. Some a isso as receitas com dosagens oficiais, a calculadora de food cost e o Chef Prima 24/7.</p><div class="cta-row" style="margin-top:8px"><a class="btn ghost" href="/formacao">Formação e demonstração</a><a class="btn ghost" href="/foodcost.html">Calcular food cost</a></div></div>
+<div class="block"><h2>Vamos pôr a sua produção a render?</h2><p>Peça a sua cotação e a nossa equipa prepara uma proposta à medida.</p><div class="cta-row" style="margin-top:8px"><a class="btn primary" href="/cotacao.html">Pedir cotação</a><a class="btn ghost" href="mailto:geral@quenteebom.co.ao">Falar com a equipa</a></div></div>
+</main>` + FOOT;
+}
+function solucoesHub() {
+  const url = `${SITE}/solucoes/`;
+  const cb = [{ name: "Início", href: "/index.html" }, { name: "Soluções" }];
+  const cards = SEGMENTOS.map((s) => `<a href="/solucoes/${s.slug}/" class="block" style="text-decoration:none;color:inherit;display:block"><h2 style="margin-bottom:6px">${esc(s.nome)}</h2><p style="color:#5a4029">${esc(s.lead)}</p><span class="ver" style="color:var(--laranja-d);font-weight:800">Ver soluções →</span></a>`).join("");
+  return head({ title: "Soluções por segmento | Massa Prima", desc: "Soluções da Massa Prima por tipo de negócio: padarias e pastelarias, hotelaria e restauração, produção industrial e revendedores.", canonical: url, jsonld: [breadcrumbLd(cb)] }) +
+    `<main class="wrap">${crumbs(cb)}<h1>Soluções por segmento</h1><p class="lead" style="margin-bottom:18px">Produtos, receitas, formação e apoio técnico à medida do seu negócio.</p>${cards}</main>` + FOOT;
+}
+
 function buildSitemap() {
-  const pages = ["/", "/catalogo.html", "/receitas.html", "/foodcost.html", "/cotacao.html", "/formacao", "/contactos/", "/privacidade.html"];
+  const pages = ["/", "/catalogo.html", "/receitas.html", "/solucoes/", "/foodcost.html", "/cotacao.html", "/formacao", "/contactos/", "/privacidade.html", ...SEGMENTOS.map((s) => `/solucoes/${s.slug}/`)];
   const urls = [
     ...pages.map((u) => ({ loc: SITE + u })),
     ...productCats.map((c) => ({ loc: `${SITE}/catalogo/categoria/${slugify(c)}/` })),
@@ -405,6 +458,11 @@ if (!validateOnly) {
 
   // página de contactos
   fs.mkdirSync("contactos", { recursive: true }); fs.writeFileSync("contactos/index.html", contactosPage()); changed.push("contactos");
+
+  // Soluções por segmento
+  fs.mkdirSync("solucoes", { recursive: true }); fs.writeFileSync("solucoes/index.html", solucoesHub());
+  for (const s of SEGMENTOS) { fs.mkdirSync(`solucoes/${s.slug}`, { recursive: true }); fs.writeFileSync(`solucoes/${s.slug}/index.html`, solucoesPage(s)); }
+  changed.push(`soluções (${SEGMENTOS.length + 1})`);
 
   // sitemap.xml regenerado com todas as URLs
   fs.writeFileSync("sitemap.xml", buildSitemap()); changed.push("sitemap.xml");
