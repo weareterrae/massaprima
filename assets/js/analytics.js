@@ -18,6 +18,18 @@
     try { return localStorage.getItem("mp-consent") !== "deny"; } catch (_) { return true; }
   }
 
+  // GA4 (gtag): carrega e configura sozinho se houver ID em MP_CFG.ga4 e consentimento.
+  // O gtag('config') já regista o page_view — por isso o mpTrack NÃO reenvia page_view p/ o GA4.
+  if (CFG.ga4 && consent()) {
+    var gs = document.createElement("script");
+    gs.async = true;
+    gs.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(CFG.ga4);
+    (document.head || document.documentElement).appendChild(gs);
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", CFG.ga4);
+  }
+
   function track(event, props) {
     props = props || {};
     var payload = { event: event };
@@ -29,8 +41,8 @@
     if (typeof window.fbq === "function" && (event === "submit_quote" || event === "quote_success" || event === "request_demo")) {
       try { window.fbq("trackCustom", event, props); } catch (_) {}
     }
-    // GA4 via gtag, apenas se configurado
-    if (CFG.ga4 && typeof window.gtag === "function") {
+    // GA4 via gtag: eventos personalizados (o page_view já vai pelo gtag('config'))
+    if (CFG.ga4 && event !== "page_view" && typeof window.gtag === "function") {
       try { window.gtag("event", event, props); } catch (_) {}
     }
   }
