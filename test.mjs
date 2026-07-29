@@ -15,7 +15,7 @@ const P = JSON.parse(read("data/products.json"));
 const R = JSON.parse(read("data/recipes.json"));
 console.log("1. Dados");
 ok(P.length === 88, `88 produtos (obtido ${P.length})`);
-ok(R.length === 88, `88 receitas (obtido ${R.length})`);
+ok(R.length === 100, `100 receitas (obtido ${R.length})`);
 ok(new Set(P.map((p) => p.slug)).size === P.length, "slugs de produto únicos");
 ok(new Set(R.map((r) => r.slug)).size === R.length, "slugs de receita únicos");
 ok(P.every((p) => p.nome && p.segmento && p.formatos), "produtos com campos obrigatórios");

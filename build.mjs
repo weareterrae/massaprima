@@ -382,7 +382,14 @@ if (!validateOnly) {
     idx = idx.replace(/(data-count=")\d+(">0<\/div><div class="lbl">produtos)/, `$1${counts.produtos}$2`);
     idx = idx.replace(/(data-count=")\d+(">0<\/div><div class="lbl">receitas)/, `$1${counts.receitas}$2`);
     idx = idx.replace(/\b\d+( receitas profissionais)/g, `${counts.receitas}$1`);
+    idx = idx.replace(/(as )\d+( receitas)/g, `$1${counts.receitas}$2`);
     if (idx !== before) { fs.writeFileSync("index.html", idx); changed.push("index.html (contadores)"); }
+    // menções "NN receitas" nas descrições de receitas.html e formacao.html
+    for (const f of ["receitas.html", "formacao.html"]) {
+      let h = read(f); const b2 = h;
+      h = h.replace(/\b\d+ receitas\b/g, `${counts.receitas} receitas`);
+      if (h !== b2) { fs.writeFileSync(f, h); changed.push(`${f} (contador)`); }
+    }
   } catch (_) {}
 
   // páginas individuais /catalogo/<slug>/ e /receitas/<slug>/

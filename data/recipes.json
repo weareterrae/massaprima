@@ -4714,5 +4714,638 @@
     ],
     "dica": "O centro húmido é a assinatura da queijada de leite: não as deixe cozer demais.",
     "venda": "Baratas de produzir e viciantes — vitrine de café toda a manhã, todo o ano."
+  },
+  {
+    "slug": "pao-melhorante-natura",
+    "id": "pao-melhorante-natura",
+    "cat": "Pão",
+    "titulo": "Pão do dia clean-label (Melhorante Natura)",
+    "foto": "assets/receitas/pao-melhorante-natura.jpg",
+    "tempo": "±2h",
+    "rend": "±160 pães de 100 g (em massa)",
+    "usados": [
+      {
+        "n": "Massa Prima Melhorante Natura",
+        "id": "melhorante-natura"
+      },
+      {
+        "n": "Levedura Seca (PZ)",
+        "id": "pz-levedura-seca"
+      }
+    ],
+    "tabela": [
+      [
+        "Farinha de trigo (a do padeiro)",
+        "10.000 g"
+      ],
+      [
+        "MP Melhorante Natura (1% sobre a farinha)",
+        "100 g"
+      ],
+      [
+        "— Restante receita (sugestão da escola) —",
+        ""
+      ],
+      [
+        "Água",
+        "± 6.000 g"
+      ],
+      [
+        "Sal",
+        "180 g"
+      ],
+      [
+        "Levedura Fresca",
+        "300 g"
+      ],
+      [
+        "ou Levedura Seca",
+        "100 g"
+      ]
+    ],
+    "metodo": [
+      "Junte à farinha o Melhorante Natura (1% sobre a farinha), o sal e a levedura.",
+      "Adicione a água e amasse até obter uma massa lisa e elástica.",
+      "Deixe levedar em massa até dobrar de volume.",
+      "Tenda os pães, deixe levedar de novo e coza em forno bem quente com vapor.",
+      "Retire e deixe arrefecer sobre grelha para a côdea estalar."
+    ],
+    "dica": "O Natura é melhorante clean label — dá volume, cor e conservação sem aditivos artificiais na sua lista.",
+    "venda": "Comunique 'pão sem aditivos artificiais' na vitrine: é um argumento que o cliente de hoje valoriza e paga."
+  },
+  {
+    "slug": "bolo-espelho-branco",
+    "id": "bolo-espelho-branco",
+    "cat": "Bolos & Tortas",
+    "titulo": "Bolo de chocolate com espelho branco",
+    "foto": "assets/receitas/bolo-espelho-branco.jpg",
+    "tempo": "±1h + frio",
+    "rend": "±3 bolos",
+    "usados": [
+      {
+        "n": "Massa Prima Cake Chocolate",
+        "id": "cake-chocolate"
+      },
+      {
+        "n": "Cobertura Branca em Barra (PZ)",
+        "id": "pz-cobertura-branca-em-barra"
+      }
+    ],
+    "tabela": [
+      [
+        "MP Cake Chocolate",
+        "1.000 g"
+      ],
+      [
+        "Óleo vegetal",
+        "300 g"
+      ],
+      [
+        "Ovos",
+        "(±6) 300 g"
+      ],
+      [
+        "Água",
+        "250 g"
+      ],
+      [
+        "— Espelho branco —",
+        ""
+      ],
+      [
+        "Cobertura Branca em Barra",
+        "q.b."
+      ]
+    ],
+    "metodo": [
+      "Bata o Cake Chocolate com o óleo, os ovos e a água até obter um batido homogéneo.",
+      "Coza em formas untadas até o palito sair limpo; desenforme e deixe arrefecer bem.",
+      "Derreta a Cobertura Branca em Barra em banho-maria até ficar fluida.",
+      "Cubra o bolo frio, deixando o espelho escorrer pelos lados; leve ao frio a firmar."
+    ],
+    "dica": "O bolo tem de estar frio para o espelho branco ganhar brilho e não deslizar.",
+    "venda": "O contraste chocolate escuro por dentro e branco brilhante por fora faz-se notar na montra e nas fotos."
+  },
+  {
+    "slug": "bolo-natas-frutos-vermelhos",
+    "id": "bolo-natas-frutos-vermelhos",
+    "cat": "Bolos & Tortas",
+    "titulo": "Bolo de natas e frutos vermelhos",
+    "foto": "assets/receitas/bolo-natas-frutos-vermelhos.jpg",
+    "tempo": "±1h + frio",
+    "rend": "±2 bolos",
+    "usados": [
+      {
+        "n": "Massa Prima Biscuit",
+        "id": "biscuit"
+      },
+      {
+        "n": "Natas Caselle (PZ)",
+        "id": "pz-natas-caselle"
+      }
+    ],
+    "tabela": [
+      [
+        "MP Biscuit",
+        "1.000 g"
+      ],
+      [
+        "Ovos",
+        "(±15) 750 g"
+      ],
+      [
+        "Água",
+        "200 g"
+      ],
+      [
+        "— Chantilly —",
+        ""
+      ],
+      [
+        "Natas Caselle (bater bem frias)",
+        "1.000 g"
+      ],
+      [
+        "Frutos vermelhos frescos",
+        "q.b."
+      ]
+    ],
+    "metodo": [
+      "Bata o Biscuit com os ovos e a água até dobrar de volume e ficar bem arejado.",
+      "Coza em aro, desenforme e corte em duas ou três camadas.",
+      "Bata as Natas Caselle bem frias até ficarem firmes.",
+      "Recheie e cubra com o chantilly, intercalando frutos vermelhos; leve ao frio antes de servir."
+    ],
+    "dica": "As Natas Caselle batem melhor a 4 ºC — tigela e varas frias ajudam a montar mais depressa e estável.",
+    "venda": "Frutos vermelhos por cima dão ar premium e justificam um preço de bolo de festa."
+  },
+  {
+    "slug": "bolo-figo-mel",
+    "id": "bolo-figo-mel",
+    "cat": "Bolos & Tortas",
+    "titulo": "Bolo de figo e mel",
+    "foto": "assets/receitas/bolo-figo-mel.jpg",
+    "tempo": "±50 min",
+    "rend": "±3 bolos",
+    "usados": [
+      {
+        "n": "Massa Prima Cake Neutro",
+        "id": "cake-neutro"
+      },
+      {
+        "n": "Figo (PZ)",
+        "id": "pz-figo"
+      }
+    ],
+    "tabela": [
+      [
+        "MP Cake Neutro",
+        "1.000 g"
+      ],
+      [
+        "Óleo vegetal",
+        "300 g"
+      ],
+      [
+        "Ovos",
+        "(±6) 300 g"
+      ],
+      [
+        "Água",
+        "225 g"
+      ],
+      [
+        "Mel",
+        "150 g"
+      ],
+      [
+        "Figo (escorrido, aos pedaços)",
+        "250 g"
+      ]
+    ],
+    "metodo": [
+      "Bata o Cake Neutro com o óleo, os ovos, a água e o mel até obter um batido liso.",
+      "Envolva os pedaços de figo escorridos, reservando alguns para o topo.",
+      "Verta na forma, distribua o figo reservado por cima e coza até o palito sair limpo.",
+      "Deixe amornar e, se quiser, pincele com um fio de mel para brilho."
+    ],
+    "dica": "Passe os pedaços de figo por um pouco de farinha antes de envolver — evita que se afundem no batido.",
+    "venda": "Um bolo 'de figo e mel' soa artesanal e regional — perfeito para a montra de fim de semana."
+  },
+  {
+    "slug": "napolitanas-chocolate",
+    "id": "napolitanas-chocolate",
+    "cat": "Vitrine & Café",
+    "titulo": "Napolitanas de chocolate",
+    "foto": "assets/receitas/napolitanas-chocolate.jpg",
+    "tempo": "±3h",
+    "rend": "±14 por kg de mix",
+    "usados": [
+      {
+        "n": "Massa Prima Brioche",
+        "id": "brioche"
+      },
+      {
+        "n": "Chocolatier Forno (PZ)",
+        "id": "pz-chocolatier-forno"
+      },
+      {
+        "n": "Margarina Perla Folhados (PZ)",
+        "id": "pz-margarina-para-folhados"
+      }
+    ],
+    "tabela": [
+      [
+        "Massa Prima Brioche",
+        "1.000 g"
+      ],
+      [
+        "Água",
+        "325 g"
+      ],
+      [
+        "Margarina (na massa)",
+        "50 g"
+      ],
+      [
+        "Levedura",
+        "60 g"
+      ],
+      [
+        "ou Levedura Seca",
+        "20 g"
+      ],
+      [
+        "— Folhagem e recheio —",
+        ""
+      ],
+      [
+        "Margarina Perla Folhados",
+        "q.b. para laminar"
+      ],
+      [
+        "Chocolatier Forno (bastão)",
+        "q.b."
+      ]
+    ],
+    "metodo": [
+      "Amasse o Brioche com a água, a margarina e a levedura até obter massa lisa; deixe repousar.",
+      "Lamine com a Margarina Perla Folhados, dando as voltas como num folhado.",
+      "Corte em retângulos, coloque um ou dois bastões de Chocolatier Forno e enrole.",
+      "Deixe levedar, pincele com ovo e coza até dourar — o Chocolatier aguenta o forno sem queimar."
+    ],
+    "dica": "O Chocolatier Forno é feito para ir ao forno: mantém a forma e não sangra como o chocolate comum.",
+    "venda": "Napolitana ao lado do café é venda certa ao pequeno-almoço — produza em série a partir do mesmo mix do croissant."
+  },
+  {
+    "slug": "muffins-choc-leite",
+    "id": "muffins-choc-leite",
+    "cat": "Vitrine & Café",
+    "titulo": "Muffins de pepitas de chocolate de leite",
+    "foto": "assets/receitas/muffins-choc-leite.jpg",
+    "tempo": "±40 min",
+    "rend": "±180 muffins de 100 g",
+    "usados": [
+      {
+        "n": "Massa Prima Muffin Chocolate",
+        "id": "muffin-chocolate"
+      },
+      {
+        "n": "Arabesque Milk 34% (PZ)",
+        "id": "pz-arabesq-milk-34"
+      }
+    ],
+    "tabela": [
+      [
+        "MP Muffin Chocolate",
+        "10.000 g"
+      ],
+      [
+        "Água",
+        "4000 g"
+      ],
+      [
+        "Óleo",
+        "4000 g"
+      ],
+      [
+        "Arabesque Milk 34% (picado)",
+        "1.000 g"
+      ]
+    ],
+    "metodo": [
+      "Bata o Muffin Chocolate com a água e o óleo até obter um batido homogéneo.",
+      "Envolva o Arabesque Milk 34% picado, reservando algum para o topo.",
+      "Encha as formas até 3/4, salpique com o chocolate reservado e coza.",
+      "Sirva morno para as pepitas de chocolate de leite ficarem derretidas."
+    ],
+    "dica": "Pepitas grandes (não finas) dão o efeito de 'chocolate derretido' que faz vender.",
+    "venda": "O chocolate de leite agrada mais ao público jovem — bom para lanches e pontos de venda perto de escolas."
+  },
+  {
+    "slug": "tartelete-morango",
+    "id": "tartelete-morango",
+    "cat": "Vitrine & Café",
+    "titulo": "Tartelete de morango brilhante",
+    "foto": "assets/receitas/tartelete-morango.jpg",
+    "tempo": "±45 min + frio",
+    "rend": "±24 tarteletes",
+    "usados": [
+      {
+        "n": "Massa Prima Creme Pasteleiro Sublime",
+        "id": "creme-pasteleiro-sublime"
+      },
+      {
+        "n": "Brigel Morango (PZ)",
+        "id": "pz-brigel-morango"
+      }
+    ],
+    "tabela": [
+      [
+        "— Creme (a frio) —",
+        ""
+      ],
+      [
+        "MP Creme Pasteleiro Sublime",
+        "1.000 g"
+      ],
+      [
+        "Açúcar",
+        "1.000 g"
+      ],
+      [
+        "Água fria",
+        "3.000 g"
+      ],
+      [
+        "— Acabamento —",
+        ""
+      ],
+      [
+        "Morangos frescos",
+        "q.b."
+      ],
+      [
+        "Brigel Morango (brilho)",
+        "q.b."
+      ]
+    ],
+    "metodo": [
+      "Prepare o Creme Pasteleiro Sublime a frio: misture o açúcar com o pó, junte a água e bata 3-5 min.",
+      "Deixe repousar e encha as bases de tartelete já cozidas.",
+      "Disponha os morangos frescos laminados por cima.",
+      "Pincele com Brigel Morango para dar o brilho e fixar a fruta."
+    ],
+    "dica": "O creme a frio faz-se em 5 minutos sem fogão — ideal para produzir muitas tarteletes de uma vez.",
+    "venda": "O brilho do Brigel dá aspeto de pastelaria fina e mantém a fruta bonita na montra durante mais horas."
+  },
+  {
+    "slug": "verrine-creme-frutos",
+    "id": "verrine-creme-frutos",
+    "cat": "Vitrine & Café",
+    "titulo": "Verrine de creme e frutos",
+    "foto": "assets/receitas/verrine-creme-frutos.jpg",
+    "tempo": "±20 min",
+    "rend": "±20 verrines",
+    "usados": [
+      {
+        "n": "Massa Prima Creme Pasteleiro Sublime",
+        "id": "creme-pasteleiro-sublime"
+      },
+      {
+        "n": "Natas Pritchitts Gold (PZ)",
+        "id": "pz-natas-pritchtts-gold"
+      }
+    ],
+    "tabela": [
+      [
+        "— Creme (a frio) —",
+        ""
+      ],
+      [
+        "MP Creme Pasteleiro Sublime",
+        "1.000 g"
+      ],
+      [
+        "Açúcar",
+        "1.000 g"
+      ],
+      [
+        "Água fria",
+        "3.000 g"
+      ],
+      [
+        "— Chantilly e fruta —",
+        ""
+      ],
+      [
+        "Natas Pritchitts Gold (bater)",
+        "1.000 g"
+      ],
+      [
+        "Fruta fresca / bolacha",
+        "q.b."
+      ]
+    ],
+    "metodo": [
+      "Prepare o Creme Pasteleiro Sublime a frio (açúcar + pó + água, bater 3-5 min).",
+      "Bata as Natas Pritchitts Gold bem frias até ficarem firmes.",
+      "Monte as verrines em camadas: creme, fruta ou bolacha, chantilly.",
+      "Leve ao frio e decore no momento de servir."
+    ],
+    "dica": "Sobremesa de montagem rápida e sem forno — perfeita para dias de calor e para escoar fruta madura.",
+    "venda": "Servida em copo individual, tem margem alta e vende-se a peça no balcão de café."
+  },
+  {
+    "slug": "tarte-abobora-amendoa",
+    "id": "tarte-abobora-amendoa",
+    "cat": "Tradicional & Festas",
+    "titulo": "Tarte de abóbora e amêndoa",
+    "foto": "assets/receitas/tarte-abobora-amendoa.jpg",
+    "tempo": "±1h",
+    "rend": "±2 tartes",
+    "usados": [
+      {
+        "n": "Massa Prima Cake Neutro",
+        "id": "cake-neutro"
+      },
+      {
+        "n": "Abóbora Vermelha Laminada (PZ)",
+        "id": "pz-abobora-vermelha-laminada"
+      },
+      {
+        "n": "Miolo de Amêndoa Palitada (PZ)",
+        "id": "pz-miolo-de-amendoa-palitada"
+      }
+    ],
+    "tabela": [
+      [
+        "MP Cake Neutro",
+        "1.000 g"
+      ],
+      [
+        "Óleo vegetal",
+        "300 g"
+      ],
+      [
+        "Ovos",
+        "(±6) 300 g"
+      ],
+      [
+        "Água",
+        "225 g"
+      ],
+      [
+        "Abóbora Laminada (escorrida)",
+        "300 g"
+      ],
+      [
+        "Miolo de Amêndoa Palitada (topo)",
+        "150 g"
+      ]
+    ],
+    "metodo": [
+      "Bata o Cake Neutro com o óleo, os ovos e a água até obter um batido liso.",
+      "Envolva a abóbora laminada escorrida no batido.",
+      "Verta em tarteira, cubra com a amêndoa palitada e coza até dourar.",
+      "Deixe arrefecer — fica mais firme e fácil de cortar."
+    ],
+    "dica": "Escorra bem a abóbora laminada para o batido não ficar húmido demais.",
+    "venda": "A abóbora com amêndoa remete para a doçaria conventual — um doce 'de outros tempos' que se vende caro."
+  },
+  {
+    "slug": "tarte-pera",
+    "id": "tarte-pera",
+    "cat": "Tradicional & Festas",
+    "titulo": "Tarte folhada de pêra",
+    "foto": "assets/receitas/tarte-pera.jpg",
+    "tempo": "±50 min",
+    "rend": "2 tartes (±16 fatias)",
+    "usados": [
+      {
+        "n": "Margarina Perla Folhados (PZ)",
+        "id": "pz-margarina-para-folhados"
+      },
+      {
+        "n": "Pera (PZ)",
+        "id": "pz-pera"
+      },
+      {
+        "n": "Brigel Neutro (PZ)",
+        "id": "pz-brigel-neutro"
+      }
+    ],
+    "tabela": [
+      [
+        "Massa folhada (Margarina Perla Folhados)",
+        "2 placas"
+      ],
+      [
+        "Pera (escorrida, laminada)",
+        "1.000 g"
+      ],
+      [
+        "— Brilho —",
+        ""
+      ],
+      [
+        "Brigel Neutro",
+        "1.000 g"
+      ],
+      [
+        "Água",
+        "700-900 g"
+      ]
+    ],
+    "metodo": [
+      "Forre a tarteira com massa folhada feita com a Margarina Perla Folhados; pique o fundo.",
+      "Disponha a pêra laminada e escorrida em leque sobre a massa.",
+      "Coza até a massa ficar dourada e estaladiça.",
+      "Pincele com Brigel Neutro (diluído em água a ferver) para dar brilho de pastelaria."
+    ],
+    "dica": "Escorra bem a pêra e seque com papel — a massa folhada só fica estaladiça se a fruta não largar água.",
+    "venda": "O leque de pêra brilhante é dos acabamentos que mais fotografam bem — bom para redes sociais e encomendas."
+  },
+  {
+    "slug": "tabletes-pascoa",
+    "id": "tabletes-pascoa",
+    "cat": "Tradicional & Festas",
+    "titulo": "Tabletes e ovos de Páscoa",
+    "foto": "assets/receitas/tabletes-pascoa.jpg",
+    "tempo": "±30 min + frio",
+    "rend": "variável",
+    "usados": [
+      {
+        "n": "Cobertura Barra (PZ)",
+        "id": "pz-cobertura-barra"
+      }
+    ],
+    "tabela": [
+      [
+        "Cobertura Barra (derreter em banho-maria)",
+        "q.b."
+      ],
+      [
+        "Frutos secos / recheios (opcional)",
+        "q.b."
+      ]
+    ],
+    "metodo": [
+      "Derreta a Cobertura Barra em banho-maria, sem deixar entrar água.",
+      "Preencha os moldes de ovo ou tablete, girando para cobrir bem as paredes.",
+      "Junte frutos secos ou recheio, se quiser, e leve ao frio a cristalizar.",
+      "Desenforme com cuidado — o chocolate deve sair brilhante e a estalar."
+    ],
+    "dica": "Temperatura estável na cristalização é o segredo do brilho e do 'estalo' — evite o frigorífico demasiado frio.",
+    "venda": "Produza ovos e tabletes por encomenda na Páscoa — é sazonal, mas com margem alta e procura garantida."
+  },
+  {
+    "slug": "cake-pops-branco",
+    "id": "cake-pops-branco",
+    "cat": "Tradicional & Festas",
+    "titulo": "Cake pops de chocolate branco",
+    "foto": "assets/receitas/cake-pops-branco.jpg",
+    "tempo": "±1h + frio",
+    "rend": "±40 cake pops",
+    "usados": [
+      {
+        "n": "Massa Prima Biscuit",
+        "id": "biscuit"
+      },
+      {
+        "n": "Arabesque White 30% (PZ)",
+        "id": "pz-arabesq-white-30"
+      }
+    ],
+    "tabela": [
+      [
+        "MP Biscuit (bolo base, esfarelado)",
+        "1.000 g"
+      ],
+      [
+        "Ovos",
+        "(±15) 750 g"
+      ],
+      [
+        "Água",
+        "200 g"
+      ],
+      [
+        "— Cobertura —",
+        ""
+      ],
+      [
+        "Arabesque White 30% (derretido)",
+        "q.b."
+      ]
+    ],
+    "metodo": [
+      "Coza um bolo de Biscuit, deixe arrefecer e esfarele.",
+      "Amasse a migalha com um pouco de creme ou cobertura até ligar; faça bolinhas e espete os palitos.",
+      "Leve ao frio a firmar.",
+      "Mergulhe cada bolinha no Arabesque White 30% derretido, decore e deixe cristalizar em pé."
+    ],
+    "dica": "As bolinhas têm de estar bem frias antes de mergulhar — senão desfazem-se no chocolate.",
+    "venda": "Cake pops são perfeitos para festas de aniversário e podem levar as cores do cliente — encomenda com margem."
   }
 ]
