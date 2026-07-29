@@ -15,6 +15,9 @@ const validateOnly = process.argv.includes("--validate-only");
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const slugify = (s) => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/&/g, " e ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+// Envolve um <img> (que aponta a .jpg) numa <picture> com fonte WebP + fallback JPG.
+const webpOf = (src) => String(src).replace(/\.(jpe?g|png)$/i, ".webp");
+const pic = (src, imgHtml) => `<picture><source srcset="/${esc(webpOf(src))}" type="image/webp">${imgHtml}</picture>`;
 
 // ---- carregar fonte única ----
 const products = JSON.parse(read("data/products.json"));
@@ -205,7 +208,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</sc
 </head><body>
 <header><div class="nav">
 <a class="logo" href="/index.html"><img src="/assets/logo_principal.png" alt="Massa Prima"></a>
-<nav><a href="/catalogo.html">Catálogo</a><a href="/receitas.html">Receitas</a><a href="/foodcost.html">Food Cost</a><a href="/formacao">Formação</a><a class="cta" href="/cotacao.html">Pedir cotação</a></nav>
+<nav><a href="/catalogo.html">Catálogo</a><a href="/receitas.html">Receitas</a><a href="/foodcost.html">Food Cost</a><a href="/formacao">Formação</a><a href="/contactos/">Contactos</a><a class="cta" href="/cotacao.html">Pedir cotação</a></nav>
 </div></header>`;
 }
 const FOOT = `<footer><div class="wrap"><img src="/assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p style="margin-top:8px">Massa Prima <span style="opacity:.7">by Quente e Bom</span> · <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p><p style="opacity:.7;font-size:.85rem;margin-top:6px">© 2026 Massa Prima · Quente e Bom, Angola</p></div></footer></body></html>`;
@@ -224,7 +227,7 @@ function productPage(p) {
   const cb = [{ name: "Início", href: "/index.html" }, { name: "Catálogo", href: "/catalogo.html" }, { name: p.segmento, href: `/catalogo.html#${encodeURIComponent(p.segmento)}` }, { name: p.nome }];
   const prodLd = { "@context": "https://schema.org", "@type": "Product", name: p.nome, category: `${p.segmento} / ${p.subfamilia}`, brand: { "@type": "Brand", name: p.marca }, url, ...(p.img ? { image: `${SITE}/${p.img}` } : {}), ...(p.desc ? { description: p.desc } : {}) };
   const rec = relRecipesForProduct(p), rp = relProducts(p);
-  const thumb = p.img ? `<div class="ph"><img src="/${esc(p.img)}" alt="${esc(p.nome)}"></div>` : `<div class="ph"></div>`;
+  const thumb = p.img ? `<div class="ph">${pic(p.img, `<img src="/${esc(p.img)}" alt="${esc(p.nome)}">`)}</div>` : `<div class="ph"></div>`;
   const sec = [];
   if (p.metodo && p.metodo.length) sec.push(`<div class="block"><h2>Modo de aplicação</h2><ol>${p.metodo.map((m) => `<li>${esc(m)}</li>`).join("")}</ol></div>`);
   sec.push(renderReceita(p.receita));
@@ -247,8 +250,8 @@ ${p.desc ? `<p class="lead">${esc(p.desc)}</p>` : ""}
 </div></article>
 ${sec.join("\n")}
 <div class="cta-row" style="margin:6px 0 10px"><button class="btn ghost" onclick="window.print()">Imprimir ficha técnica</button></div>
-${rec.length ? `<section class="rel"><h2>Receitas com este produto</h2><div class="rgrid">${rec.map((r) => `<a href="/receitas/${esc(r.slug)}/"><div class="th"><img loading="lazy" src="/${esc(r.foto)}" alt="${esc(r.titulo)}"></div><div class="t">${esc(r.titulo)}</div></a>`).join("")}</div></section>` : ""}
-${rp.length ? `<section class="rel"><h2>Produtos relacionados</h2><div class="rgrid">${rp.map((x) => `<a href="/catalogo/${esc(x.slug)}/"><div class="th">${x.img ? `<img loading="lazy" src="/${esc(x.img)}" alt="${esc(x.nome)}">` : ""}</div><div class="t">${esc(x.nome.replace("Massa Prima ", ""))}</div></a>`).join("")}</div></section>` : ""}
+${rec.length ? `<section class="rel"><h2>Receitas com este produto</h2><div class="rgrid">${rec.map((r) => `<a href="/receitas/${esc(r.slug)}/"><div class="th">${pic(r.foto, `<img loading="lazy" src="/${esc(r.foto)}" alt="${esc(r.titulo)}">`)}</div><div class="t">${esc(r.titulo)}</div></a>`).join("")}</div></section>` : ""}
+${rp.length ? `<section class="rel"><h2>Produtos relacionados</h2><div class="rgrid">${rp.map((x) => `<a href="/catalogo/${esc(x.slug)}/"><div class="th">${x.img ? pic(x.img, `<img loading="lazy" src="/${esc(x.img)}" alt="${esc(x.nome)}">`) : ""}</div><div class="t">${esc(x.nome.replace("Massa Prima ", ""))}</div></a>`).join("")}</div></section>` : ""}
 </main>` + FOOT;
 }
 
@@ -266,7 +269,7 @@ function recipePage(r) {
   const tabela = (r.tabela || []).map((row) => (row[1] === "" && /^—/.test(row[0])) ? `<tr class="grp"><td colspan="2">${esc(row[0].replace(/—/g, "").trim())}</td></tr>` : `<tr><td>${esc(row[0])}</td><td class="num">${esc(row[1])}</td></tr>`).join("");
   return head({ title, desc, canonical: url, jsonld: [recipeLd, breadcrumbLd(cb)] }) + `<main class="wrap">
 ${crumbs(cb)}
-<article class="hero"><div class="ph"><img src="/${esc(r.foto)}" alt="${esc(r.titulo)}" onerror="this.onerror=null;this.src='/assets/produtos/hero.jpg'"></div><div>
+<article class="hero"><div class="ph">${pic(r.foto, `<img src="/${esc(r.foto)}" alt="${esc(r.titulo)}" onerror="this.onerror=null;this.src='/assets/produtos/hero.jpg'">`)}</div><div>
 <span class="eyebrow">${esc(r.cat)}</span>
 <h1>${esc(r.titulo)}</h1>
 <p class="lead">⏱ ${esc(r.tempo)} · 🥖 ${esc(r.rend)}${r.dificuldade ? " · " + esc(r.dificuldade) : ""}</p>
@@ -278,7 +281,7 @@ ${(r.metodo && r.metodo.length) ? `<div class="block"><h2>Método</h2><ol>${r.me
 ${r.dica ? `<div class="block"><h2>Dica do Chef</h2><p>${esc(r.dica)}</p></div>` : ""}
 ${r.venda ? `<div class="block"><h2>Como vender mais</h2><p>${esc(r.venda)}</p></div>` : ""}
 <div class="cta-row" style="margin:6px 0 10px"><button class="btn ghost" onclick="window.print()">Imprimir receita</button></div>
-${rel.length ? `<section class="rel"><h2>Mais receitas de ${esc(r.cat)}</h2><div class="rgrid">${rel.map((x) => `<a href="/receitas/${esc(x.slug)}/"><div class="th"><img loading="lazy" src="/${esc(x.foto)}" alt="${esc(x.titulo)}"></div><div class="t">${esc(x.titulo)}</div></a>`).join("")}</div></section>` : ""}
+${rel.length ? `<section class="rel"><h2>Mais receitas de ${esc(r.cat)}</h2><div class="rgrid">${rel.map((x) => `<a href="/receitas/${esc(x.slug)}/"><div class="th">${pic(x.foto, `<img loading="lazy" src="/${esc(x.foto)}" alt="${esc(x.titulo)}">`)}</div><div class="t">${esc(x.titulo)}</div></a>`).join("")}</div></section>` : ""}
 </main>` + FOOT;
 }
 
@@ -288,7 +291,7 @@ function categoryGrid(items) {
     const href = isProd ? `/catalogo/${esc(it.slug)}/` : `/receitas/${esc(it.slug)}/`;
     const img = isProd ? it.img : it.foto;
     const nome = isProd ? it.nome.replace("Massa Prima ", "") : it.titulo;
-    return `<a href="${href}"><div class="th">${img ? `<img loading="lazy" src="/${esc(img)}" alt="${esc(nome)}">` : ""}</div><div class="t">${esc(nome)}</div></a>`;
+    return `<a href="${href}"><div class="th">${img ? pic(img, `<img loading="lazy" src="/${esc(img)}" alt="${esc(nome)}">`) : ""}</div><div class="t">${esc(nome)}</div></a>`;
   }).join("");
 }
 function productCategoryPage(seg) {
@@ -308,8 +311,35 @@ function recipeCategoryPage(cat) {
 const productCats = [...new Set(P.map((p) => p.segmento))];
 const recipeCats = [...new Set(R.map((r) => r.cat))];
 
+function contactosPage() {
+  const url = `${SITE}/contactos/`;
+  const cb = [{ name: "Início", href: "/index.html" }, { name: "Contactos" }];
+  const ld = {
+    "@context": "https://schema.org", "@type": "Organization",
+    name: "Massa Prima", legalName: "Quente e Bom", url: SITE, logo: `${SITE}/assets/logo_principal.png`,
+    email: "geral@quenteebom.co.ao",
+    address: { "@type": "PostalAddress", streetAddress: "Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8", addressLocality: "Viana", addressRegion: "Luanda", addressCountry: "AO" },
+    sameAs: ["https://www.instagram.com/massaprima", "https://www.facebook.com/1109918612215834"],
+  };
+  return head({ title: "Contactos — Massa Prima | Fale com a nossa equipa", desc: "Contactos da Massa Prima (by Quente e Bom), Viana — Luanda: email, morada, redes e pedido de cotação para padarias e pastelarias.", canonical: url, jsonld: [ld, breadcrumbLd(cb)] }) +
+    `<main class="wrap">${crumbs(cb)}
+<h1>Contactos</h1>
+<p class="lead" style="margin-bottom:20px">A <b>Massa Prima</b> é uma marca da <b>Quente e Bom</b> — matérias-primas de panificação e pastelaria para padarias, pastelarias e quem produz para vender, em toda a Angola.</p>
+<div class="block"><h2>Falar com a equipa comercial</h2><dl class="kv">
+<dt>E-mail</dt><dd><a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></dd>
+<dt>Morada</dt><dd>Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8, Viana — Luanda, Angola</dd>
+<dt>Instagram</dt><dd><a href="https://www.instagram.com/massaprima" target="_blank" rel="noopener">@massaprima</a></dd>
+<dt>Facebook</dt><dd><a href="https://www.facebook.com/1109918612215834" target="_blank" rel="noopener">Massa Prima</a></dd>
+</dl>
+<div class="cta-row" style="margin-top:18px"><a class="btn primary" href="/cotacao.html">Pedir cotação</a><a class="btn ghost" href="mailto:geral@quenteebom.co.ao?subject=Massa%20Prima%20%E2%80%94%20contacto">Enviar e-mail</a></div>
+</div>
+<div class="block"><h2>Preços, encomendas e amostras</h2><p>Não publicamos preços no site — cada negócio é diferente. Peça a sua cotação e a nossa equipa prepara uma proposta à medida, com o plano de entregas.</p></div>
+<div class="block"><h2>Privacidade e ferramentas</h2><p>Os preços que introduz na <a href="/foodcost.html">calculadora de food cost</a> ficam guardados só no seu dispositivo. Consulte a nossa <a href="/privacidade.html">Política de Privacidade</a>.</p></div>
+</main>` + FOOT;
+}
+
 function buildSitemap() {
-  const pages = ["/", "/catalogo.html", "/receitas.html", "/foodcost.html", "/cotacao.html", "/formacao.html", "/privacidade.html"];
+  const pages = ["/", "/catalogo.html", "/receitas.html", "/foodcost.html", "/cotacao.html", "/formacao", "/contactos/", "/privacidade.html"];
   const urls = [
     ...pages.map((u) => ({ loc: SITE + u })),
     ...productCats.map((c) => ({ loc: `${SITE}/catalogo/categoria/${slugify(c)}/` })),
@@ -365,6 +395,9 @@ if (!validateOnly) {
   for (const c of productCats) { const s = slugify(c); fs.mkdirSync(`catalogo/categoria/${s}`, { recursive: true }); fs.writeFileSync(`catalogo/categoria/${s}/index.html`, productCategoryPage(c)); }
   for (const c of recipeCats) { const s = slugify(c); fs.mkdirSync(`receitas/categoria/${s}`, { recursive: true }); fs.writeFileSync(`receitas/categoria/${s}/index.html`, recipeCategoryPage(c)); }
   changed.push(`${productCats.length}+${recipeCats.length} páginas de categoria`);
+
+  // página de contactos
+  fs.mkdirSync("contactos", { recursive: true }); fs.writeFileSync("contactos/index.html", contactosPage()); changed.push("contactos");
 
   // sitemap.xml regenerado com todas as URLs
   fs.writeFileSync("sitemap.xml", buildSitemap()); changed.push("sitemap.xml");
