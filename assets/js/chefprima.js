@@ -129,7 +129,10 @@ async function send(q){
   let full='';
   const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),30000);
   try{
-    const r=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12),stream:true}),signal:ctl.signal});
+    // NOTA: o gateway Gemini da Netlify ainda não expõe streaming de tokens → pedimos JSON
+    // (rápido e fiável). O widget e o backend já suportam SSE: basta repor stream:true aqui
+    // quando o streaming estiver disponível, sem mais mudanças.
+    const r=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12)}),signal:ctl.signal});
     const ct=r.headers.get('content-type')||'';
     if(r.ok&&/text\/event-stream/.test(ct)&&r.body){
       const reader=r.body.getReader(),dec=new TextDecoder();let buf='';
