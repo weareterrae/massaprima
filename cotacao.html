@@ -83,6 +83,7 @@ section.blk{padding:30px 0}
 .tools{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
 .srch{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:40px;padding:11px 18px}
 .srch input{border:none;outline:none;font:inherit;flex:1;background:transparent;color:var(--ink)}
+.srch:focus-within{border-color:var(--laranja)}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{background:#fff;border:1.5px solid var(--line);color:var(--castanho);border-radius:30px;padding:7px 15px;font-weight:700;font-size:.86rem;cursor:pointer}
 .chip.on{background:var(--laranja);color:#fff;border-color:var(--laranja)}
@@ -152,7 +153,7 @@ footer .soc a{color:var(--bege);text-decoration:none;margin:0 6px}
   <div class="wrap">
     <div class="hd"><span class="num">1</span><h2>Escolha os artigos</h2></div>
     <div class="tools">
-      <div class="srch"><span>🔎</span><input id="q" type="search" placeholder="Procurar produto (ex.: pão, muffin, creme, chocolate…)" autocomplete="off"></div>
+      <div class="srch"><span aria-hidden="true">🔎</span><input id="q" type="search" aria-label="Procurar produto" placeholder="Procurar produto (ex.: pão, muffin, creme, chocolate…)" autocomplete="off"></div>
       <div class="chips" id="fseg"><button class="chip on" data-v="">Todos os segmentos</button><button class="chip" data-v="Padaria">Padaria</button><button class="chip" data-v="Pastelaria">Pastelaria</button></div>
       <div class="chips" id="fmar"><button class="chip on" data-v="">Todas as marcas</button><button class="chip" data-v="Massa Prima">Massa Prima</button><button class="chip" data-v="Prodite Zeelandia">Prodite Zeelandia</button></div>
       <div class="count" id="count"></div>
@@ -179,13 +180,13 @@ footer .soc a{color:var(--bege);text-decoration:none;margin:0 6px}
       <input type="hidden" name="referencia" id="referencia">
       <input type="hidden" name="origem" id="origem">
       <div class="formg">
-        <div class="field full"><label>Nome da empresa / padaria <span class="req">*</span></label><input required name="empresa" placeholder="Ex.: Padaria Bom Pão"></div>
-        <div class="field"><label>Responsável <span class="req">*</span></label><input required name="responsavel" placeholder="O seu nome"></div>
-        <div class="field"><label>Telefone <span class="req">*</span></label><input required name="telefone" inputmode="tel" placeholder="9XX XXX XXX"></div>
-        <div class="field"><label>E-mail</label><input type="email" name="email" placeholder="opcional"></div>
-        <div class="field"><label>Província <span class="req">*</span></label><select required name="provincia"><option>Luanda</option><option>Bengo</option><option>Benguela</option><option>Bié</option><option>Cabinda</option><option>Cuando Cubango</option><option>Cuanza Norte</option><option>Cuanza Sul</option><option>Cunene</option><option>Huambo</option><option>Huíla</option><option>Lunda Norte</option><option>Lunda Sul</option><option>Malanje</option><option>Moxico</option><option>Namibe</option><option>Uíge</option><option>Zaire</option><option>Outra</option></select></div>
-        <div class="field full"><label>Tipo de negócio</label><select name="tipo"><option>Padaria</option><option>Pastelaria</option><option>Padaria e pastelaria</option><option>Hotelaria / restauração</option><option>Café / snack</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option><option>Outro</option></select></div>
-        <div class="field full"><label>Observações</label><textarea rows="3" name="mensagem" placeholder="Frequência de entrega, prazos, ou qualquer detalhe que ajude a preparar a proposta."></textarea></div>
+        <div class="field full"><label for="f-empresa">Nome da empresa / padaria <span class="req">*</span></label><input id="f-empresa" required name="empresa" autocomplete="organization" placeholder="Ex.: Padaria Bom Pão"></div>
+        <div class="field"><label for="f-responsavel">Responsável <span class="req">*</span></label><input id="f-responsavel" required name="responsavel" autocomplete="name" placeholder="O seu nome"></div>
+        <div class="field"><label for="f-telefone">Telefone <span class="req">*</span></label><input id="f-telefone" required name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="9XX XXX XXX"></div>
+        <div class="field"><label for="f-email">E-mail</label><input id="f-email" type="email" name="email" autocomplete="email" placeholder="opcional"></div>
+        <div class="field"><label for="f-provincia">Província <span class="req">*</span></label><select id="f-provincia" required name="provincia"><option>Luanda</option><option>Bengo</option><option>Benguela</option><option>Bié</option><option>Cabinda</option><option>Cuando Cubango</option><option>Cuanza Norte</option><option>Cuanza Sul</option><option>Cunene</option><option>Huambo</option><option>Huíla</option><option>Lunda Norte</option><option>Lunda Sul</option><option>Malanje</option><option>Moxico</option><option>Namibe</option><option>Uíge</option><option>Zaire</option><option>Outra</option></select></div>
+        <div class="field full"><label for="f-tipo">Tipo de negócio</label><select id="f-tipo" name="tipo"><option>Padaria</option><option>Pastelaria</option><option>Padaria e pastelaria</option><option>Hotelaria / restauração</option><option>Café / snack</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option><option>Outro</option></select></div>
+        <div class="field full"><label for="f-mensagem">Observações</label><textarea id="f-mensagem" rows="3" name="mensagem" placeholder="Frequência de entrega, prazos, ou qualquer detalhe que ajude a preparar a proposta."></textarea></div>
       </div>
       <div style="margin-top:18px"><button class="btn" type="submit" id="send">Enviar pedido de cotação</button></div>
       <p id="status"></p>
@@ -252,12 +253,12 @@ function match(p){
 function fmtOpts(p){
   if(!p.f.length)return '<span class="fmt">formato a combinar</span>';
   if(p.f.length===1)return '<span class="fmt">'+esc(p.f[0])+'</span>';
-  return '<select class="fmt" data-fmt="'+p.id+'">'+p.f.map(f=>'<option>'+esc(f)+'</option>').join('')+'</select>';
+  return '<select class="fmt" data-fmt="'+p.id+'" aria-label="Formato de '+esc(p.n)+'">'+p.f.map(f=>'<option>'+esc(f)+'</option>').join('')+'</select>';
 }
 function card(p){
   const inC=cart.has(p.id);
   const ctrl=inC
-    ? '<div class="step"><button data-dec="'+p.id+'">−</button><span class="q">'+cart.get(p.id).qty+'</span><button data-inc="'+p.id+'">+</button></div>'
+    ? '<div class="step"><button type="button" aria-label="Diminuir quantidade" data-dec="'+p.id+'">−</button><span class="q">'+cart.get(p.id).qty+'</span><button type="button" aria-label="Aumentar quantidade" data-inc="'+p.id+'">+</button></div>'
     : '<button class="add" data-add="'+p.id+'">+ Adicionar</button>';
   const mk=p.m==='Prodite Zeelandia'?'mk pz':'mk';
   const img=p.img?('<img class="thumb" src="'+esc(p.img)+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">'):'<div class="thumb"></div>';
@@ -287,8 +288,8 @@ function renderCart(){
   if(!cart.size){el.innerHTML='<div class="empty">Ainda não adicionou artigos. Use o passo 1 para os escolher. 🌾</div>';return;}
   let h='';
   cart.forEach((c,id)=>{h+='<div class="citem"><div class="cinfo"><b>'+esc(c.p.n)+'</b><small>'+esc(c.p.m)+' · '+esc(c.fmt)+'</small></div>'+
-    '<div class="step"><button data-dec="'+id+'">−</button><span class="q">'+c.qty+'</span><button data-inc="'+id+'">+</button></div>'+
-    '<button class="rm" data-rm="'+id+'" title="Remover">✕</button></div>';});
+    '<div class="step"><button type="button" aria-label="Diminuir quantidade" data-dec="'+id+'">−</button><span class="q">'+c.qty+'</span><button type="button" aria-label="Aumentar quantidade" data-inc="'+id+'">+</button></div>'+
+    '<button type="button" class="rm" data-rm="'+id+'" title="Remover" aria-label="Remover '+esc(c.p.n)+'">✕</button></div>';});
   el.innerHTML=h;
 }
 function serialize(){

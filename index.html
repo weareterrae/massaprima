@@ -552,10 +552,10 @@ footer .soc a:hover{color:#fff}
     </div>
     <form id="form-contacto" name="contacto" method="POST" data-netlify="true" netlify-honeypot="_honey" class="rv" style="transition-delay:.1s">
       <input type="hidden" name="form-name" value="contacto">
-      <input required name="nome" placeholder="Nome / Empresa">
-      <input required name="contacto" placeholder="Telefone ou e-mail">
-      <select name="tipo"><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
-      <textarea rows="3" name="mensagem" placeholder="O que precisa? (catálogo, preços, parceria…)"></textarea>
+      <input required name="nome" aria-label="Nome / Empresa" autocomplete="name" placeholder="Nome / Empresa">
+      <input required name="contacto" aria-label="Telefone ou e-mail" placeholder="Telefone ou e-mail">
+      <select name="tipo" aria-label="Tipo de negócio"><option>Sou uma padaria</option><option>Sou uma pastelaria</option><option>Hotelaria / restauração</option><option>Produzo em casa para vender</option><option>Distribuição / revenda</option></select>
+      <textarea rows="3" name="mensagem" aria-label="Mensagem" placeholder="O que precisa? (catálogo, preços, parceria…)"></textarea>
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <button class="btn" type="submit" id="form-btn">Pedir contacto</button>
       <p id="form-status" style="font-weight:700;display:none"></p>
