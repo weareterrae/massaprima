@@ -119,42 +119,78 @@ export default async (req, context) => {
   const system = await getPrompt();
   const modelo = process.env.CLAUDE_MODEL || "claude-sonnet-5";
   const base = (process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com").replace(/\/$/, "");
+  const anthHeaders = { "x-api-key": chave, "anthropic-version": "2023-06-01", "content-type": "application/json" };
 
-  try {
-    const pedirClaude = () => fetch(`${base}/v1/messages`, {
-      method: "POST",
-      headers: {
-        "x-api-key": chave,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ model: modelo, max_tokens: 900, system, messages }),
-    });
-    let r = await pedirClaude();
-    // As rajadas de 429 do gateway duram ~1s — uma segunda tentativa resolve quase sempre.
-    if (!r.ok && (r.status === 429 || r.status >= 500)) {
-      console.error("chef-prima: Anthropic", r.status, "→ retry em 1.2s");
-      await new Promise((res) => setTimeout(res, 1200));
-      r = await pedirClaude();
-    }
-    if (!r.ok) {
-      console.error("chef-prima: Anthropic", r.status, await r.text());
+  // Gera a resposta completa (Claude + retry → Gemini → contingência). Mesmo comportamento de sempre.
+  async function gerarReply() {
+    try {
+      const pedirClaude = () => fetch(`${base}/v1/messages`, {
+        method: "POST", headers: anthHeaders,
+        body: JSON.stringify({ model: modelo, max_tokens: 900, system, messages }),
+      });
+      let r = await pedirClaude();
+      if (!r.ok && (r.status === 429 || r.status >= 500)) {
+        console.error("chef-prima: Anthropic", r.status, "→ retry em 1.2s");
+        await new Promise((res) => setTimeout(res, 1200));
+        r = await pedirClaude();
+      }
+      if (!r.ok) {
+        console.error("chef-prima: Anthropic", r.status, await r.text());
+        const b = await planoBGemini(system, messages, 900);
+        return b || CONTINGENCIA;
+      }
+      const data = await r.json();
+      let reply = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
+      if (data.stop_reason === "max_tokens") reply = reply.replace(/\n[^\n]*$/, "").trim() || reply;
+      return reply;
+    } catch (e) {
+      console.error("chef-prima: falha de rede", e);
       const b = await planoBGemini(system, messages, 900);
-      return json({ reply: b || CONTINGENCIA });
+      return b || CONTINGENCIA;
     }
-    const data = await r.json();
-    let reply = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
-    // Se mesmo assim o limite cortar a resposta, apara a última linha incompleta
-    // (evita markdown pendurado tipo "[Chantilly" no ecrã).
-    if (data.stop_reason === "max_tokens") {
-      reply = reply.replace(/\n[^\n]*$/, "").trim() || reply;
-    }
-    return json({ reply });
-  } catch (e) {
-    console.error("chef-prima: falha de rede", e);
-    const b = await planoBGemini(system, messages, 900);
-    return json({ reply: b || CONTINGENCIA });
   }
+
+  // ── Streaming (opcional, aditivo): o widget pede {stream:true}; se o streaming
+  // não arrancar, respondemos em JSON — o widget trata os dois formatos. Caminho
+  // JSON abaixo fica 100% intacto como fallback.
+  if (corpo?.stream === true) {
+    try {
+      const r = await fetch(`${base}/v1/messages`, {
+        method: "POST", headers: anthHeaders,
+        body: JSON.stringify({ model: modelo, max_tokens: 900, system, messages, stream: true }),
+      });
+      if (r.ok && r.body) {
+        const upstream = r.body.getReader();
+        const dec = new TextDecoder(), enc = new TextEncoder();
+        const stream = new ReadableStream({
+          async pull(controller) {
+            try {
+              const { done, value } = await upstream.read();
+              if (done) { controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); return; }
+              // reencaminha só os deltas de texto do formato SSE da Anthropic
+              for (const linha of dec.decode(value, { stream: true }).split("\n")) {
+                if (!linha.startsWith("data:")) continue;
+                const p = linha.slice(5).trim();
+                if (!p || p === "[DONE]") continue;
+                try {
+                  const ev = JSON.parse(p);
+                  const t = ev?.delta?.text;
+                  if (ev.type === "content_block_delta" && typeof t === "string" && t)
+                    controller.enqueue(enc.encode("data: " + JSON.stringify({ t }) + "\n\n"));
+                } catch { /* ignora keep-alive/eventos não-texto */ }
+              }
+            } catch (e) { console.error("chef-prima: stream", e); try { controller.close(); } catch {} }
+          },
+          cancel() { try { upstream.cancel(); } catch {} },
+        });
+        return new Response(stream, { headers: { "content-type": "text/event-stream; charset=utf-8", "cache-control": "no-cache", "x-accel-buffering": "no" } });
+      }
+      // streaming não arrancou → cai para JSON (com retry/Gemini/contingência)
+      console.error("chef-prima: stream não arrancou", r.status);
+    } catch (e) { console.error("chef-prima: stream falhou, uso JSON", e); }
+  }
+
+  return json({ reply: await gerarReply() });
 };
 
 export const config = { path: "/api/chef-prima" };

@@ -38,8 +38,12 @@
     if (DEBUG) { try { console.log("[mpTrack]", event, props); } catch (_) {} }
     if (!consent()) return;
     // Meta Pixel: só eventos de conversão relevantes (evita duplicar PageView)
-    if (typeof window.fbq === "function" && (event === "submit_quote" || event === "quote_success" || event === "request_demo")) {
-      try { window.fbq("trackCustom", event, props); } catch (_) {}
+    if (typeof window.fbq === "function") {
+      // Lead (evento padrão do Pixel) quando o assistente/site captam um contacto
+      if (event === "generate_lead") { try { window.fbq("track", "Lead", props); } catch (_) {} }
+      else if (event === "submit_quote" || event === "quote_success" || event === "request_demo") {
+        try { window.fbq("trackCustom", event, props); } catch (_) {}
+      }
     }
     // GA4 via gtag: eventos personalizados (o page_view já vai pelo gtag('config'))
     if (CFG.ga4 && event !== "page_view" && typeof window.gtag === "function") {

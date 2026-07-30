@@ -550,6 +550,11 @@ footer .soc a:hover{color:#fff}
       <div class="cline">✉️ <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></div>
       <div class="cline">📍 <span>Estrada do Calumbo/Zango, Viana Parque, Armazém 1Q8<br>Viana — Luanda, Angola</span></div>
     </div>
+    <!-- Formulário de deteção do Netlify para os leads captados pelo Chef Prima (submissão via JS no widget). Não visível. -->
+    <form name="lead-chef-prima" data-netlify="true" netlify-honeypot="_honey" hidden aria-hidden="true">
+      <input type="hidden" name="form-name" value="lead-chef-prima">
+      <input name="nome"><input name="contacto"><input name="assunto"><input name="mensagem"><input name="origem">
+    </form>
     <form id="form-contacto" name="contacto" method="POST" data-netlify="true" netlify-honeypot="_honey" class="rv" style="transition-delay:.1s">
       <input type="hidden" name="form-name" value="contacto">
       <input required name="nome" aria-label="Nome / Empresa" autocomplete="name" placeholder="Nome / Empresa">

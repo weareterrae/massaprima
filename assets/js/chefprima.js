@@ -2,6 +2,8 @@
    IA: Netlify Function /api/chef-prima (AI Gateway) · cérebro: prima-prompt.txt (git push = atualizado) */
 (function(){
 const ENDPOINT='/api/chef-prima';
+// medição (usa a camada mpTrack se existir; nunca rebenta se não existir)
+function track(ev,props){try{if(window.mpTrack)window.mpTrack(ev,props||{});}catch(_){}}
 const css=`
 #cpx-btn{position:fixed;bottom:22px;right:22px;z-index:9990;display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #EC6607;border-radius:50px;padding:8px 20px 8px 8px;cursor:pointer;box-shadow:0 10px 30px rgba(119,49,10,.28);font-family:'Nunito',sans-serif;transition:transform .15s}
 #cpx-btn:hover{transform:translateY(-2px)}
@@ -69,7 +71,13 @@ function save(){try{sessionStorage.setItem('cpx-hist',JSON.stringify(hist.slice(
 function safeHref(u){
   u=u.trim();
   if(/^mailto:/i.test(u))return u;
-  if(/^(catalogo|receitas|foodcost|index)\.html(#[\w-]*)?$/i.test(u))return u;
+  // páginas .html conhecidas → torna root-absolutas p/ funcionarem a qualquer profundidade (ex.: /catalogo/brioche/)
+  var m=u.match(/^\/?((?:catalogo|receitas|foodcost|cotacao|formacao|index)\.html)(#[\w-]*)?$/i);
+  if(m)return '/'+m[1]+(m[2]||'');
+  // hubs e páginas geradas do próprio site
+  if(/^\/?(solucoes|contactos)\/?$/i.test(u))return '/'+u.replace(/^\/|\/$/g,'')+'/';
+  if(/^\/(catalogo|receitas|solucoes|contactos)\/[\w\/-]*$/i.test(u))return u;
+  if(/^https:\/\/(www\.)?massaprima\.com\//i.test(u))return u;
   if(/^https:\/\/weareterrae\.github\.io\/massaprima\//i.test(u))return u;
   return null;
 }
@@ -80,8 +88,10 @@ function render(t){
 }
 function add(t,c){const d=document.createElement('div');d.className='cpx-m '+c;if(c==='bot')d.innerHTML=render(t);else d.textContent=t;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d;}
 function chips(){chipsEl.innerHTML='';CHIPS.forEach(q=>{const b=document.createElement('button');b.textContent=q;b.onclick=()=>send(q);chipsEl.appendChild(b);});}
+let aberturaMedida=false;
 function openPanel(){
   panel.classList.add('on');document.getElementById('cpx-btn').style.display='none';teaserOff();
+  if(!aberturaMedida){aberturaMedida=true;track('chef_prima_open',{path:location.pathname});}
   if(!msgs.children.length){
     hist.forEach(m=>add(m.content,m.role==='assistant'?'bot':'user'));
     if(!hist.length)add('Olá! Sou o Chef Prima 🌾 o mestre padeiro digital da Massa Prima. Posso ensinar-lhe a usar qualquer produto, dar-lhe receitas passo-a-passo ou ajudar a pôr preço no que produz. Em que posso ajudar?','bot');
@@ -93,21 +103,57 @@ function closePanel(){panel.classList.remove('on');document.getElementById('cpx-
 document.getElementById('cpx-btn').onclick=openPanel;
 document.getElementById('cpx-close').onclick=closePanel;
 
+// separa a resposta visível do marcador técnico [[LEAD]]{...} que o modelo põe no fim
+function extractLead(text){
+  const i=text.indexOf('[[LEAD]]');
+  if(i<0)return{visible:text,lead:null};
+  let lead=null;const m=text.slice(i+8).match(/\{[\s\S]*\}/);
+  if(m){try{lead=JSON.parse(m[0]);}catch(_){}}
+  return{visible:text.slice(0,i).trim(),lead:lead};
+}
+// entrega o lead no MESMO destino do formulário do site (Netlify Forms) + evento de conversão
+function submitLead(lead){
+  const nome=(lead&&lead.nome||'').toString().trim().slice(0,120);
+  const contacto=(lead&&lead.contacto||'').toString().trim().slice(0,120);
+  if(!nome||!contacto)return;
+  const body=new URLSearchParams({'form-name':'lead-chef-prima',nome:nome,contacto:contacto,assunto:(lead.assunto||'Chef Prima').toString().slice(0,120),mensagem:(lead.mensagem||'').toString().slice(0,600),origem:'Chef Prima · '+location.pathname});
+  try{fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});}catch(_){}
+  track('generate_lead',{source:'chef_prima',assunto:lead.assunto||'',path:location.pathname});
+}
 async function send(q){
   if(!q)return;
   chipsEl.innerHTML='';
   add(q,'user');hist.push({role:'user',content:q});save();
+  track('chef_prima_question',{path:location.pathname});
   const t=add('🌾 a pensar…','bot');
-  let reply=null;
+  let full='';
+  const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),30000);
   try{
-    const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),25000);
-    const r=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12)}),signal:ctl.signal});
-    clearTimeout(tm);
-    if(r.ok){const d=await r.json();if(d.reply)reply=d.reply;}
+    const r=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12),stream:true}),signal:ctl.signal});
+    const ct=r.headers.get('content-type')||'';
+    if(r.ok&&/text\/event-stream/.test(ct)&&r.body){
+      const reader=r.body.getReader(),dec=new TextDecoder();let buf='';
+      while(true){
+        const{done,value}=await reader.read();if(done)break;
+        buf+=dec.decode(value,{stream:true});let idx;
+        while((idx=buf.indexOf('\n\n'))>=0){
+          const line=buf.slice(0,idx).split('\n').find(l=>l.indexOf('data:')===0);buf=buf.slice(idx+2);
+          if(!line)continue;const p=line.slice(5).trim();if(!p)continue;
+          let ev;try{ev=JSON.parse(p);}catch(_){continue;}
+          if(ev&&ev.t){full+=ev.t;t.innerHTML=render(extractLead(full).visible);msgs.scrollTop=msgs.scrollHeight;}
+        }
+      }
+    }else if(r.ok){const d=await r.json();if(d.reply)full=d.reply;} // fallback JSON
   }catch(_){}
-  if(!reply)reply='Estou com dificuldades de ligação neste momento 🌾 Tente outra vez daqui a pouco, ou escreva-nos para geral@quenteebom.co.ao que a equipa responde em horário de expediente.';
-  t.innerHTML=render(reply);
-  hist.push({role:'assistant',content:reply});save();
+  clearTimeout(tm);
+  // rede de segurança: se o streaming não trouxe nada, tenta o caminho JSON antes de desistir
+  if(!full){try{const r2=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12)})});if(r2.ok){const d=await r2.json();if(d.reply)full=d.reply;}}catch(_){}}
+  const parsed=extractLead(full);
+  let visible=parsed.visible;
+  if(!visible)visible='Estou com dificuldades de ligação neste momento 🌾 Tente outra vez daqui a pouco, ou escreva-nos para geral@quenteebom.co.ao que a equipa responde em horário de expediente.';
+  t.innerHTML=render(visible);
+  if(parsed.lead)submitLead(parsed.lead);
+  hist.push({role:'assistant',content:visible});save(); // guarda só o texto visível (sem marcador)
 }
 document.getElementById('cpx-form').onsubmit=e=>{e.preventDefault();const i=document.getElementById('cpx-in');const q=i.value.trim();i.value='';send(q);};
 
