@@ -45,7 +45,7 @@ src="https://www.facebook.com/tr?id=930726976710021&ev=PageView&noscript=1"
 <meta name="description" content="Mixes e matérias-primas de panificação e pastelaria, em grande parte produzidos em Angola. Qualidade que inspira resultados perfeitos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/produtos/hero.jpg" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/produtos/hero-480.webp 480w, assets/produtos/hero-800.webp 800w, assets/produtos/hero.webp 1100w" imagesizes="100vw" fetchpriority="high">
 <style>
 :root{
   --laranja:#EC6607; --castanho:#77310A; --bege:#FEEAD3; --bege-claro:#FFF7EC;
@@ -308,7 +308,7 @@ footer .soc a:hover{color:#fff}
 
 <header>
   <div class="nav">
-    <a class="logo" href="#top"><img src="assets/logo_principal.png" alt="Massa Prima by Quente e Bom"></a>
+    <a class="logo" href="#top"><picture><source type="image/webp" srcset="assets/logo_principal.webp"><img src="assets/logo_principal.png" alt="Massa Prima by Quente e Bom" width="260" height="160"></picture></a>
     <input type="checkbox" id="navtog" class="navtog" hidden>
     <label for="navtog" class="burger" aria-label="Abrir menu"><span></span><span></span><span></span></label>
     <ul>
@@ -326,7 +326,7 @@ footer .soc a:hover{color:#fff}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="bgwrap" id="bgwrap"><img class="bg" src="assets/produtos/hero.jpg" alt="Pães e bolos acabados de sair do forno" fetchpriority="high"></div>
+  <div class="bgwrap" id="bgwrap"><picture><source type="image/webp" srcset="assets/produtos/hero-480.webp 480w, assets/produtos/hero-800.webp 800w, assets/produtos/hero.webp 1100w" sizes="100vw"><img class="bg" src="assets/produtos/hero.jpg" alt="Pães e bolos acabados de sair do forno" fetchpriority="high" width="1100" height="629"></picture></div>
   <div class="veil"></div>
   <div class="floaters" aria-hidden="true">
     <span class="fl" style="left:7%;top:20%;width:26px;height:48px;animation-delay:0s"><svg viewBox="0 0 24 44" fill="#FEEAD3"><ellipse cx="12" cy="11" rx="6.5" ry="11"/><ellipse cx="12" cy="33" rx="6.5" ry="11"/></svg></span>
@@ -383,7 +383,7 @@ footer .soc a:hover{color:#fff}
     </div>
     <div class="prod-grid">
       <article class="pcard big rv">
-        <div class="ph"><span class="cat">Padaria</span><img loading="lazy" src="assets/produtos/rustic.jpg" alt="Pão rústico de crosta dourada"></div>
+        <div class="ph"><span class="cat">Padaria</span><picture><source type="image/webp" srcset="assets/produtos/rustic-480.webp 480w, assets/produtos/rustic-800.webp 800w, assets/produtos/rustic.webp 1100w" sizes="(max-width:900px) 92vw, 45vw"><img loading="lazy" src="assets/produtos/rustic.jpg" alt="Pão rústico de crosta dourada" width="1100" height="803"></picture></div>
         <div class="pb">
           <h3>Mixes de pão 100%, melhorantes e decoração</h3>
           <p>Rústico · Integral · Multicereais · Centeio da Baviera · Prokorn · Shape · Pão de Forma &amp; Hambúrguer. Melhorantes Natura, Gold e Fresh a 1%, sementes e decoração de milho.</p>
@@ -392,7 +392,7 @@ footer .soc a:hover{color:#fff}
         </div>
       </article>
       <article class="pcard rv" style="transition-delay:.08s">
-        <div class="ph"><span class="cat">Pastelaria</span><img loading="lazy" src="assets/produtos/cake-chocolate.jpg" alt="Bolo de chocolate"></div>
+        <div class="ph"><span class="cat">Pastelaria</span><picture><source type="image/webp" srcset="assets/produtos/cake-chocolate-480.webp 480w, assets/produtos/cake-chocolate-800.webp 800w, assets/produtos/cake-chocolate.webp 1100w" sizes="(max-width:900px) 92vw, 45vw"><img loading="lazy" src="assets/produtos/cake-chocolate.jpg" alt="Bolo de chocolate" width="1100" height="803"></picture></div>
         <div class="pb">
           <h3>Do cake ao brioche, acabamento profissional</h3>
           <p>Cakes em 10 sabores, Brioche e Bolo Rei, Creme Pasteleiro Sublime, Chantilly, Icing e cacau.</p>
@@ -400,7 +400,7 @@ footer .soc a:hover{color:#fff}
         </div>
       </article>
       <article class="pcard rv" style="transition-delay:.16s">
-        <div class="ph"><span class="cat">Gama Complementar</span><img loading="lazy" src="assets/produtos/cocoa.jpg" alt="Cacau e ingredientes"></div>
+        <div class="ph"><span class="cat">Gama Complementar</span><picture><source type="image/webp" srcset="assets/produtos/cocoa-480.webp 480w, assets/produtos/cocoa-800.webp 800w, assets/produtos/cocoa.webp 1100w" sizes="(max-width:900px) 92vw, 45vw"><img loading="lazy" src="assets/produtos/cocoa.jpg" alt="Cacau e ingredientes" width="1100" height="803"></picture></div>
         <div class="pb">
           <h3>Tudo o que completa a sua bancada</h3>
           <p>Chocolates e coberturas, frutas e geleias, margarinas técnicas, natas e levedura — uma só entrega resolve a produção.</p>
@@ -426,20 +426,20 @@ footer .soc a:hover{color:#fff}
   </div>
   <div class="marquee rv" aria-label="Galeria de receitas Massa Prima">
     <div class="mq-track" id="mqtrack">
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/pasteis-de-nata.jpg" alt=""><span>Pastéis de nata</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/pao-rustico.jpg" alt=""><span>Pão rústico</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/bolo-rei.jpg" alt=""><span>Bolo Rei</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/croissants.jpg" alt=""><span>Croissants brioche</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/torta-chocolate-framboesa.jpg" alt=""><span>Torta de chocolate</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/pao-de-deus.jpg" alt=""><span>Pão de Deus</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/bolas-de-berlim.jpg" alt=""><span>Bolas de Berlim</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/broa-milho.jpg" alt=""><span>Broa de milho</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/mil-folhas.jpg" alt=""><span>Mil-folhas</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/tronco-de-natal.jpg" alt=""><span>Tronco de Natal</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/madalenas.jpg" alt=""><span>Madalenas</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/travesseiros-de-sintra.jpg" alt=""><span>Travesseiros de Sintra</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/rolos-de-canela.jpg" alt=""><span>Rolos de canela</span></div>
-      <div class="mq-item"><img loading="lazy" src="assets/receitas/queques-de-laranja.jpg" alt=""><span>Queques de laranja</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/pasteis-de-nata-480.webp"><img loading="lazy" src="assets/receitas/pasteis-de-nata.jpg" alt="" width="250" height="310"></picture><span>Pastéis de nata</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/pao-rustico-480.webp"><img loading="lazy" src="assets/receitas/pao-rustico.jpg" alt="" width="250" height="310"></picture><span>Pão rústico</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/bolo-rei-480.webp"><img loading="lazy" src="assets/receitas/bolo-rei.jpg" alt="" width="250" height="310"></picture><span>Bolo Rei</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/croissants-480.webp"><img loading="lazy" src="assets/receitas/croissants.jpg" alt="" width="250" height="310"></picture><span>Croissants brioche</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/torta-chocolate-framboesa-480.webp"><img loading="lazy" src="assets/receitas/torta-chocolate-framboesa.jpg" alt="" width="250" height="310"></picture><span>Torta de chocolate</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/pao-de-deus-480.webp"><img loading="lazy" src="assets/receitas/pao-de-deus.jpg" alt="" width="250" height="310"></picture><span>Pão de Deus</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/bolas-de-berlim-480.webp"><img loading="lazy" src="assets/receitas/bolas-de-berlim.jpg" alt="" width="250" height="310"></picture><span>Bolas de Berlim</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/broa-milho-480.webp"><img loading="lazy" src="assets/receitas/broa-milho.jpg" alt="" width="250" height="310"></picture><span>Broa de milho</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/mil-folhas-480.webp"><img loading="lazy" src="assets/receitas/mil-folhas.jpg" alt="" width="250" height="310"></picture><span>Mil-folhas</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/tronco-de-natal-480.webp"><img loading="lazy" src="assets/receitas/tronco-de-natal.jpg" alt="" width="250" height="310"></picture><span>Tronco de Natal</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/madalenas-480.webp"><img loading="lazy" src="assets/receitas/madalenas.jpg" alt="" width="250" height="310"></picture><span>Madalenas</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/travesseiros-de-sintra-480.webp"><img loading="lazy" src="assets/receitas/travesseiros-de-sintra.jpg" alt="" width="250" height="310"></picture><span>Travesseiros de Sintra</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/rolos-de-canela-480.webp"><img loading="lazy" src="assets/receitas/rolos-de-canela.jpg" alt="" width="250" height="310"></picture><span>Rolos de canela</span></div>
+      <div class="mq-item"><picture><source type="image/webp" srcset="assets/receitas/queques-de-laranja-480.webp"><img loading="lazy" src="assets/receitas/queques-de-laranja.jpg" alt="" width="250" height="310"></picture><span>Queques de laranja</span></div>
     </div>
   </div>
   <div class="wrap" style="text-align:center;margin-top:38px">
@@ -458,7 +458,7 @@ footer .soc a:hover{color:#fff}
       <span class="selo-pill">🌾 Feito em Angola · by quente e bom</span>
     </div>
     <div class="angola-foto rv" style="transition-delay:.1s">
-      <img loading="lazy" src="assets/pessoas/mestre-retrato.jpg" alt="Mestre padeiro angolano">
+      <picture><source type="image/webp" srcset="assets/pessoas/mestre-retrato-480.webp 480w, assets/pessoas/mestre-retrato-800.webp 800w" sizes="(max-width:760px) 92vw, 46vw"><img loading="lazy" src="assets/pessoas/mestre-retrato.jpg" alt="Mestre padeiro angolano"></picture>
     </div>
   </div>
   <div class="wrap">
@@ -467,10 +467,10 @@ footer .soc a:hover{color:#fff}
       <p class="sec-sub">Todos os dias, padeiros e pasteleiros angolanos transformam as nossas matérias-primas no pão e nos bolos deste país.</p>
     </div>
     <div class="galeria rv">
-      <figure><img loading="lazy" src="assets/pessoas/maos-mistura.jpg" alt="Deitar o mix na taça"><figcaption>Do mix à massa</figcaption></figure>
-      <figure><img loading="lazy" src="assets/pessoas/padeiro-amassar.jpg" alt="Padeiro a amassar"><figcaption>Amassar</figcaption></figure>
-      <figure><img loading="lazy" src="assets/pessoas/padeiro-forno.jpg" alt="Padeira a tirar pão do forno"><figcaption>Ao forno</figcaption></figure>
-      <figure><img loading="lazy" src="assets/pessoas/pasteleira-creme.jpg" alt="Pasteleira a rechear um bolo"><figcaption>A rechear</figcaption></figure>
+      <figure><picture><source type="image/webp" srcset="assets/pessoas/maos-mistura-480.webp 480w, assets/pessoas/maos-mistura-800.webp 800w" sizes="(max-width:760px) 46vw, 24vw"><img loading="lazy" src="assets/pessoas/maos-mistura.jpg" alt="Deitar o mix na taça"></picture><figcaption>Do mix à massa</figcaption></figure>
+      <figure><picture><source type="image/webp" srcset="assets/pessoas/padeiro-amassar-480.webp 480w, assets/pessoas/padeiro-amassar-800.webp 800w" sizes="(max-width:760px) 46vw, 24vw"><img loading="lazy" src="assets/pessoas/padeiro-amassar.jpg" alt="Padeiro a amassar"></picture><figcaption>Amassar</figcaption></figure>
+      <figure><picture><source type="image/webp" srcset="assets/pessoas/padeiro-forno-480.webp 480w, assets/pessoas/padeiro-forno-800.webp 800w" sizes="(max-width:760px) 46vw, 24vw"><img loading="lazy" src="assets/pessoas/padeiro-forno.jpg" alt="Padeira a tirar pão do forno"></picture><figcaption>Ao forno</figcaption></figure>
+      <figure><picture><source type="image/webp" srcset="assets/pessoas/pasteleira-creme-480.webp 480w, assets/pessoas/pasteleira-creme-800.webp 800w" sizes="(max-width:760px) 46vw, 24vw"><img loading="lazy" src="assets/pessoas/pasteleira-creme.jpg" alt="Pasteleira a rechear um bolo"></picture><figcaption>A rechear</figcaption></figure>
     </div>
   </div>
 </section>
@@ -522,7 +522,7 @@ footer .soc a:hover{color:#fff}
 <section class="formacao" id="apoio">
   <div class="wrap form-grid">
     <div class="form-foto rv">
-      <img loading="lazy" src="assets/pessoas/formacao.jpg" alt="Formadora Massa Prima a demonstrar a massa a dois jovens padeiros">
+      <picture><source type="image/webp" srcset="assets/pessoas/formacao-480.webp 480w, assets/pessoas/formacao-800.webp 800w" sizes="(max-width:900px) 92vw, 46vw"><img loading="lazy" src="assets/pessoas/formacao.jpg" alt="Formadora Massa Prima a demonstrar a massa a dois jovens padeiros"></picture>
       <span class="badge">🤝 Incluído no acompanhamento — sem custo à parte</span>
     </div>
     <div class="form-txt rv" style="transition-delay:.1s">
@@ -586,7 +586,7 @@ footer .soc a:hover{color:#fff}
 <div class="graos-band"></div>
 <footer>
   <div class="wrap">
-    <img src="assets/logo_bege.png" alt="Massa Prima">
+    <picture><source type="image/webp" srcset="assets/logo_bege.webp"><img src="assets/logo_bege.png" alt="Massa Prima" width="420" height="258"></picture>
     <p><em>qualidade que inspira resultados perfeitos</em></p>
     <p class="soc"><a href="https://www.instagram.com/massaprima" target="_blank" rel="noopener">Instagram</a>·<a href="https://www.facebook.com/1109918612215834" target="_blank" rel="noopener">Facebook</a>·<a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p>
     <p style="font-size:.8rem;padding-bottom:18px;opacity:.75">© 2026 Massa Prima · Doce, Quente e Bom Angola, Lda · NIF 5417154385 · Viana, Luanda</p>
