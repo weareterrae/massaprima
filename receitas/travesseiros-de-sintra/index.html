@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Travesseiros de Sintra","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/travesseiros-de-sintra.jpg","recipeYield":"±16 unidades","recipeIngredient":["Farinha de trigo — 1.000 g","Margarina Perla Folhados — 750 g","Água — 500 g","Sal — 20 g","Miolo de Amêndoa (creme) — 400 g","Ovos e açúcar (creme) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Faça a massa folhada e estenda fina."},{"@type":"HowToStep","text":"Recheio: creme de amêndoa com ovos e açúcar."},{"@type":"HowToStep","text":"Coloque o creme e dobre em travesseiro, selando bem as bordas."},{"@type":"HowToStep","text":"Polvilhe com açúcar e coza a 200 ºC até dourar e folhar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Travesseiros de Sintra"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Travesseiros de Sintra</h1>
 <p class="lead">⏱ 1h30 (com voltas) · 🥖 ±16 unidades</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=travesseiros-de-sintra">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=pz-margarina-para-folhados,pz-miolo-de-amendoa-laminada">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Ftravesseiros-de-sintra%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/travesseiros-de-sintra/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>Farinha de trigo</td><td class="num">1.000 g</td></tr><tr><td>Margarina Perla Folhados</td><td class="num">750 g</td></tr><tr><td>Água</td><td class="num">500 g</td></tr><tr><td>Sal</td><td class="num">20 g</td></tr><tr><td>Miolo de Amêndoa (creme)</td><td class="num">400 g</td></tr><tr><td>Ovos e açúcar (creme)</td><td class="num">q.b.</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/pz-margarina-para-folhados/">Margarina Perla Folhados Placas</a> · <a href="/catalogo/pz-miolo-de-amendoa-laminada/">Miolo de Amêndoa Laminada</a></p></div>

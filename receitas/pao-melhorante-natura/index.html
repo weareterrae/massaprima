@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Pão do dia clean-label (Melhorante Natura)","recipeCategory":"Pão","image":"https://massaprima.com/assets/receitas/pao-melhorante-natura.jpg","recipeYield":"±160 pães de 100 g (em massa)","recipeIngredient":["Farinha de trigo (a do padeiro) — 10.000 g","MP Melhorante Natura (1% sobre a farinha) — 100 g","Água — ± 6.000 g","Sal — 180 g","Levedura Fresca — 300 g","ou Levedura Seca — 100 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Junte à farinha o Melhorante Natura (1% sobre a farinha), o sal e a levedura."},{"@type":"HowToStep","text":"Adicione a água e amasse até obter uma massa lisa e elástica."},{"@type":"HowToStep","text":"Deixe levedar em massa até dobrar de volume."},{"@type":"HowToStep","text":"Tenda os pães, deixe levedar de novo e coza em forno bem quente com vapor."},{"@type":"HowToStep","text":"Retire e deixe arrefecer sobre grelha para a côdea estalar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Pão","item":"https://massaprima.com/receitas.html#P%C3%A3o"},{"@type":"ListItem","position":4,"name":"Pão do dia clean-label (Melhorante Natura)"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Pão do dia clean-label (Melhorante Natura)</h1>
 <p class="lead">⏱ ±2h · 🥖 ±160 pães de 100 g (em massa)</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=pao-melhorante-natura">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=melhorante-natura,pz-levedura-seca">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Fpao-melhorante-natura%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/pao-melhorante-natura/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>Farinha de trigo (a do padeiro)</td><td class="num">10.000 g</td></tr><tr><td>MP Melhorante Natura (1% sobre a farinha)</td><td class="num">100 g</td></tr><tr class="grp"><td colspan="2">Restante receita (sugestão da escola)</td></tr><tr><td>Água</td><td class="num">± 6.000 g</td></tr><tr><td>Sal</td><td class="num">180 g</td></tr><tr><td>Levedura Fresca</td><td class="num">300 g</td></tr><tr><td>ou Levedura Seca</td><td class="num">100 g</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/melhorante-natura/">Massa Prima Melhorante Natura</a> · <a href="/catalogo/pz-levedura-seca/">Levedura Seca (PZ)</a></p></div>

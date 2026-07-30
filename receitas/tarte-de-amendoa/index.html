@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Tarte de amêndoa","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/tarte-de-amendoa.jpg","recipeYield":"±3 tartes","recipeIngredient":["MP Cake Neutro — 1.000 g","Óleo vegetal — 300 g","Ovos — (±6) 300 g","Água — 225 g","Miolo de Amêndoa Laminada (topo) — 300 g","Açúcar + margarina (crocante) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Bata o Cake Neutro, o óleo, os ovos e a água ±5 min. Verta em formas de tarte untadas."},{"@type":"HowToStep","text":"Prepare o crocante: leve ao lume açúcar, margarina e um pouco de leite; junte a amêndoa laminada."},{"@type":"HowToStep","text":"Espalhe o crocante de amêndoa sobre o batido."},{"@type":"HowToStep","text":"Coza a 180 ºC durante ±30 min, até a amêndoa dourar. Pincele com Decorgel Caramelo para brilho."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Tarte de amêndoa"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Tarte de amêndoa</h1>
 <p class="lead">⏱ 50 min · 🥖 ±3 tartes</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=tarte-de-amendoa">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=cake-neutro,pz-miolo-de-amendoa-laminada,pz-decorgel-caramelo">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Ftarte-de-amendoa%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/tarte-de-amendoa/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>MP Cake Neutro</td><td class="num">1.000 g</td></tr><tr><td>Óleo vegetal</td><td class="num">300 g</td></tr><tr><td>Ovos</td><td class="num">(±6) 300 g</td></tr><tr><td>Água</td><td class="num">225 g</td></tr><tr><td>Miolo de Amêndoa Laminada (topo)</td><td class="num">300 g</td></tr><tr><td>Açúcar + margarina (crocante)</td><td class="num">q.b.</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/cake-neutro/">Massa Prima Cake Neutro</a> · <a href="/catalogo/pz-miolo-de-amendoa-laminada/">Miolo de Amêndoa Laminada</a> · <a href="/catalogo/pz-decorgel-caramelo/">Decorgel Caramelo</a></p></div>

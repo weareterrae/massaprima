@@ -184,8 +184,39 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 `;
+
+// partilha (sem WhatsApp — copiar link + Facebook)
+function shareBar(url, title) {
+  const u = encodeURIComponent(url);
+  return `<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span>` +
+    `<a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=${u}" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a>` +
+    `<button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('${url}').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>`;
+}
+// FAQ factual do produto (só perguntas com resposta real) → {html, ld}
+function productFaq(p) {
+  const qa = [];
+  const fmts = (p.formatos || []).map((f) => kgLabel(f)).filter(Boolean);
+  if (fmts.length) qa.push(["Em que formatos está disponível?", `${p.nome} está disponível em ${fmts.join(", ")}. Indique o formato pretendido no pedido de cotação.`]);
+  if (p.validade || p.conservacao) qa.push(["Qual é a validade e como se conserva?", [p.validade ? `Validade: ${p.validade}.` : "", p.conservacao ? `Conservação: ${p.conservacao}.` : ""].filter(Boolean).join(" ")]);
+  qa.push(["Como peço o preço ou faço uma encomenda?", `Adicione o produto ao pedido de cotação e a nossa equipa comercial responde em privado com o preço e o plano de entregas. Também pode escrever para geral@quenteebom.co.ao.`]);
+  qa.push(["Posso pedir uma amostra?", `Sim. Indique este produto no pedido de cotação e mencione que pretende amostra — a equipa comercial trata do resto.`]);
+  qa.push(["Dão apoio técnico e formação?", `Sim. A nossa equipa técnica demonstra os produtos e forma a sua equipa, na sua padaria ou nas nossas instalações em Viana. Veja a página de Formação.`]);
+  const html = `<section class="block faq"><h2>Perguntas frequentes</h2>${qa.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}</section>`;
+  const ld = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: qa.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) };
+  return { html, ld };
+}
 
 function head({ title, desc, canonical, jsonld }) {
   return `<!DOCTYPE html><html lang="pt-AO"><head>
@@ -239,16 +270,19 @@ function productPage(p) {
   if (p.conservacao) cons.push(`<dt>Conservação</dt><dd>${esc(p.conservacao)}</dd>`);
   if (cons.length) sec.push(`<div class="block"><h2>Conservação</h2><dl class="kv">${cons.join("")}</dl></div>`);
   const mail = `mailto:geral@quenteebom.co.ao?subject=${encodeURIComponent("Massa Prima — " + p.nome)}`;
-  return head({ title, desc, canonical: url, jsonld: [prodLd, breadcrumbLd(cb)] }) + `<main class="wrap">
+  const faq = productFaq(p);
+  return head({ title, desc, canonical: url, jsonld: [prodLd, faq.ld, breadcrumbLd(cb)] }) + `<main class="wrap">
 ${crumbs(cb)}
 <article class="hero">${thumb}<div>
 <span class="eyebrow">${esc(p.subfamilia)}</span>${pz ? `<span class="mkbadge">${esc(p.marca)}</span>` : ""}
 <h1>${esc(p.nome)}</h1>
 ${p.desc ? `<p class="lead">${esc(p.desc)}</p>` : ""}
 <div class="fmts">${(p.formatos || []).map((f) => `<span class="kg">${esc(kgLabel(f))}</span>`).join("")}</div>
-<div class="cta-row"><a class="btn primary" href="/cotacao.html?produto=${esc(p.slug)}">Adicionar ao pedido de cotação</a><a class="btn ghost" href="${mail}">Falar com a equipa</a></div>
+<div class="cta-row"><a class="btn primary" href="/cotacao.html?produto=${esc(p.slug)}">Adicionar ao pedido de cotação</a><a class="btn ghost" href="/cotacao.html?produto=${esc(p.slug)}&amostra=1">Pedir amostra</a><a class="btn ghost" href="${mail}">Falar com a equipa</a></div>
+${shareBar(url, p.nome)}
 </div></article>
 ${sec.join("\n")}
+${faq.html}
 <div class="cta-row" style="margin:6px 0 10px"><button class="btn ghost" onclick="window.print()">Imprimir ficha técnica</button></div>
 ${rec.length ? `<section class="rel"><h2>Receitas com este produto</h2><div class="rgrid">${rec.map((r) => `<a href="/receitas/${esc(r.slug)}/"><div class="th">${pic(r.foto, `<img loading="lazy" src="/${esc(r.foto)}" alt="${esc(r.titulo)}">`)}</div><div class="t">${esc(r.titulo)}</div></a>`).join("")}</div></section>` : ""}
 ${rp.length ? `<section class="rel"><h2>Produtos relacionados</h2><div class="rgrid">${rp.map((x) => `<a href="/catalogo/${esc(x.slug)}/"><div class="th">${x.img ? pic(x.img, `<img loading="lazy" src="/${esc(x.img)}" alt="${esc(x.nome)}">`) : ""}</div><div class="t">${esc(x.nome.replace("Massa Prima ", ""))}</div></a>`).join("")}</div></section>` : ""}
@@ -274,6 +308,7 @@ ${crumbs(cb)}
 <h1>${esc(r.titulo)}</h1>
 <p class="lead">⏱ ${esc(r.tempo)} · 🥖 ${esc(r.rend)}${r.dificuldade ? " · " + esc(r.dificuldade) : ""}</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=${esc(r.slug)}">Calcular food cost</a><a class="btn ghost" href="${cotaHref}">Adicionar ingredientes à cotação</a></div>
+${shareBar(url, r.titulo)}
 </div></article>
 ${tabela ? `<div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody>${tabela}</tbody></table></div></div>` : ""}
 ${usados ? `<div class="block"><h2>Produtos Massa Prima usados</h2><p>${usados}</p></div>` : ""}
@@ -376,6 +411,7 @@ function solucoesPage(s) {
 <h1>${esc(s.nome)}</h1>
 <p class="lead" style="margin-bottom:16px">${esc(s.lead)}</p>
 <div class="cta-row" style="margin-bottom:8px"><a class="btn primary" href="/cotacao.html">Pedir cotação</a><a class="btn ghost" href="/formacao">Pedir demonstração</a></div>
+${shareBar(url, s.nome + " — Massa Prima")}
 <div class="block"><h2>O que este segmento precisa</h2><ul>${s.necessidades.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>
 ${prodGrid ? `<section class="rel"><h2>Produtos indicados</h2><div class="rgrid">${prodGrid}</div><p style="margin-top:10px"><a href="/catalogo.html">Ver catálogo completo →</a></p></section>` : ""}
 ${recGrid ? `<section class="rel"><h2>Receitas para começar</h2><div class="rgrid">${recGrid}</div><p style="margin-top:10px"><a href="/receitas.html">Ver todas as receitas →</a></p></section>` : ""}

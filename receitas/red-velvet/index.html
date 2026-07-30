@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Red velvet com chantilly","recipeCategory":"Bolos & Tortas","image":"https://massaprima.com/assets/receitas/red-velvet.jpg","recipeYield":"1 bolo de 2 andares (±14 fatias)","recipeIngredient":["Soft Cake Red Velvet — 1.000 g","Ovos — 350 g","Óleo vegetal* — 300 g","Água — 225 g","MP Chantilly Pó — 600 g","Água ou leite frio — 1.000 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Misturar todos os ingredientes e bater com raquete, durante"},{"@type":"HowToStep","text":"5 minutos em velocidade lenta, até obter um preparado homogéneo."},{"@type":"HowToStep","text":"Cozer a 170-180ºC."},{"@type":"HowToStep","text":"Adequar o tempo de cozedura ao tipo de aplicação."},{"@type":"HowToStep","text":"Chantilly: adicionar o MP Chantilly Pó à água ou leite frio e bater com varas na velocidade máxima 4-5 minutos."},{"@type":"HowToStep","text":"Montar em camadas: bolo, chantilly, bolo, chantilly. Alisar e decorar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Bolos & Tortas","item":"https://massaprima.com/receitas.html#Bolos%20%26%20Tortas"},{"@type":"ListItem","position":4,"name":"Red velvet com chantilly"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Red velvet com chantilly</h1>
 <p class="lead">⏱ ±1h15 · 🥖 1 bolo de 2 andares (±14 fatias)</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=red-velvet">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=pz-soft-cake-red-velvet,chantilly-po">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Fred-velvet%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/red-velvet/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>Soft Cake Red Velvet</td><td class="num">1.000 g</td></tr><tr><td>Ovos</td><td class="num">350 g</td></tr><tr><td>Óleo vegetal*</td><td class="num">300 g</td></tr><tr><td>Água</td><td class="num">225 g</td></tr><tr class="grp"><td colspan="2">Chantilly</td></tr><tr><td>MP Chantilly Pó</td><td class="num">600 g</td></tr><tr><td>Água ou leite frio</td><td class="num">1.000 g</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/pz-soft-cake-red-velvet/">Soft Cake Red Velvet (PZ)</a> · <a href="/catalogo/chantilly-po/">Massa Prima Chantilly Pó</a></p></div>

@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Pão multicereais decorado","recipeCategory":"Pão","image":"https://massaprima.com/assets/receitas/multicereais.jpg","recipeYield":"±32 pães de 500 g (em massa)","recipeIngredient":["MP Pão Multicereais 100% LD — 10.000 g","Levedura Fresca — 300 g","ou Levedura Seca — 100 g","Água — ± 5.900 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Misturar todos os ingredientes e amassar cerca de 12 minutos."},{"@type":"HowToStep","text":"Deixar repousar 15 minutos, enrolar e descansar mais 10 minutos."},{"@type":"HowToStep","text":"Formar e decorar com as sementes que desejar (sésamo, flocos de aveia, 4 sementes) e deixar levedar 45 minutos."},{"@type":"HowToStep","text":"Cozer a uma temperatura de 210-220ºC com vapor."},{"@type":"HowToStep","text":"Adequar o tempo de cozimento ao tamanho das peças."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Pão","item":"https://massaprima.com/receitas.html#P%C3%A3o"},{"@type":"ListItem","position":4,"name":"Pão multicereais decorado"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Pão multicereais decorado</h1>
 <p class="lead">⏱ ±2h · 🥖 ±32 pães de 500 g (em massa)</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=multicereais">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=pao-multicereais,mistura-4-sementes,sementes-de-sesamo-sem-pele">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Fmulticereais%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/multicereais/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>MP Pão Multicereais 100% LD</td><td class="num">10.000 g</td></tr><tr><td>Levedura Fresca</td><td class="num">300 g</td></tr><tr><td>ou Levedura Seca</td><td class="num">100 g</td></tr><tr><td>Água</td><td class="num">± 5.900 g</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/pao-multicereais/">Massa Prima Pão Multicereais 100%</a> · <a href="/catalogo/mistura-4-sementes/">Mistura 4 Sementes</a> · <a href="/catalogo/sementes-de-sesamo-sem-pele/">Sementes de Sésamo</a></p></div>

@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Aletria de Natal","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/aletria.jpg","recipeYield":"±2 travessas (±24 doses)","recipeIngredient":["Aletria — 500 g","Leite — 2.000 g","Açúcar — 350 g","Creme de Ovo (PZ) — 300 g","Casca de limão e canela em pau — q.b.","Canela em pó (para o xadrez) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Ferva o leite com a casca de limão e a canela em pau."},{"@type":"HowToStep","text":"Junte a aletria partida e coza em lume brando, mexendo, até estar macia."},{"@type":"HowToStep","text":"Adicione o açúcar e apure até engrossar ligeiramente."},{"@type":"HowToStep","text":"Fora do lume, envolva o Creme de Ovo — dá a riqueza das gemas sem o trabalho nem o risco."},{"@type":"HowToStep","text":"Verta em travessas e desenhe o tradicional xadrez com canela em pó."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Aletria de Natal"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Aletria de Natal</h1>
 <p class="lead">⏱ 40 min · 🥖 ±2 travessas (±24 doses)</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=aletria">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=pz-creme-de-ovo">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Faletria%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/aletria/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>Aletria</td><td class="num">500 g</td></tr><tr><td>Leite</td><td class="num">2.000 g</td></tr><tr><td>Açúcar</td><td class="num">350 g</td></tr><tr><td>Creme de Ovo (PZ)</td><td class="num">300 g</td></tr><tr><td>Casca de limão e canela em pau</td><td class="num">q.b.</td></tr><tr><td>Canela em pó (para o xadrez)</td><td class="num">q.b.</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/pz-creme-de-ovo/">Creme de Ovo</a></p></div>

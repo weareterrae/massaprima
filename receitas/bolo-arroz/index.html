@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Bolo de arroz tradicional","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/bolo-arroz.jpg","recipeYield":"±150 bolos de 110 g","recipeIngredient":["MP Queque e Bolo de Arroz — 10.000 g","Água — 4000 g","Óleo — 2500 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo."},{"@type":"HowToStep","text":"Distribuir o batido pelas formas."},{"@type":"HowToStep","text":"Cozer a 180-200º C durante 20-25 minutos."},{"@type":"HowToStep","text":"Polvilhar com açúcar antes de cozer para a crosta característica."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Bolo de arroz tradicional"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Bolo de arroz tradicional</h1>
 <p class="lead">⏱ ±40 min · 🥖 ±150 bolos de 110 g</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=bolo-arroz">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=queque-e-bolo-de-arroz">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Fbolo-arroz%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/bolo-arroz/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>MP Queque e Bolo de Arroz</td><td class="num">10.000 g</td></tr><tr><td>Água</td><td class="num">4000 g</td></tr><tr><td>Óleo</td><td class="num">2500 g</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/queque-e-bolo-de-arroz/">Massa Prima Queque e Bolo de Arroz</a></p></div>

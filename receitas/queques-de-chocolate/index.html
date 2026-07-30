@@ -58,7 +58,17 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
-@media print{header,footer,.cta-row,.crumbs,.rel{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
+.share span{font-weight:800;color:var(--muted)}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq details[open] summary::after{content:'–'}
+.faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+@media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Queques de chocolate","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/queques-de-chocolate.jpg","recipeYield":"±20 queques","recipeIngredient":["MP Muffin Chocolate — 1.000 g","Água — 400 g","Óleo — 400 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Bater o MP Muffin Chocolate, a água e o óleo ±5 min até batido homogéneo."},{"@type":"HowToStep","text":"Distribuir nas formas de queque."},{"@type":"HowToStep","text":"Cozer a 200 ºC durante ±25 min; abrir o ar quando formarem cabeça."},{"@type":"HowToStep","text":"Opcional: pincelar Decorgel Chocolate ainda mornos para um topo brilhante."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Queques de chocolate"}]}</script>
@@ -75,6 +85,7 @@ footer a{color:var(--bege)}
 <h1>Queques de chocolate</h1>
 <p class="lead">⏱ 35 min · 🥖 ±20 queques</p>
 <div class="cta-row"><a class="btn primary" href="/foodcost.html?receita=queques-de-chocolate">Calcular food cost</a><a class="btn ghost" href="/cotacao.html?produtos=muffin-chocolate,pz-decorgel-chocolate">Adicionar ingredientes à cotação</a></div>
+<div class="share" aria-label="Partilhar esta página"><span>Partilhar</span><a class="sh" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmassaprima.com%2Freceitas%2Fqueques-de-chocolate%2F" target="_blank" rel="noopener" aria-label="Partilhar no Facebook">Facebook</a><button class="sh" type="button" onclick="var b=this;if(navigator.clipboard){navigator.clipboard.writeText('https://massaprima.com/receitas/queques-de-chocolate/').then(function(){b.textContent='Link copiado ✓';setTimeout(function(){b.textContent='Copiar link'},1800)})}">Copiar link</button></div>
 </div></article>
 <div class="block"><h2>Ingredientes</h2><div class="tbl"><table class="tec"><tbody><tr><td>MP Muffin Chocolate</td><td class="num">1.000 g</td></tr><tr><td>Água</td><td class="num">400 g</td></tr><tr><td>Óleo</td><td class="num">400 g</td></tr></tbody></table></div></div>
 <div class="block"><h2>Produtos Massa Prima usados</h2><p><a href="/catalogo/muffin-chocolate/">Massa Prima Muffin Chocolate</a> · <a href="/catalogo/pz-decorgel-chocolate/">Decorgel Chocolate</a></p></div>
