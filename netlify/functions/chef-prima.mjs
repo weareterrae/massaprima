@@ -101,8 +101,8 @@ export default async (req, context) => {
   const ip = context?.ip || req.headers.get("x-nf-client-connection-ip") || "?";
   if (excedeuLimites(ip)) return json({ error: "IA indisponível" }, 429);
 
-  const chave = process.env.ANTHROPIC_API_KEY;
-  if (!chave) return json({ reply: CONTINGENCIA });
+  // Precisa de PELO MENOS um motor: Gemini (principal) ou Anthropic (reforço opcional).
+  if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY) return json({ reply: CONTINGENCIA });
 
   let corpo;
   try { corpo = await req.json(); } catch { return json({ error: "pedido inválido" }, 400); }
@@ -117,77 +117,80 @@ export default async (req, context) => {
   }
 
   const system = await getPrompt();
-  const modelo = process.env.CLAUDE_MODEL || "claude-sonnet-5";
-  const base = (process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com").replace(/\/$/, "");
-  const anthHeaders = { "x-api-key": chave, "anthropic-version": "2023-06-01", "content-type": "application/json" };
+  const geminiModelo = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+  const geminiChave = process.env.GEMINI_API_KEY;
+  const geminiBase = (process.env.GOOGLE_GEMINI_BASE_URL || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
+  const contents = messages.map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] }));
 
-  // Gera a resposta completa (Claude + retry → Gemini → contingência). Mesmo comportamento de sempre.
-  async function gerarReply() {
+  // Reforço OPCIONAL: Claude, só se existir chave Anthropic (o motor principal é o Gemini).
+  async function tentarClaude() {
+    const chaveA = process.env.ANTHROPIC_API_KEY;
+    if (!chaveA) return null;
+    const base = (process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com").replace(/\/$/, "");
     try {
-      const pedirClaude = () => fetch(`${base}/v1/messages`, {
-        method: "POST", headers: anthHeaders,
-        body: JSON.stringify({ model: modelo, max_tokens: 900, system, messages }),
+      const r = await fetch(`${base}/v1/messages`, {
+        method: "POST",
+        headers: { "x-api-key": chaveA, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+        body: JSON.stringify({ model: process.env.CLAUDE_MODEL || "claude-sonnet-5", max_tokens: 900, system, messages }),
       });
-      let r = await pedirClaude();
-      if (!r.ok && (r.status === 429 || r.status >= 500)) {
-        console.error("chef-prima: Anthropic", r.status, "→ retry em 1.2s");
-        await new Promise((res) => setTimeout(res, 1200));
-        r = await pedirClaude();
-      }
-      if (!r.ok) {
-        console.error("chef-prima: Anthropic", r.status, await r.text());
-        const b = await planoBGemini(system, messages, 900);
-        return b || CONTINGENCIA;
-      }
+      if (!r.ok) return null;
       const data = await r.json();
       let reply = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
       if (data.stop_reason === "max_tokens") reply = reply.replace(/\n[^\n]*$/, "").trim() || reply;
-      return reply;
-    } catch (e) {
-      console.error("chef-prima: falha de rede", e);
-      const b = await planoBGemini(system, messages, 900);
-      return b || CONTINGENCIA;
-    }
+      return reply || null;
+    } catch { return null; }
   }
 
-  // ── Streaming (opcional, aditivo): o widget pede {stream:true}; se o streaming
-  // não arrancar, respondemos em JSON — o widget trata os dois formatos. Caminho
-  // JSON abaixo fica 100% intacto como fallback.
-  if (corpo?.stream === true) {
+  // Motor principal = GEMINI. Se falhar, tenta Claude (se houver chave); senão, contingência.
+  async function gerarReply() {
+    const g = await planoBGemini(system, messages, 900);
+    if (g) return g;
+    return (await tentarClaude()) || CONTINGENCIA;
+  }
+
+  // ── Streaming (aditivo) via Gemini SSE. Se não arrancar ou não sair nada, cai para
+  // o caminho JSON (gerarReply) — o widget trata os dois formatos. Fallback total.
+  if (corpo?.stream === true && geminiChave) {
     try {
-      const r = await fetch(`${base}/v1/messages`, {
-        method: "POST", headers: anthHeaders,
-        body: JSON.stringify({ model: modelo, max_tokens: 900, system, messages, stream: true }),
+      const r = await fetch(`${geminiBase}/v1beta/models/${geminiModelo}:streamGenerateContent?alt=sse`, {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-goog-api-key": geminiChave },
+        body: JSON.stringify({ system_instruction: { parts: [{ text: system }] }, contents, generationConfig: { maxOutputTokens: 900 } }),
       });
       if (r.ok && r.body) {
         const upstream = r.body.getReader();
         const dec = new TextDecoder(), enc = new TextEncoder();
+        let buf = "", saiuAlgo = false;
         const stream = new ReadableStream({
           async pull(controller) {
             try {
               const { done, value } = await upstream.read();
-              if (done) { controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); return; }
-              // reencaminha só os deltas de texto do formato SSE da Anthropic
-              for (const linha of dec.decode(value, { stream: true }).split("\n")) {
+              if (done) {
+                // se o stream não produziu texto, recorre ao JSON antes de fechar
+                if (!saiuAlgo) { const g = await gerarReply(); controller.enqueue(enc.encode("data: " + JSON.stringify({ t: g }) + "\n\n")); }
+                controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); return;
+              }
+              buf += dec.decode(value, { stream: true });
+              let idx;
+              while ((idx = buf.indexOf("\n")) >= 0) {
+                const linha = buf.slice(0, idx); buf = buf.slice(idx + 1);
                 if (!linha.startsWith("data:")) continue;
                 const p = linha.slice(5).trim();
                 if (!p || p === "[DONE]") continue;
                 try {
                   const ev = JSON.parse(p);
-                  const t = ev?.delta?.text;
-                  if (ev.type === "content_block_delta" && typeof t === "string" && t)
-                    controller.enqueue(enc.encode("data: " + JSON.stringify({ t }) + "\n\n"));
+                  const t = (ev?.candidates?.[0]?.content?.parts || []).map((x) => x.text || "").join("");
+                  if (t) { saiuAlgo = true; controller.enqueue(enc.encode("data: " + JSON.stringify({ t }) + "\n\n")); }
                 } catch { /* ignora keep-alive/eventos não-texto */ }
               }
-            } catch (e) { console.error("chef-prima: stream", e); try { controller.close(); } catch {} }
+            } catch (e) { console.error("chef-prima: stream Gemini", e); try { controller.close(); } catch {} }
           },
           cancel() { try { upstream.cancel(); } catch {} },
         });
         return new Response(stream, { headers: { "content-type": "text/event-stream; charset=utf-8", "cache-control": "no-cache", "x-accel-buffering": "no" } });
       }
-      // streaming não arrancou → cai para JSON (com retry/Gemini/contingência)
-      console.error("chef-prima: stream não arrancou", r.status);
-    } catch (e) { console.error("chef-prima: stream falhou, uso JSON", e); }
+      console.error("chef-prima: stream Gemini não arrancou", r.status);
+    } catch (e) { console.error("chef-prima: stream Gemini falhou, uso JSON", e); }
   }
 
   return json({ reply: await gerarReply() });
