@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Napolitanas de chocolate","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/napolitanas-chocolate.jpg","recipeYield":"±14 por kg de mix","recipeIngredient":["Massa Prima Brioche — 1.000 g","Água — 325 g","Margarina (na massa) — 50 g","Levedura — 60 g","ou Levedura Seca — 20 g","Margarina Perla Folhados — q.b. para laminar","Chocolatier Forno (bastão) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Amasse o Brioche com a água, a margarina e a levedura até obter massa lisa; deixe repousar."},{"@type":"HowToStep","text":"Lamine com a Margarina Perla Folhados, dando as voltas como num folhado."},{"@type":"HowToStep","text":"Corte em retângulos, coloque um ou dois bastões de Chocolatier Forno e enrole."},{"@type":"HowToStep","text":"Deixe levedar, pincele com ovo e coza até dourar — o Chocolatier aguenta o forno sem queimar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Napolitanas de chocolate"}]}</script>

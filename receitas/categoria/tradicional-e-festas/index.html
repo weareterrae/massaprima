@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Receitas de Tradicional & Festas — Massa Prima","url":"https://massaprima.com/receitas/categoria/tradicional-e-festas/"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas"}]}</script>

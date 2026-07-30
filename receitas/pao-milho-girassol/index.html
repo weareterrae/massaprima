@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Pão de milho e girassol","recipeCategory":"Pão","image":"https://massaprima.com/assets/receitas/pao-milho-girassol.jpg","recipeYield":"±30 pães de 500 g","recipeIngredient":["Panovite Milho e Girassol 50% — 5.000 g","Farinha de Trigo — 5.000 g","Água — ±5.200 g","Levedura Fresca — 300 g","ou Levedura Seca — 100 g","Não juntar sal"],"recipeInstructions":[{"@type":"HowToStep","text":"Amassar os ingredientes até obter uma massa homogénea (±10 minutos). Temperatura da massa: 25 ºC."},{"@type":"HowToStep","text":"Dividir a massa com o peso desejado, enrolar e deixar repousar 20 minutos."},{"@type":"HowToStep","text":"Dar o formato desejado (pão grande, pequeno, pão de forma, baguete)."},{"@type":"HowToStep","text":"Humedecer as peças com água e colocar a decoração de milho."},{"@type":"HowToStep","text":"Levedação final: 60 minutos."},{"@type":"HowToStep","text":"Cozer com vapor."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Pão","item":"https://massaprima.com/receitas.html#P%C3%A3o"},{"@type":"ListItem","position":4,"name":"Pão de milho e girassol"}]}</script>

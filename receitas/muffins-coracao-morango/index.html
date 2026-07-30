@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Muffins com coração de morango","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/muffins-coracao-morango.jpg","recipeYield":"±180 muffins de 100 g","recipeIngredient":["MP Muffin — 10.000 g","Água — 4000 g","Óleo — 4000 g","Fruitful Filling Morango (±15 g por muffin) — ±2.500 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Misturar todos os ingredientes e bater com raquete cerca de 5 minutos em velocidade média, até obter um batido homogéneo."},{"@type":"HowToStep","text":"Distribuir o batido pelas formas de muffins."},{"@type":"HowToStep","text":"Com saco de pasteleiro e bico liso, injetar uma porção de Fruitful Filling Morango no centro de cada muffin — o recheio é estável ao forno."},{"@type":"HowToStep","text":"Cozer os muffins a uma temperatura de cerca de 200ºC (lar) e 180ºC (teto), durante aproximadamente 25 minutos."},{"@type":"HowToStep","text":"Abrir o ar quando os bolos começarem a formar cabeça."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Muffins com coração de morango"}]}</script>

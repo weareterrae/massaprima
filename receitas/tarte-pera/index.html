@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Tarte folhada de pêra","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/tarte-pera.jpg","recipeYield":"2 tartes (±16 fatias)","recipeIngredient":["Massa folhada (Margarina Perla Folhados) — 2 placas","Pera (escorrida, laminada) — 1.000 g","Brigel Neutro — 1.000 g","Água — 700-900 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Forre a tarteira com massa folhada feita com a Margarina Perla Folhados; pique o fundo."},{"@type":"HowToStep","text":"Disponha a pêra laminada e escorrida em leque sobre a massa."},{"@type":"HowToStep","text":"Coza até a massa ficar dourada e estaladiça."},{"@type":"HowToStep","text":"Pincele com Brigel Neutro (diluído em água a ferver) para dar brilho de pastelaria."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Tarte folhada de pêra"}]}</script>

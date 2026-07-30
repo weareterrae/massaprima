@@ -45,6 +45,11 @@ src="https://www.facebook.com/tr?id=930726976710021&ev=PageView&noscript=1"
 <style>
 :root{--laranja:#EC6607;--laranja-d:#c9550a;--castanho:#77310A;--bege:#FEEAD3;--bege-claro:#FFF7EC;--ink:#3D1A05;--sand:#efe0cd;--sand-line:#e6d3b8;--muted:#8a6a4a;--ok:#2e7d32;--warn:#b4530f}
 *{margin:0;padding:0;box-sizing:border-box}
+/* transição suave entre páginas (View Transitions API; ignorado por browsers antigos) */
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 body{font-family:'Nunito',sans-serif;color:var(--ink);background:var(--bege-claro);line-height:1.55}
 h1,h2,h3,h4{font-family:'Zilla Slab',serif;color:var(--castanho);line-height:1.15}
 .wrap{max-width:1100px;margin:0 auto;padding:0 22px}

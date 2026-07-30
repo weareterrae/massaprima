@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Cake pops de chocolate branco","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/cake-pops-branco.jpg","recipeYield":"±40 cake pops","recipeIngredient":["MP Biscuit (bolo base, esfarelado) — 1.000 g","Ovos — (±15) 750 g","Água — 200 g","Arabesque White 30% (derretido) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Coza um bolo de Biscuit, deixe arrefecer e esfarele."},{"@type":"HowToStep","text":"Amasse a migalha com um pouco de creme ou cobertura até ligar; faça bolinhas e espete os palitos."},{"@type":"HowToStep","text":"Leve ao frio a firmar."},{"@type":"HowToStep","text":"Mergulhe cada bolinha no Arabesque White 30% derretido, decore e deixe cristalizar em pé."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Cake pops de chocolate branco"}]}</script>

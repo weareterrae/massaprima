@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Croissants folhados","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/croissants.jpg","recipeYield":"±14 croissants de 100 g (por kg de mix)","recipeIngredient":["Massa Prima Brioche — 1.000 g","Água — 325 g","Margarina (na massa) — 50 g","Levedura — 60 g","ou Levedura Seca — 20 g","Margarina Perla Folhados — q.b. para laminar"],"recipeInstructions":[{"@type":"HowToStep","text":"Amassar os ingredientes da massa 3 minutos em 1.ª velocidade e 8 minutos em 2.ª (temperatura da massa: 26-28 °C)."},{"@type":"HowToStep","text":"Deixar descansar 5 minutos e esticar ligeiramente a massa no laminador."},{"@type":"HowToStep","text":"Barrar a Margarina Perla Folhados de forma homogénea sobre a superfície da massa."},{"@type":"HowToStep","text":"Dar 1 volta simples e voltar a esticar até 4-5 mm de espessura."},{"@type":"HowToStep","text":"Cortar peças com cerca de 100 g e formar os croissants."},{"@type":"HowToStep","text":"Deixar levedar 60-70 minutos. Pintar com ovo."},{"@type":"HowToStep","text":"Cozer a 220 °C durante cerca de 12 minutos."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Croissants folhados"}]}</script>

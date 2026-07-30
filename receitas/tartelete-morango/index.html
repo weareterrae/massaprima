@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Tartelete de morango brilhante","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/tartelete-morango.jpg","recipeYield":"±24 tarteletes","recipeIngredient":["MP Creme Pasteleiro Sublime — 1.000 g","Açúcar — 1.000 g","Água fria — 3.000 g","Morangos frescos — q.b.","Brigel Morango (brilho) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Prepare o Creme Pasteleiro Sublime a frio: misture o açúcar com o pó, junte a água e bata 3-5 min."},{"@type":"HowToStep","text":"Deixe repousar e encha as bases de tartelete já cozidas."},{"@type":"HowToStep","text":"Disponha os morangos frescos laminados por cima."},{"@type":"HowToStep","text":"Pincele com Brigel Morango para dar o brilho e fixar a fruta."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Tartelete de morango brilhante"}]}</script>

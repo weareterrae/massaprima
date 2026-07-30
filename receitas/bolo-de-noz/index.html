@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Bolo de noz","recipeCategory":"Bolos & Tortas","image":"https://massaprima.com/assets/receitas/bolo-de-noz.jpg","recipeYield":"±3 bolos","recipeIngredient":["MP Cake Noz — 1.000 g","Óleo vegetal — 200 g","Ovos — (±6) 300 g","Água — 200 g","Miolo de Noz (topo) — 100 g","Icing Sugar (polvilhar) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Bater todos os ingredientes ±5 min até preparado homogéneo."},{"@type":"HowToStep","text":"Untar as formas com Carlex e encher a 3/4."},{"@type":"HowToStep","text":"Cozer a 170-180 ºC durante ±35 min."},{"@type":"HowToStep","text":"Frio, decorar com metades de noz e polvilhar com Icing Sugar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Bolos & Tortas","item":"https://massaprima.com/receitas.html#Bolos%20%26%20Tortas"},{"@type":"ListItem","position":4,"name":"Bolo de noz"}]}</script>

@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Trança doce de brioche com sultanas","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/tranca-brioche-sultanas.jpg","recipeYield":"±6 tranças","recipeIngredient":["Massa Prima Brioche — 1.000 g","Água — 400 g","Levedura Fresca — 60 g","ou Levedura Seca — 20 g","Sultanas — 200 g","Brigel Neutro (brilho) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Amassar o brioche 3 min em 1ª e 8 min em 2ª velocidade até massa bem desenvolvida. Envolver as sultanas no fim."},{"@type":"HowToStep","text":"Descanso 10 min; dividir e formar 3 tiras por trança."},{"@type":"HowToStep","text":"Trançar e deixar levedar ±60 min. Pintar com ovo."},{"@type":"HowToStep","text":"Cozer a 200 ºC até dourado; frio, pincelar com Brigel Neutro."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Trança doce de brioche com sultanas"}]}</script>

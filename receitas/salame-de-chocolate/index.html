@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Salame de chocolate","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/salame-de-chocolate.jpg","recipeYield":"±4 salames","recipeIngredient":["Scaldis Dark — 500 g","Cacau em Pó — 100 g","Manteiga — 200 g","Açúcar — 150 g","Ovos — 2","Bolacha partida — 400 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Derreta o Scaldis Dark com a manteiga; junte o cacau, o açúcar e os ovos."},{"@type":"HowToStep","text":"Envolva a bolacha partida em pedaços."},{"@type":"HowToStep","text":"Enrole em forma de salame no papel vegetal e leve ao frio."},{"@type":"HowToStep","text":"Frio, corte às rodelas e polvilhe Icing Sugar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Salame de chocolate"}]}</script>

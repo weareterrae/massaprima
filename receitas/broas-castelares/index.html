@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Broas Castelares","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/broas-castelares.jpg","recipeYield":"±45 broas","recipeIngredient":["Batata-doce assada (polpa) — 1.000 g","Açúcar — 600 g","Miolo de amêndoa moído — 250 g","Massa Prima Coco Ralado Ceilão — 100 g","Farinha de milho + farinha de trigo — 150 g + 100 g","Gemas (para pincelar) e raspa de laranja — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Leve a polpa de batata-doce ao lume com o açúcar até secar em puré espesso."},{"@type":"HowToStep","text":"Fora do lume, envolva a amêndoa, o coco, as farinhas e a raspa. Deixe repousar de um dia para o outro."},{"@type":"HowToStep","text":"Molde as broas em forma de fuso com as mãos húmidas."},{"@type":"HowToStep","text":"Pincele generosamente com gema e coza a 200 ºC ±12 min até brilharem e estalarem."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Broas Castelares"}]}</script>

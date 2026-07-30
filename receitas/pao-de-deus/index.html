@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Pão de Deus","recipeCategory":"Vitrine & Café","image":"https://massaprima.com/assets/receitas/pao-de-deus.jpg","recipeYield":"±20 pães de Deus de 70 g","recipeIngredient":["Massa Prima Brioche — 1.000 g","Água — 400 g","Levedura Fresca — 60 g","ou Levedura Seca — 20 g","Coco Ralado Ceilão (cobertura) — 200 g","Açúcar (na cobertura) — 150 g","Ovo (na cobertura) — 1"],"recipeInstructions":[{"@type":"HowToStep","text":"Amassar o brioche com a água e a levedura 3 min em 1ª e 8 min em 2ª velocidade. Descansar 10 min."},{"@type":"HowToStep","text":"Bolear bolas de ±70 g e dispor no tabuleiro."},{"@type":"HowToStep","text":"Cobertura: misturar o Coco Ralado Ceilão, o açúcar e o ovo até obter uma pasta; espalhar sobre cada bola."},{"@type":"HowToStep","text":"Levedar ±50 min. Cozer a 190 ºC durante ±15 min."},{"@type":"HowToStep","text":"Frios, polvilhar com Icing Sugar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Vitrine & Café","item":"https://massaprima.com/receitas.html#Vitrine%20%26%20Caf%C3%A9"},{"@type":"ListItem","position":4,"name":"Pão de Deus"}]}</script>

@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Pão de forma fatiado para sanduíche","recipeCategory":"Pão","image":"https://massaprima.com/assets/receitas/pao-de-forma-sanduiche.jpg","recipeYield":"±14 formas de 750 g","recipeIngredient":["MP Pão de Forma e Hambúrguer 100% LD — 10.000 g","Levedura Fresca — 500 g","ou Levedura Seca — 170 g","Água — 5.200 g","Gorpan — 500 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Amassar todos os ingredientes até obter massa lisa e bem desenvolvida."},{"@type":"HowToStep","text":"Dividir e colocar em formas de pão de forma untadas."},{"@type":"HowToStep","text":"Deixar levedar até ao topo da forma."},{"@type":"HowToStep","text":"Cozer a 200 ºC durante ±30 min."},{"@type":"HowToStep","text":"Arrefecer completamente antes de fatiar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Pão","item":"https://massaprima.com/receitas.html#P%C3%A3o"},{"@type":"ListItem","position":4,"name":"Pão de forma fatiado para sanduíche"}]}</script>

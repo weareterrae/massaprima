@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Mil-folhas","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/mil-folhas.jpg","recipeYield":"±2 tabuleiros","recipeIngredient":["Farinha de trigo — 1.000 g","Margarina Perla Folhados — 750 g","Água — 500 g","Sal — 20 g","Creme Pasteleiro Sublime (recheio) — 1.000 g","Icing Sugar (topo) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Faça a massa folhada: amasse a farinha com a água e o sal; lamine com a Margarina Perla Folhados dando 5-6 voltas, com descanso no frio entre voltas."},{"@type":"HowToStep","text":"Estenda fina, pique com um garfo e coza a 200 ºC até folhar e dourar."},{"@type":"HowToStep","text":"Corte em retângulos e intercale com Creme Pasteleiro Sublime."},{"@type":"HowToStep","text":"Polvilhe generosamente com Icing Sugar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Mil-folhas"}]}</script>

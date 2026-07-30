@@ -195,6 +195,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 `;
 
 // partilha (sem WhatsApp — copiar link + Facebook)
@@ -443,6 +447,10 @@ function buildSitemap() {
 function replaceDados(html, arr) {
   return html.replace(/(<script id="dados"[^>]*>)[\s\S]*?(<\/script>)/, `$1${JSON.stringify(arr)}$2`);
 }
+// JSON-LD dos hubs (id="ld-lista"): gerado dos dados reais, idempotente
+function replaceLdLista(html, obj) {
+  return html.replace(/(<script type="application\/ld\+json" id="ld-lista">)[\s\S]*?(<\/script>)/, `$1${JSON.stringify(obj)}$2`);
+}
 function injectInner(html, openRe, closeRe, inner) {
   // substitui o conteúdo entre a abertura e o fecho (idempotente)
   const re = new RegExp(`(${openRe})[\\s\\S]*?(${closeRe})`);
@@ -452,17 +460,29 @@ function injectInner(html, openRe, closeRe, inner) {
 // ---- BUILD ----
 const changed = [];
 if (!validateOnly) {
-  // catalogo.html: #dados + pré-render #lista
+  // catalogo.html: #dados + pré-render #lista + JSON-LD ItemList
   let cat = read("catalogo.html");
   cat = replaceDados(cat, P);
   cat = injectInner(cat, '<div id="lista">', '</div><div class="empty" id="empty"', catalogCardsHTML());
+  cat = replaceLdLista(cat, {
+    "@context": "https://schema.org", "@type": "ItemList",
+    name: "Catálogo Massa Prima — matérias-primas de panificação e pastelaria",
+    url: `${SITE}/catalogo.html`, numberOfItems: P.length,
+    itemListElement: P.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.nome, url: `${SITE}/catalogo/${p.slug}/` })),
+  });
   fs.writeFileSync("catalogo.html", cat); changed.push("catalogo.html");
 
-  // receitas.html: #dados + pré-render #grid + corrigir contagem "42 receitas"
+  // receitas.html: #dados + pré-render #grid + corrigir contagem "42 receitas" + JSON-LD ItemList de Recipe
   let rec = read("receitas.html");
   rec = replaceDados(rec, R);
   rec = injectInner(rec, '<div class="grid" id="grid">', "</div></main>", recipeCardsHTML());
   rec = rec.replace(/\b42 receitas\b/g, `${counts.receitas} receitas`);
+  rec = replaceLdLista(rec, {
+    "@context": "https://schema.org", "@type": "ItemList",
+    name: "Receitas profissionais Massa Prima",
+    url: `${SITE}/receitas.html`, numberOfItems: R.length,
+    itemListElement: R.map((r, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "Recipe", name: r.titulo, url: `${SITE}/receitas/${r.slug}/`, ...(r.foto ? { image: `${SITE}/${r.foto}` } : {}), ...(r.rend ? { recipeYield: r.rend } : {}) } })),
+  });
   fs.writeFileSync("receitas.html", rec); changed.push("receitas.html");
 
   // homepage: contadores derivados dos dados (P0 — nunca hard-code; evita drift)

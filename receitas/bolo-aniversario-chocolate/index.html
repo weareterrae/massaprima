@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Bolo de aniversário de chocolate","recipeCategory":"Bolos & Tortas","image":"https://massaprima.com/assets/receitas/bolo-aniversario-chocolate.jpg","recipeYield":"±2 bolos redondos","recipeIngredient":["MP Cake Chocolate — 1.000 g","Óleo vegetal — 300 g","Ovos — (±6) 300 g","Água — 250 g","Chantilly Pó (recheio e cobertura) — 500 g","Arabesque Dark 70% (raspas) — q.b."],"recipeInstructions":[{"@type":"HowToStep","text":"Bater o mix, óleo, ovos e água ±5 min. Cozer em formas redondas untadas a 170-180 ºC ±35 min."},{"@type":"HowToStep","text":"Frio, cortar em 2-3 discos."},{"@type":"HowToStep","text":"Bater o Chantilly Pó e rechear e cobrir os discos."},{"@type":"HowToStep","text":"Decorar com raspas de Arabesque Dark 70%."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Bolos & Tortas","item":"https://massaprima.com/receitas.html#Bolos%20%26%20Tortas"},{"@type":"ListItem","position":4,"name":"Bolo de aniversário de chocolate"}]}</script>

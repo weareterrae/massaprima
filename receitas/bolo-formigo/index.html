@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Bolo formigo","recipeCategory":"Tradicional & Festas","image":"https://massaprima.com/assets/receitas/bolo-formigo.jpg","recipeYield":"±3 bolos","recipeIngredient":["MP Cake Neutro — 1.000 g","Óleo vegetal — 300 g","Ovos — (±6) 300 g","Água — 225 g","Mel — 300 g","Pão ralado — 200 g","Nozes e sultanas — 200 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Bata o Cake Neutro, o óleo, os ovos e a água; junte o mel e o pão ralado."},{"@type":"HowToStep","text":"Envolva as nozes e as sultanas."},{"@type":"HowToStep","text":"Coza em forma untada a 170 ºC durante ±40 min."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Tradicional & Festas","item":"https://massaprima.com/receitas.html#Tradicional%20%26%20Festas"},{"@type":"ListItem","position":4,"name":"Bolo formigo"}]}</script>

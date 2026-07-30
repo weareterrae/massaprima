@@ -69,6 +69,10 @@ footer a{color:var(--bege)}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
+@media (prefers-reduced-motion: no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Red velvet com chantilly","recipeCategory":"Bolos & Tortas","image":"https://massaprima.com/assets/receitas/red-velvet.jpg","recipeYield":"1 bolo de 2 andares (±14 fatias)","recipeIngredient":["Soft Cake Red Velvet — 1.000 g","Ovos — 350 g","Óleo vegetal* — 300 g","Água — 225 g","MP Chantilly Pó — 600 g","Água ou leite frio — 1.000 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Misturar todos os ingredientes e bater com raquete, durante"},{"@type":"HowToStep","text":"5 minutos em velocidade lenta, até obter um preparado homogéneo."},{"@type":"HowToStep","text":"Cozer a 170-180ºC."},{"@type":"HowToStep","text":"Adequar o tempo de cozedura ao tipo de aplicação."},{"@type":"HowToStep","text":"Chantilly: adicionar o MP Chantilly Pó à água ou leite frio e bater com varas na velocidade máxima 4-5 minutos."},{"@type":"HowToStep","text":"Montar em camadas: bolo, chantilly, bolo, chantilly. Alisar e decorar."}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://massaprima.com/index.html"},{"@type":"ListItem","position":2,"name":"Receitas","item":"https://massaprima.com/receitas.html"},{"@type":"ListItem","position":3,"name":"Bolos & Tortas","item":"https://massaprima.com/receitas.html#Bolos%20%26%20Tortas"},{"@type":"ListItem","position":4,"name":"Red velvet com chantilly"}]}</script>
