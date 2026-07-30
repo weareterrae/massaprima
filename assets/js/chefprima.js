@@ -4,6 +4,24 @@
 const ENDPOINT='/api/chef-prima';
 // medição (usa a camada mpTrack se existir; nunca rebenta se não existir)
 function track(ev,props){try{if(window.mpTrack)window.mpTrack(ev,props||{});}catch(_){}}
+// ── travões no cliente (anti-rajada) ──
+const INTERVALO_MIN=900, MAX_CONVERSA=30;
+let ultimoEnvio=0, enviando=false, totalUser=0;
+// ── Turnstile (opcional, não-fatal): pôr aqui a Site Key do widget Turnstile de massaprima.com ──
+// Enquanto vazio, o Turnstile fica DESLIGADO (o núcleo de proteção do servidor continua ativo).
+const TURNSTILE_SITEKEY='';
+let tsToken='', tsWidgetId=null;
+function tsInit(){
+  if(!TURNSTILE_SITEKEY||window.__cpxTs)return; window.__cpxTs=1;
+  const s=document.createElement('script');
+  s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.async=true;s.defer=true;
+  s.onload=function(){try{
+    const c=document.createElement('div');c.id='cpx-ts';c.style.cssText='position:fixed;left:-9999px;bottom:0';document.body.appendChild(c);
+    tsWidgetId=window.turnstile.render('#cpx-ts',{sitekey:TURNSTILE_SITEKEY,size:'invisible',callback:function(tok){tsToken=tok;}});
+  }catch(_){}};
+  document.head.appendChild(s);
+}
+function tsRefresh(){try{if(window.turnstile&&tsWidgetId!=null){window.turnstile.reset(tsWidgetId);if(window.turnstile.execute)window.turnstile.execute(tsWidgetId);}}catch(_){}}
 const css=`
 #cpx-btn{position:fixed;bottom:22px;right:22px;z-index:9990;display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #EC6607;border-radius:50px;padding:8px 20px 8px 8px;cursor:pointer;box-shadow:0 10px 30px rgba(119,49,10,.28);font-family:'Nunito',sans-serif;transition:transform .15s}
 #cpx-btn:hover{transform:translateY(-2px)}
@@ -92,6 +110,7 @@ let aberturaMedida=false;
 function openPanel(){
   panel.classList.add('on');document.getElementById('cpx-btn').style.display='none';teaserOff();
   if(!aberturaMedida){aberturaMedida=true;track('chef_prima_open',{path:location.pathname});}
+  tsInit();
   if(!msgs.children.length){
     hist.forEach(m=>add(m.content,m.role==='assistant'?'bot':'user'));
     if(!hist.length)add('Olá! Sou o Chef Prima 🌾 o mestre padeiro digital da Massa Prima. Posso ensinar-lhe a usar qualquer produto, dar-lhe receitas passo-a-passo ou ajudar a pôr preço no que produz. Em que posso ajudar?','bot');
@@ -121,7 +140,13 @@ function submitLead(lead){
   track('generate_lead',{source:'chef_prima',assunto:lead.assunto||'',path:location.pathname});
 }
 async function send(q){
-  if(!q)return;
+  if(!q||enviando)return;
+  // travão: teto de mensagens por conversa → encaminha para humano
+  if(totalUser>=MAX_CONVERSA){add('Já lhe dei bastante conversa por agora 🌾 Para continuar, fale com a nossa equipa em geral@quenteebom.co.ao ou faça o seu pedido em [pedir cotação](cotacao.html).','bot');return;}
+  // travão: intervalo mínimo entre envios (anti-rajada)
+  const agora=Date.now();
+  if(agora-ultimoEnvio<INTERVALO_MIN)return;
+  ultimoEnvio=agora;enviando=true;totalUser++;
   chipsEl.innerHTML='';
   add(q,'user');hist.push({role:'user',content:q});save();
   track('chef_prima_question',{path:location.pathname});
@@ -132,7 +157,7 @@ async function send(q){
     // NOTA: o gateway Gemini da Netlify ainda não expõe streaming de tokens → pedimos JSON
     // (rápido e fiável). O widget e o backend já suportam SSE: basta repor stream:true aqui
     // quando o streaming estiver disponível, sem mais mudanças.
-    const r=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12)}),signal:ctl.signal});
+    const r=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12),turnstileToken:tsToken}),signal:ctl.signal});
     const ct=r.headers.get('content-type')||'';
     if(r.ok&&/text\/event-stream/.test(ct)&&r.body){
       const reader=r.body.getReader(),dec=new TextDecoder();let buf='';
@@ -146,11 +171,11 @@ async function send(q){
           if(ev&&ev.t){full+=ev.t;t.innerHTML=render(extractLead(full).visible);msgs.scrollTop=msgs.scrollHeight;}
         }
       }
-    }else if(r.ok){const d=await r.json();if(d.reply)full=d.reply;} // fallback JSON
+    }else{const d=await r.json().catch(()=>null);if(d&&d.reply)full=d.reply;} // JSON, mesmo em 429/403 (mostra a msg amável)
   }catch(_){}
   clearTimeout(tm);
-  // rede de segurança: se o streaming não trouxe nada, tenta o caminho JSON antes de desistir
-  if(!full){try{const r2=await fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:hist.slice(-12)})});if(r2.ok){const d=await r2.json();if(d.reply)full=d.reply;}}catch(_){}}
+  tsRefresh(); // prepara token novo para o próximo envio
+  enviando=false;
   const parsed=extractLead(full);
   let visible=parsed.visible;
   if(!visible)visible='Estou com dificuldades de ligação neste momento 🌾 Tente outra vez daqui a pouco, ou escreva-nos para geral@quenteebom.co.ao que a equipa responde em horário de expediente.';

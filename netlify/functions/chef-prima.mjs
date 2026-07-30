@@ -39,24 +39,56 @@ const origemValida = (req) => {
   return ORIGENS.some((p) => o.startsWith(p));
 };
 
-// Proteção anti-abuso: limite por IP (janela deslizante) + teto diário global.
-// Em memória por instância — best-effort, suficiente para travar floods e bots.
-const IP_LIMITE = 8;            // pedidos por IP
-const IP_JANELA_MS = 60_000;    // por minuto
-const DIA_LIMITE = 400;         // teto de pedidos por instância e por dia
-const baldeIp = new Map();
+// Proteção anti-abuso (em memória por instância — best-effort, trava floods/bots).
+const IP_MIN_LIMITE = 18;      // pedidos por IP por minuto
+const IP_HORA_LIMITE = 150;    // pedidos por IP por hora
+const DIA_LIMITE = 800;        // teto diário global por instância (backstop anti-runaway)
+const MAX_BODY_BYTES = 40 * 1024;  // teto do corpo do pedido
+const MAX_MSGS = 16;           // últimas N mensagens enviadas ao modelo
+const MAX_CHARS = 1500;        // teto de caracteres por mensagem
+const baldeIp = new Map();     // ip -> [timestamps da última hora]
 let diaTotal = 0;
 let diaInicio = 0;
 
-function excedeuLimites(ip) {
+// limite por IP: devolve true se excedeu minuto OU hora (→ 429 amável).
+function limiteIp(ip) {
+  const agora = Date.now();
+  const arr = (baldeIp.get(ip) ?? []).filter((t) => agora - t < 3_600_000); // última hora
+  arr.push(agora);
+  baldeIp.set(ip, arr);
+  if (baldeIp.size > 5000) baldeIp.clear(); // trava crescimento de memória
+  const ultimoMin = arr.reduce((n, t) => n + (agora - t < 60_000 ? 1 : 0), 0);
+  return ultimoMin > IP_MIN_LIMITE || arr.length > IP_HORA_LIMITE;
+}
+// teto diário global: devolve true quando ultrapassa (→ fallback gracioso, não erro).
+function tetoDiarioExcedido() {
   const agora = Date.now();
   if (agora - diaInicio > 86_400_000) { diaInicio = agora; diaTotal = 0; }
-  if (++diaTotal > DIA_LIMITE) return true;
-  const recentes = (baldeIp.get(ip) ?? []).filter((t) => agora - t < IP_JANELA_MS);
-  recentes.push(agora);
-  baldeIp.set(ip, recentes);
-  if (baldeIp.size > 5000) baldeIp.clear(); // trava crescimento de memória
-  return recentes.length > IP_LIMITE;
+  return (++diaTotal > DIA_LIMITE);
+}
+
+// Mensagem amável de rate-limit (sem WhatsApp — regra de marca Angola).
+const AVISO_LIMITE =
+  "Ui, muitas perguntas de seguida! 🌾 Dê-me só um instante e volte a tentar. Se for urgente, fale com a equipa em geral@quenteebom.co.ao ou faça o seu pedido em massaprima.com/cotacao.html.";
+
+// Verificação Turnstile (Cloudflare) — só ativa se houver TURNSTILE_SECRET.
+// Devolve {ok, motivo}. Em modo suave (sem ENFORCE) o resultado é registado mas não bloqueia.
+async function verificarTurnstile(token, ip) {
+  const secret = process.env.TURNSTILE_SECRET;
+  if (!secret) return { ok: true, motivo: "desligado" }; // Turnstile não configurado
+  if (!token) return { ok: false, motivo: "sem-token" };
+  try {
+    const body = new URLSearchParams({ secret, response: String(token).slice(0, 4000) });
+    if (ip && ip !== "?") body.set("remoteip", ip);
+    const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: body.toString(),
+    });
+    const j = await r.json();
+    return { ok: !!j.success, motivo: (j["error-codes"] || []).join(",") || "" };
+  } catch (e) {
+    console.error("chef-prima: turnstile falha", e);
+    return { ok: false, motivo: "erro-verificacao" };
+  }
 }
 
 const json = (obj, status = 200) =>
@@ -65,13 +97,16 @@ const json = (obj, status = 200) =>
     headers: { "content-type": "application/json; charset=utf-8" },
   });
 
-// PLANO B: se o Claude falhar (erro/429), tenta o Gemini — pelo MESMO gateway da
-// Netlify (GEMINI_API_KEY + GOOGLE_GEMINI_BASE_URL injetados; sem chaves pessoais).
+// Motor Gemini (via gateway da Netlify). Resiliente: fallback de modelo em 404,
+// 2ª chave de reserva (env GEMINI_API_KEY_2, de OUTRO projeto) em 401/403/429,
+// retry em 429/5xx e filtragem das partes de "thinking".
+let geminiModeloOk = null; // memoiza o modelo que funcionou nesta instância
 async function planoBGemini(system, mensagens, maxTokens) {
-  const chave = process.env.GEMINI_API_KEY;
   const base = (process.env.GOOGLE_GEMINI_BASE_URL || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
-  const modelo = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-  if (!chave || !base) return null;
+  const chaves = [process.env.GEMINI_API_KEY, process.env.GEMINI_API_KEY_2].filter(Boolean);
+  if (!chaves.length || !base) return null;
+  const preferido = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+  const modelos = geminiModeloOk ? [geminiModeloOk] : [preferido, "gemini-flash-latest"];
   const corpo = JSON.stringify({
     system_instruction: { parts: [{ text: system }] },
     contents: mensagens.map((m) => ({
@@ -80,27 +115,30 @@ async function planoBGemini(system, mensagens, maxTokens) {
     })),
     generationConfig: { maxOutputTokens: maxTokens },
   });
-  const pedir = () => fetch(`${base}/v1beta/models/${modelo}:generateContent`, {
-    method: "POST",
-    headers: { "content-type": "application/json", "x-goog-api-key": chave },
-    body: corpo,
+  const pedir = (modelo, chave) => fetch(`${base}/v1beta/models/${modelo}:generateContent`, {
+    method: "POST", headers: { "content-type": "application/json", "x-goog-api-key": chave }, body: corpo,
   });
-  try {
-    let r = await pedir();
-    // rajadas de 429/5xx do gateway são curtas — uma segunda tentativa resolve quase sempre.
-    if (!r.ok && (r.status === 429 || r.status >= 500)) {
-      console.error("chef-prima: Gemini", r.status, "→ retry em 1.2s");
-      await new Promise((res) => setTimeout(res, 1200));
-      r = await pedir();
+  for (const modelo of modelos) {
+    let modeloIndisponivel = false;
+    for (const chave of chaves) {
+      try {
+        let r = await pedir(modelo, chave);
+        if (!r.ok && (r.status === 429 || r.status >= 500)) { // rajada curta → 1 retry
+          await new Promise((res) => setTimeout(res, 1200));
+          r = await pedir(modelo, chave);
+        }
+        if (r.status === 404) { console.error("chef-prima: Gemini modelo 404", modelo); modeloIndisponivel = true; break; } // tenta próximo modelo
+        if (r.status === 401 || r.status === 403 || r.status === 429) { console.error("chef-prima: Gemini chave", r.status); continue; } // tenta próxima chave
+        if (!r.ok) { console.error("chef-prima: Gemini", r.status, (await r.text()).slice(0, 200)); continue; }
+        const j = await r.json();
+        const texto = (j?.candidates?.[0]?.content?.parts || [])
+          .filter((p) => !p.thought).map((p) => p.text || "").join("").trim(); // ignora partes de thinking
+        if (texto) { geminiModeloOk = modelo; return texto; }
+      } catch (e) { console.error("chef-prima: Gemini falha de rede", e); }
     }
-    if (!r.ok) { console.error("chef-prima: Gemini", r.status, (await r.text()).slice(0, 200)); return null; }
-    const j = await r.json();
-    const texto = (j?.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("").trim();
-    return texto || null;
-  } catch (e) {
-    console.error("chef-prima: Gemini falha de rede", e);
-    return null;
+    if (!modeloIndisponivel && geminiModeloOk === modelo) break;
   }
+  return null;
 }
 
 export default async (req, context) => {
@@ -108,18 +146,40 @@ export default async (req, context) => {
   if (!origemValida(req)) return json({ error: "origem" }, 403);
 
   const ip = context?.ip || req.headers.get("x-nf-client-connection-ip") || "?";
-  if (excedeuLimites(ip)) return json({ error: "IA indisponível" }, 429);
+  // 1) rate-limit por IP (minuto/hora) → 429 amável
+  if (limiteIp(ip)) return json({ reply: AVISO_LIMITE }, 429);
+  // 2) teto diário global → fallback gracioso (nunca erro)
+  if (tetoDiarioExcedido()) return json({ reply: CONTINGENCIA });
 
   // Precisa de PELO MENOS um motor: Gemini (principal) ou Anthropic (reforço opcional).
   if (!process.env.GEMINI_API_KEY && !process.env.ANTHROPIC_API_KEY) return json({ reply: CONTINGENCIA });
 
+  // 3) teto de tamanho do corpo → 413 (barato: header primeiro, depois o texto real)
+  const cl = Number(req.headers.get("content-length") || 0);
+  if (cl && cl > MAX_BODY_BYTES) return json({ error: "corpo demasiado grande" }, 413);
+  let texto;
+  try { texto = await req.text(); } catch { return json({ error: "pedido inválido" }, 400); }
+  if (texto.length > MAX_BODY_BYTES) return json({ error: "corpo demasiado grande" }, 413);
   let corpo;
-  try { corpo = await req.json(); } catch { return json({ error: "pedido inválido" }, 400); }
+  try { corpo = JSON.parse(texto); } catch { return json({ error: "pedido inválido" }, 400); }
 
+  // Turnstile (opcional, NÃO-fatal): só EXIGE token se houver TURNSTILE_SECRET e ENFORCE=on.
+  const temSecret = !!process.env.TURNSTILE_SECRET;
+  const enforce = temSecret && process.env.TURNSTILE_ENFORCE === "on";
+  if (temSecret) {
+    const ts = await verificarTurnstile(corpo?.turnstileToken, ip);
+    if (!ts.ok) {
+      console.error("chef-prima: turnstile", ts.motivo, "enforce=", enforce);
+      if (enforce) return json({ reply: AVISO_LIMITE }, 403); // bloqueia só em modo duro
+      // modo suave: regista e continua — um widget mal configurado nunca deita o bot abaixo
+    }
+  }
+
+  // 4) sanitização do histórico: últimas N mensagens, cada uma limitada em caracteres
   const raw = Array.isArray(corpo?.messages) ? corpo.messages : [];
-  const messages = raw.slice(-12).map((m) => ({
+  const messages = raw.slice(-MAX_MSGS).map((m) => ({
     role: m.role === "assistant" ? "assistant" : "user",
-    content: String(m.content || "").slice(0, 1000),
+    content: String(m.content || "").slice(0, MAX_CHARS),
   })).filter((m) => m.content.trim());
   if (!messages.length || messages[messages.length - 1].role !== "user") {
     return json({ error: "messages em falta" }, 400);
