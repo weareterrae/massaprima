@@ -70,20 +70,29 @@ const json = (obj, status = 200) =>
 async function planoBGemini(system, mensagens, maxTokens) {
   const chave = process.env.GEMINI_API_KEY;
   const base = (process.env.GOOGLE_GEMINI_BASE_URL || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
+  const modelo = process.env.GEMINI_MODEL || "gemini-2.5-flash";
   if (!chave || !base) return null;
+  const corpo = JSON.stringify({
+    system_instruction: { parts: [{ text: system }] },
+    contents: mensagens.map((m) => ({
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text: typeof m.content === "string" ? m.content : "" }],
+    })),
+    generationConfig: { maxOutputTokens: maxTokens },
+  });
+  const pedir = () => fetch(`${base}/v1beta/models/${modelo}:generateContent`, {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-goog-api-key": chave },
+    body: corpo,
+  });
   try {
-    const r = await fetch(`${base}/v1beta/models/gemini-2.5-flash:generateContent`, {
-      method: "POST",
-      headers: { "content-type": "application/json", "x-goog-api-key": chave },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: system }] },
-        contents: mensagens.map((m) => ({
-          role: m.role === "assistant" ? "model" : "user",
-          parts: [{ text: typeof m.content === "string" ? m.content : "" }],
-        })),
-        generationConfig: { maxOutputTokens: maxTokens },
-      }),
-    });
+    let r = await pedir();
+    // rajadas de 429/5xx do gateway são curtas — uma segunda tentativa resolve quase sempre.
+    if (!r.ok && (r.status === 429 || r.status >= 500)) {
+      console.error("chef-prima: Gemini", r.status, "→ retry em 1.2s");
+      await new Promise((res) => setTimeout(res, 1200));
+      r = await pedir();
+    }
     if (!r.ok) { console.error("chef-prima: Gemini", r.status, (await r.text()).slice(0, 200)); return null; }
     const j = await r.json();
     const texto = (j?.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("").trim();
