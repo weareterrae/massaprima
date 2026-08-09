@@ -5,36 +5,23 @@
 // É uma função à parte — não toca no /api/chef-prima nem no widget.
 
 import { getStore } from "@netlify/blobs";
+import { chamarGemini } from "./_shared/gemini.mjs";
 
 const SITE = "https://massaprima.com";
 const ALERT_EMAIL = process.env.ALERT_EMAIL || "sandro.qb@gmail.com";
 const ALERT_FROM = process.env.ALERT_FROM || "Chef Prima <onboarding@resend.dev>"; // funciona em modo teste do Resend
 
-// Ping ao motor Gemini (o mesmo que o bot usa), com 1 retry para não dar falso alarme.
+// Ping ao motor Gemini (o mesmo que o bot usa). Usa o motor partilhado resiliente
+// (retry com backoff + fallback de chave e de modelo, timeout de 12s por tentativa),
+// para NÃO dar falso alarme num soluço transitório do Google.
 async function pingMotor() {
-  const chave = process.env.GEMINI_API_KEY;
-  const base = (process.env.GOOGLE_GEMINI_BASE_URL || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
-  const modelo = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-  if (!chave) return { ok: false, motivo: "sem GEMINI_API_KEY" };
-  const corpo = JSON.stringify({ contents: [{ role: "user", parts: [{ text: "responde só: ok" }] }], generationConfig: { maxOutputTokens: 16 } });
-  const tentar = async () => {
-    const ctl = new AbortController();
-    const tm = setTimeout(() => ctl.abort(), 12000);
-    try {
-      const r = await fetch(`${base}/v1beta/models/${modelo}:generateContent`, {
-        method: "POST", headers: { "content-type": "application/json", "x-goog-api-key": chave }, body: corpo, signal: ctl.signal,
-      });
-      if (!r.ok) return { ok: false, motivo: `HTTP ${r.status}` };
-      const j = await r.json();
-      const t = (j?.candidates?.[0]?.content?.parts || []).map((p) => p.text || "").join("").trim();
-      return t ? { ok: true } : { ok: false, motivo: "resposta vazia" };
-    } catch (e) {
-      return { ok: false, motivo: String((e && e.name) || e) };
-    } finally { clearTimeout(tm); }
-  };
-  let res = await tentar();
-  if (!res.ok) { await new Promise((r) => setTimeout(r, 1500)); res = await tentar(); }
-  return res;
+  if (!process.env.GEMINI_API_KEY) return { ok: false, motivo: "sem GEMINI_API_KEY" };
+  const r = await chamarGemini({
+    mensagens: [{ role: "user", content: "responde só: ok" }],
+    maxTokens: 16,
+    timeoutMs: 12000,
+  });
+  return r.ok ? { ok: true } : { ok: false, motivo: r.motivo };
 }
 
 async function enviarEmail(assunto, html) {

@@ -3,6 +3,8 @@
 // usa o AI Gateway da Netlify (injeta ANTHROPIC_API_KEY + ANTHROPIC_BASE_URL, fatura na conta Netlify).
 // O SYSTEM_PROMPT continua REMOTO em /prima-prompt.txt — git push = atualizar o cérebro (cache 5 min).
 
+import { chamarGemini } from "./_shared/gemini.mjs";
+
 const PROMPT_URL = "https://massaprima.com/prima-prompt.txt";
 const PROMPT_TTL_MS = 5 * 60 * 1000;
 
@@ -97,48 +99,14 @@ const json = (obj, status = 200) =>
     headers: { "content-type": "application/json; charset=utf-8" },
   });
 
-// Motor Gemini (via gateway da Netlify). Resiliente: fallback de modelo em 404,
-// 2ª chave de reserva (env GEMINI_API_KEY_2, de OUTRO projeto) em 401/403/429,
-// retry em 429/5xx e filtragem das partes de "thinking".
-let geminiModeloOk = null; // memoiza o modelo que funcionou nesta instância
+// Motor Gemini (via gateway da Netlify). Resiliência centralizada em _shared/gemini.mjs:
+// retry com backoff + fallback de chave (GEMINI_API_KEY_2, de OUTRO projeto) e de modelo,
+// para absorver quedas transitórias do Google (503 "overloaded", 429, 5xx, timeouts) sem
+// cair na contingência. Devolve o texto ou null (mantém o contrato null → contingência).
 async function planoBGemini(system, mensagens, maxTokens) {
-  const base = (process.env.GOOGLE_GEMINI_BASE_URL || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
-  const chaves = [process.env.GEMINI_API_KEY, process.env.GEMINI_API_KEY_2].filter(Boolean);
-  if (!chaves.length || !base) return null;
-  const preferido = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-  const modelos = geminiModeloOk ? [geminiModeloOk] : [preferido, "gemini-flash-latest"];
-  const corpo = JSON.stringify({
-    system_instruction: { parts: [{ text: system }] },
-    contents: mensagens.map((m) => ({
-      role: m.role === "assistant" ? "model" : "user",
-      parts: [{ text: typeof m.content === "string" ? m.content : "" }],
-    })),
-    generationConfig: { maxOutputTokens: maxTokens },
-  });
-  const pedir = (modelo, chave) => fetch(`${base}/v1beta/models/${modelo}:generateContent`, {
-    method: "POST", headers: { "content-type": "application/json", "x-goog-api-key": chave }, body: corpo,
-  });
-  for (const modelo of modelos) {
-    let modeloIndisponivel = false;
-    for (const chave of chaves) {
-      try {
-        let r = await pedir(modelo, chave);
-        if (!r.ok && (r.status === 429 || r.status >= 500)) { // rajada curta → 1 retry
-          await new Promise((res) => setTimeout(res, 1200));
-          r = await pedir(modelo, chave);
-        }
-        if (r.status === 404) { console.error("chef-prima: Gemini modelo 404", modelo); modeloIndisponivel = true; break; } // tenta próximo modelo
-        if (r.status === 401 || r.status === 403 || r.status === 429) { console.error("chef-prima: Gemini chave", r.status); continue; } // tenta próxima chave
-        if (!r.ok) { console.error("chef-prima: Gemini", r.status, (await r.text()).slice(0, 200)); continue; }
-        const j = await r.json();
-        const texto = (j?.candidates?.[0]?.content?.parts || [])
-          .filter((p) => !p.thought).map((p) => p.text || "").join("").trim(); // ignora partes de thinking
-        if (texto) { geminiModeloOk = modelo; return texto; }
-      } catch (e) { console.error("chef-prima: Gemini falha de rede", e); }
-    }
-    if (!modeloIndisponivel && geminiModeloOk === modelo) break;
-  }
-  return null;
+  const r = await chamarGemini({ system, mensagens, maxTokens });
+  if (!r.ok) console.error("chef-prima: Gemini indisponível", r.motivo);
+  return r.ok ? r.texto : null;
 }
 
 export default async (req, context) => {
@@ -212,7 +180,7 @@ export default async (req, context) => {
 
   // Motor principal = GEMINI. Se falhar, tenta Claude (se houver chave); senão, contingência.
   async function gerarReply() {
-    const g = await planoBGemini(system, messages, 900);
+    const g = await planoBGemini(system, messages, 1024);
     if (g) return g;
     return (await tentarClaude()) || CONTINGENCIA;
   }
@@ -224,7 +192,7 @@ export default async (req, context) => {
       const r = await fetch(`${geminiBase}/v1beta/models/${geminiModelo}:streamGenerateContent?alt=sse`, {
         method: "POST",
         headers: { "content-type": "application/json", "x-goog-api-key": geminiChave },
-        body: JSON.stringify({ system_instruction: { parts: [{ text: system }] }, contents, generationConfig: { maxOutputTokens: 900 } }),
+        body: JSON.stringify({ system_instruction: { parts: [{ text: system }] }, contents, generationConfig: { maxOutputTokens: 1024 } }),
       });
       if (r.ok && r.body) {
         const upstream = r.body.getReader();
