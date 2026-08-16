@@ -246,7 +246,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</sc
 <nav><a href="/catalogo.html">Catálogo</a><a href="/receitas.html">Receitas</a><a href="/solucoes/">Soluções</a><a href="/foodcost.html">Food Cost</a><a href="/formacao">Formação</a><a href="/contactos/">Contactos</a><a class="cta" href="/cotacao.html">Pedir cotação</a></nav>
 </div></header>`;
 }
-const FOOT = `<footer><div class="wrap"><img src="/assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p style="margin-top:8px">Massa Prima <span style="opacity:.7">by Quente e Bom</span> · <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p><p style="opacity:.7;font-size:.85rem;margin-top:6px">© 2026 Massa Prima · Doce, Quente e Bom Angola, Lda · NIF 5417154385 · Viana, Luanda</p></div></footer>
+const FOOT = `<footer><div class="wrap"><img src="/assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p style="margin-top:8px">Massa Prima <span style="opacity:.7">by Quente e Bom</span> · <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p><p style="opacity:.7;font-size:.85rem;margin-top:6px">© 2026 Massa Prima · Doce, Quente e Bom Angola, Lda · NIF 5417154385 · Viana, Luanda</p><p style="opacity:.6;font-size:.8rem;margin-top:6px">Site por <a href="https://numerocinco.pt" target="_blank" rel="noopener" style="color:inherit">Nº&nbsp;5</a></p></div></footer>
 <script src="/assets/js/chefprima.js" defer></script></body></html>`;
 
 const crumbs = (arr) => `<nav class="crumbs" aria-label="Breadcrumb">${arr.map((c, i) => (c.href ? `<a href="${c.href}">${esc(c.name)}</a>` : `<span>${esc(c.name)}</span>`) + (i < arr.length - 1 ? " › " : "")).join("")}</nav>`;
