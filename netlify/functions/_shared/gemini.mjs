@@ -23,8 +23,8 @@ export async function chamarGemini({ system, mensagens, maxTokens, modelo, timeo
   const chaves = [process.env.GEMINI_API_KEY, process.env.GEMINI_API_KEY_2].filter(Boolean);
   if (!chaves.length || !base) return { ok: false, motivo: "sem chave" };
 
-  const preferido = modelo || process.env.GEMINI_MODEL || "gemini-flash-latest";
-  // gemini-2.0-flash foi RETIRADO pela Google (404) — reservas atuais: flash-latest e a lite.
+  const preferido = modelo || process.env.GEMINI_MODEL || "gemini-2.5-pro";
+  // pro (rico) primário; flash-latest e a lite como reservas rápidas se o pro falhar/demorar.
   const modelos = [preferido, "gemini-flash-latest", "gemini-flash-lite-latest"].filter((m, i, a) => m && a.indexOf(m) === i);
 
   const corpoBase = {
@@ -38,10 +38,11 @@ export async function chamarGemini({ system, mensagens, maxTokens, modelo, timeo
   let motivo = "sem resposta";
   for (const chave of chaves) {
     for (const mod of modelos) {
-      // Modelos "pensantes" (2.5/latest): desligar o thinking — comia o orçamento de tokens
-      // (respostas cortadas a meio) e segundos de latência em cada resposta.
-      const cfgGen = { maxOutputTokens: maxTokens };
-      if (/2\.5|latest/.test(mod)) cfgGen.thinkingConfig = { thinkingBudget: 0 };
+      // Pensamento: o pro leva um pouco (128) para ter alma; as reservas flash ficam a 0 (rápidas).
+      // Teto de tokens folgado para o pensamento + resposta não truncarem.
+      const cfgGen = { maxOutputTokens: Math.max(maxTokens, 1024) };
+      if (/pro/.test(mod)) cfgGen.thinkingConfig = { thinkingBudget: 128 };
+      else if (/2\.5|latest/.test(mod)) cfgGen.thinkingConfig = { thinkingBudget: 0 };
       const corpo = JSON.stringify({ ...corpoBase, generationConfig: cfgGen });
       let saltarModelo = false; // permanente / vazio → salta já para o próximo modelo
       for (let tentativa = 1; tentativa <= 3 && !saltarModelo; tentativa++) {

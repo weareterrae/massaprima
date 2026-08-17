@@ -154,7 +154,7 @@ export default async (req, context) => {
   }
 
   const system = await getPrompt();
-  const geminiModelo = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+  const geminiModelo = process.env.GEMINI_MODEL || "gemini-2.5-pro";
   const geminiChave = process.env.GEMINI_API_KEY;
   const geminiBase = (process.env.GOOGLE_GEMINI_BASE_URL || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
   const contents = messages.map((m) => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] }));
@@ -192,7 +192,7 @@ export default async (req, context) => {
       const r = await fetch(`${geminiBase}/v1beta/models/${geminiModelo}:streamGenerateContent?alt=sse`, {
         method: "POST",
         headers: { "content-type": "application/json", "x-goog-api-key": geminiChave },
-        body: JSON.stringify({ system_instruction: { parts: [{ text: system }] }, contents, generationConfig: { maxOutputTokens: 1024 } }),
+        body: JSON.stringify({ system_instruction: { parts: [{ text: system }] }, contents, generationConfig: { maxOutputTokens: 1536, thinkingConfig: { thinkingBudget: 0 } } }),
       });
       if (r.ok && r.body) {
         const upstream = r.body.getReader();
