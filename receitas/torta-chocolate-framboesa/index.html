@@ -1,4 +1,5 @@
 <!DOCTYPE html><html lang="pt-AO"><head>
+<script>try{if(matchMedia('(prefers-reduced-motion:no-preference)').matches&&'IntersectionObserver'in window)document.documentElement.className+=' anim'}catch(e){}</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Torta de chocolate com framboesa — receita profissional | Massa Prima</title>
 <meta name="description" content="Venda à fatia com a espiral à vista: a framboesa vermelha &quot;vende sozinha&quot; na vitrine. 1 kg de mix rende 2 tortas.">
@@ -12,20 +13,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--laranja:#EC6607;--laranja-d:#c9550a;--castanho:#77310A;--bege:#FEEAD3;--bege-claro:#FFF7EC;--ink:#3D1A05;--sand-line:#eaddc9;--muted:#8a6a4a;--past:#a8451a}
+:root{--laranja:#EC6607;--laranja-d:#c9550a;--castanho:#77310A;--bege:#FEEAD3;--bege-claro:#FFF7EC;--ink:#3D1A05;--sand-line:#eaddc9;--muted:#8a6a4a;--past:#a8451a;--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Nunito',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bege-claro);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:var(--laranja-d)}
 img{max-width:100%;display:block}
 .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
-header{background:#fff;border-bottom:1px solid var(--sand-line);position:sticky;top:0;z-index:20}
+header{background:#fff;border-bottom:1px solid var(--sand-line);position:sticky;top:0;z-index:20;transition:box-shadow 200ms ease,border-color 200ms ease}
+header.scrolled{box-shadow:0 6px 22px rgba(119,49,10,.10);border-color:transparent}
 header .nav{max-width:1060px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 header .logo img{height:38px}
-header nav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:.92rem;margin-left:16px}
-header nav a.cta{background:var(--laranja);color:#fff;padding:9px 16px;border-radius:40px}
+header nav a{position:relative;color:var(--ink);text-decoration:none;font-weight:700;font-size:.92rem;margin-left:16px;transition:color 150ms ease}
+header nav a:not(.cta)::after{content:'';position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--laranja);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 180ms var(--ease-out)}
+header nav a.cta{background:var(--laranja);color:#fff;padding:9px 16px;border-radius:40px;transition:background 160ms ease,transform 160ms var(--ease-out)}
+header nav a.cta:active{transform:scale(.97)}
 @media(max-width:820px){header nav a:not(.cta){display:none}}
 .crumbs{font-size:.82rem;color:var(--muted);padding:18px 0 0}
-.crumbs a{color:var(--muted);text-decoration:none}.crumbs a:hover{color:var(--laranja-d)}
+.crumbs a{color:var(--muted);text-decoration:none;transition:color 150ms ease}.crumbs a:hover{color:var(--laranja-d)}
 .hero{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:34px;align-items:start;padding:20px 0 34px}
 @media(max-width:760px){.hero{grid-template-columns:1fr}}
 .hero .ph{border-radius:20px;overflow:hidden;border:1px solid var(--sand-line);background:#fff;aspect-ratio:4/3}
@@ -37,8 +41,9 @@ h1{font-family:'Zilla Slab',Georgia,serif;color:var(--castanho);font-size:clamp(
 .fmts{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
 .kg{background:#fff;border:1px solid var(--sand-line);border-radius:20px;padding:5px 13px;font-weight:800;font-size:.86rem;color:var(--castanho)}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
-.btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;border-radius:40px;padding:12px 22px;text-decoration:none;font-size:.95rem;border:2px solid var(--laranja);cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;border-radius:40px;padding:12px 22px;text-decoration:none;font-size:.95rem;border:2px solid var(--laranja);cursor:pointer;transition:transform 160ms var(--ease-out),background 160ms ease,color 160ms ease,border-color 160ms ease}
 .btn.primary{background:var(--laranja);color:#fff}.btn.ghost{background:transparent;color:var(--laranja-d)}
+.btn:active{transform:scale(.97)}
 .block{background:#fff;border:1px solid var(--sand-line);border-radius:18px;padding:22px 24px;margin:16px 0}
 .block h2{font-family:'Zilla Slab',serif;color:var(--castanho);font-size:1.2rem;margin-bottom:12px}
 .block ul,.block ol{padding-left:20px}.block li{margin-bottom:7px}
@@ -52,26 +57,46 @@ table.tec tr.grp td{background:var(--bege);font-weight:800;color:var(--castanho)
 .rel{margin:30px 0 10px}
 .rel h2{font-family:'Zilla Slab',serif;color:var(--castanho);font-size:1.3rem;margin-bottom:14px}
 .rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
-.rgrid a{background:#fff;border:1px solid var(--sand-line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column}
-.rgrid .th{aspect-ratio:4/3;overflow:hidden;background:var(--bege)}.rgrid .th img{width:100%;height:100%;object-fit:cover}
+.rgrid a{background:#fff;border:1px solid var(--sand-line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform 220ms var(--ease-out),box-shadow 220ms var(--ease-out),border-color 200ms ease}
+.rgrid .th{aspect-ratio:4/3;overflow:hidden;background:var(--bege)}.rgrid .th img{width:100%;height:100%;object-fit:cover;transition:transform 450ms var(--ease-out)}
 .rgrid .t{padding:10px 12px;font-weight:800;color:var(--castanho);font-size:.9rem}
 footer{background:var(--castanho);color:var(--bege);text-align:center;padding:34px 20px;margin-top:40px}
 footer img{height:40px;margin:0 auto 10px}
 footer a{color:var(--bege)}
 .share{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 4px;font-size:.9rem}
 .share span{font-weight:800;color:var(--muted)}
-.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit}
+.share .sh{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.86rem;color:var(--castanho);background:#fff;border:1px solid var(--sand-line);border-radius:40px;padding:7px 15px;text-decoration:none;cursor:pointer;font-family:inherit;transition:border-color 160ms ease,color 160ms ease,transform 120ms var(--ease-out)}
 .share .sh:hover{border-color:var(--laranja);color:var(--laranja-d)}
+.share .sh:active{transform:scale(.97)}
 .faq details{background:#fff;border:1px solid var(--sand-line);border-radius:12px;margin-bottom:10px;overflow:hidden}
-.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem}
+.faq summary{cursor:pointer;font-weight:800;color:var(--castanho);padding:14px 18px;list-style:none;font-size:.98rem;transition:color 150ms ease}
+.faq summary:hover{color:var(--laranja-d)}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800}
+.faq summary::after{content:'+';float:right;color:var(--laranja);font-weight:800;font-size:1.1rem;line-height:1.3}
 .faq details[open] summary::after{content:'–'}
 .faq details>p{padding:0 18px 15px;color:#5a4029;font-size:.95rem}
+.faq details[open]>p{animation:faqIn 220ms var(--ease-out)}
+@keyframes faqIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+a:focus-visible,button:focus-visible,summary:focus-visible,.btn:focus-visible{outline:2px solid var(--laranja);outline-offset:3px;border-radius:8px}
+@media (hover:hover) and (pointer:fine){
+  header nav a:not(.cta):hover{color:var(--laranja-d)}
+  header nav a:not(.cta):hover::after{transform:scaleX(1)}
+  .btn.primary:hover{background:var(--castanho);border-color:var(--castanho)}
+  .btn.ghost:hover{background:var(--laranja);color:#fff}
+  .rgrid a:hover,.anim .rgrid a.in:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(119,49,10,.13);border-color:var(--bege)}
+  .rgrid a:hover .th img{transform:scale(1.04)}
+}
+.anim .rgrid a{opacity:0;transform:translateY(10px);transition:opacity 420ms var(--ease-out),transform 260ms var(--ease-out),box-shadow 220ms var(--ease-out),border-color 200ms ease}
+.anim .rgrid a.in{opacity:1;transform:none}
 @media print{header,footer,.cta-row,.crumbs,.rel,.share{display:none}body{background:#fff}.block{border:none;padding:8px 0}}
 @media (prefers-reduced-motion: no-preference){
   @view-transition{navigation:auto}
   ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+}
+@media (prefers-reduced-motion: reduce){
+  .rgrid a:hover,.rgrid a:hover .th img,.btn:active,.share .sh:active,header nav a.cta:active{transform:none}
+  header nav a:not(.cta)::after{display:none}
+  .faq details[open]>p{animation:none}
 }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Recipe","name":"Torta de chocolate com framboesa","recipeCategory":"Bolos & Tortas","image":"https://massaprima.com/assets/receitas/torta-chocolate-framboesa.jpg","recipeYield":"2 tortas (±20 fatias)","recipeIngredient":["MP Cake Chocolate — 1000 g","Óleo vegetal — 300 g","Ovos — (±9) 450 g","Água — 250 g","Açúcar — 150 g"],"recipeInstructions":[{"@type":"HowToStep","text":"Misturar todos os ingredientes e bater com raquete durante aproximadamente 4 minutos, velocidade lenta."},{"@type":"HowToStep","text":"Colocar o batido num tabuleiro previamente forrado com papel vegetal siliconizado, e deixar repousar durante 10 minutos."},{"@type":"HowToStep","text":"Cozer a cerca de 210 ºC, durante aproximadamente 8-10 minutos."},{"@type":"HowToStep","text":"Desenformar, barrar com Fruitful Filling Framboesa e enrolar."},{"@type":"HowToStep","text":"Cobrir com Scaldis Dark derretido e decorar."}]}</script>
@@ -99,4 +124,5 @@ footer a{color:var(--bege)}
 <div class="cta-row" style="margin:6px 0 10px"><button class="btn ghost" onclick="window.print()">Imprimir receita</button></div>
 <section class="rel"><h2>Mais receitas de Bolos &amp; Tortas</h2><div class="rgrid"><a href="/receitas/cenoura-noz/"><div class="th"><picture><source srcset="/assets/receitas/cenoura-noz.webp" type="image/webp"><img loading="lazy" src="/assets/receitas/cenoura-noz.jpg" alt="Cake de cenoura com noz e caramelo"></picture></div><div class="t">Cake de cenoura com noz e caramelo</div></a><a href="/receitas/torta-laranja/"><div class="th"><picture><source srcset="/assets/receitas/torta-laranja.webp" type="image/webp"><img loading="lazy" src="/assets/receitas/torta-laranja.jpg" alt="Torta de laranja"></picture></div><div class="t">Torta de laranja</div></a><a href="/receitas/red-velvet/"><div class="th"><picture><source srcset="/assets/receitas/red-velvet.webp" type="image/webp"><img loading="lazy" src="/assets/receitas/red-velvet.jpg" alt="Red velvet com chantilly"></picture></div><div class="t">Red velvet com chantilly</div></a><a href="/receitas/tarte-maca/"><div class="th"><picture><source srcset="/assets/receitas/tarte-maca.webp" type="image/webp"><img loading="lazy" src="/assets/receitas/tarte-maca.jpg" alt="Tarte folhada de maçã"></picture></div><div class="t">Tarte folhada de maçã</div></a><a href="/receitas/tarte-silvestres/"><div class="th"><picture><source srcset="/assets/receitas/tarte-silvestres.webp" type="image/webp"><img loading="lazy" src="/assets/receitas/tarte-silvestres.jpg" alt="Tarte de frutos silvestres com creme"></picture></div><div class="t">Tarte de frutos silvestres com creme</div></a><a href="/receitas/bolo-ingles/"><div class="th"><picture><source srcset="/assets/receitas/bolo-ingles.webp" type="image/webp"><img loading="lazy" src="/assets/receitas/bolo-ingles.jpg" alt="Bolo inglês de frutas"></picture></div><div class="t">Bolo inglês de frutas</div></a></div></section>
 </main><footer><div class="wrap"><img src="/assets/logo_bege.png" alt="Massa Prima"><p><em>qualidade que inspira resultados perfeitos</em></p><p style="margin-top:8px">Massa Prima <span style="opacity:.7">by Quente e Bom</span> · <a href="mailto:geral@quenteebom.co.ao">geral@quenteebom.co.ao</a></p><p style="opacity:.7;font-size:.85rem;margin-top:6px">© 2026 Massa Prima · Doce, Quente e Bom Angola, Lda · NIF 5417154385 · Viana, Luanda</p><p style="opacity:.6;font-size:.8rem;margin-top:6px">Site por <a href="https://numerocinco.pt" target="_blank" rel="noopener" style="color:inherit">Nº&nbsp;5</a></p></div></footer>
+<script>(function(){var h=document.querySelector('header');if(h){var s=function(){h.classList.toggle('scrolled',(window.pageYOffset||0)>8)};s();addEventListener('scroll',s,{passive:true})}if(!document.documentElement.classList.contains('anim'))return;var sel='.rgrid a';var reveal=function(el,d){el.style.transitionDelay=(d||0)+'ms';el.classList.add('in')};try{var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){reveal(e.target,(+e.target.getAttribute('data-d')||0));io.unobserve(e.target)}})},{rootMargin:'0px 0px -60px 0px',threshold:.06});document.querySelectorAll('.rgrid').forEach(function(g){[].forEach.call(g.children,function(c,i){c.setAttribute('data-d',(i%7)*50)})});document.querySelectorAll(sel).forEach(function(e){io.observe(e)})}catch(err){document.querySelectorAll(sel).forEach(function(e){e.classList.add('in')})}addEventListener('load',function(){setTimeout(function(){document.querySelectorAll(sel).forEach(function(e){if(!e.classList.contains('in'))e.classList.add('in')})},500)})})();</script>
 <script src="/assets/js/chefprima.js" defer></script></body></html>
