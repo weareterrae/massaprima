@@ -33,7 +33,7 @@ async function n5Gateway(messages, { lang, origin, sessionId, system } = {}) {
 
     const reader = r.body.getReader();
     const dec = new TextDecoder();
-    let buf = "", texto = "", erro = null;
+    let buf = "", texto = "", erro = null, recusa = null;
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -46,12 +46,23 @@ async function n5Gateway(messages, { lang, origin, sessionId, system } = {}) {
         try {
           const ev = JSON.parse(t.slice(5).trim());
           if (ev.type === "delta") texto += ev.text;
-          else if (ev.type === "error") erro = ev.code;
+          else if (ev.type === "error") {
+            erro = ev.code;
+            // TERMINAL: o gateway RECUSOU por decisao (rate limit,
+            // orcamento, origem, politica). Cair para o caminho antigo
+            // aqui seria servir o mesmo pedido por uma porta sem nenhuma
+            // dessas protecoes — contornar a protecao que acabou de o
+            // barrar. Devolve-se a mensagem e o pedido acaba.
+            if (ev.terminal) recusa = ev.message;
+          }
         } catch { /* fragmento incompleto */ }
       }
     }
     // 'rollout_excluded' é resposta normal, não avaria: este pedido não
     // pertence à fatia migrada.
+    if (recusa) return recusa;   // recusa deliberada: nao ha caminho alternativo
+    // rollout_excluded e resposta normal, nao avaria: este pedido nao
+    // pertence a fatia migrada.
     if (erro || !texto.trim()) return null;
     return texto;
   } catch {
